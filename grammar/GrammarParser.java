@@ -18,8 +18,9 @@ public class GrammarParser extends Parser {
 	public static final int
 		SWAP_NOARG=1, COPY_NOARG=2, END_NOARG=3, DEFINE_LABEL_ID=4, JUMP_ID=5, 
 		CHECK_IFEZ_ID=6, CHECK_IFLZ_ID=7, CHECK_IFGZ_ID=8, WRITE_CELL_ID=9, READ_CELL_ID=10, 
-		COPY_CELL_ID=11, SRCCOPY_CELL_ID=12, ADD_VAL=13, SUB_VAL=14, MUL_VAL=15, 
-		DIV_VAL=16, MOD_VAL=17, COMP_VAL=18, NUMBER=19, ID=20, WS=21;
+		COPY_CELL_ID=11, SRCCOPY_CELL_ID=12, GET_LABEL_CURR_CELL_NOARG=13, ADD_NUMBER=14, 
+		SUB_NUMBER=15, MUL_NUMBER=16, DIV_NUMBER=17, MOD_NUMBER=18, COMP_NUMBER=19, 
+		GET_LABEL_CELL_NUMBER=20, NUMBER=21, ID=22, WS=23;
 	public static final int
 		RULE_start = 0, RULE_main = 1, RULE_function = 2, RULE_functionNoArgument = 3, 
 		RULE_functionIDArgument = 4, RULE_functionNUMBERArgument = 5, RULE_idArgument = 6, 
@@ -36,7 +37,8 @@ public class GrammarParser extends Parser {
 		return new String[] {
 			null, "'SWAP'", "'COPY'", "'END'", "'LABEL'", "'JUMP'", "'IFEZ'", "'IFLZ'", 
 			"'IFGZ'", "'WRITE_CELL'", "'READ_CELL'", "'COPY_CELL'", "'SRCCOPY_CELL'", 
-			"'ADD'", "'SUB'", "'MUL'", "'DIV'", "'MOD'", "'COMP'"
+			"'GET_LABEL_CURR_CELL'", "'ADD'", "'SUB'", "'MUL'", "'DIV'", "'MOD'", 
+			"'COMP'", "'GET_LABEL_CELL'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
@@ -44,8 +46,9 @@ public class GrammarParser extends Parser {
 		return new String[] {
 			null, "SWAP_NOARG", "COPY_NOARG", "END_NOARG", "DEFINE_LABEL_ID", "JUMP_ID", 
 			"CHECK_IFEZ_ID", "CHECK_IFLZ_ID", "CHECK_IFGZ_ID", "WRITE_CELL_ID", "READ_CELL_ID", 
-			"COPY_CELL_ID", "SRCCOPY_CELL_ID", "ADD_VAL", "SUB_VAL", "MUL_VAL", "DIV_VAL", 
-			"MOD_VAL", "COMP_VAL", "NUMBER", "ID", "WS"
+			"COPY_CELL_ID", "SRCCOPY_CELL_ID", "GET_LABEL_CURR_CELL_NOARG", "ADD_NUMBER", 
+			"SUB_NUMBER", "MUL_NUMBER", "DIV_NUMBER", "MOD_NUMBER", "COMP_NUMBER", 
+			"GET_LABEL_CELL_NUMBER", "NUMBER", "ID", "WS"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -239,6 +242,7 @@ public class GrammarParser extends Parser {
 			case SWAP_NOARG:
 			case COPY_NOARG:
 			case END_NOARG:
+			case GET_LABEL_CURR_CELL_NOARG:
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(24);
@@ -262,12 +266,13 @@ public class GrammarParser extends Parser {
 				idArgument();
 				}
 				break;
-			case ADD_VAL:
-			case SUB_VAL:
-			case MUL_VAL:
-			case DIV_VAL:
-			case MOD_VAL:
-			case COMP_VAL:
+			case ADD_NUMBER:
+			case SUB_NUMBER:
+			case MUL_NUMBER:
+			case DIV_NUMBER:
+			case MOD_NUMBER:
+			case COMP_NUMBER:
+			case GET_LABEL_CELL_NUMBER:
 				enterOuterAlt(_localctx, 3);
 				{
 				setState(28);
@@ -296,6 +301,7 @@ public class GrammarParser extends Parser {
 		public TerminalNode SWAP_NOARG() { return getToken(GrammarParser.SWAP_NOARG, 0); }
 		public TerminalNode COPY_NOARG() { return getToken(GrammarParser.COPY_NOARG, 0); }
 		public TerminalNode END_NOARG() { return getToken(GrammarParser.END_NOARG, 0); }
+		public TerminalNode GET_LABEL_CURR_CELL_NOARG() { return getToken(GrammarParser.GET_LABEL_CURR_CELL_NOARG, 0); }
 		public FunctionNoArgumentContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -319,7 +325,7 @@ public class GrammarParser extends Parser {
 			{
 			setState(33);
 			_la = _input.LA(1);
-			if ( !(((_la) & ~0x3f) == 0 && ((1L << _la) & 14L) != 0) ) {
+			if ( !(((_la) & ~0x3f) == 0 && ((1L << _la) & 8206L) != 0) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -397,12 +403,13 @@ public class GrammarParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class FunctionNUMBERArgumentContext extends ParserRuleContext {
-		public TerminalNode ADD_VAL() { return getToken(GrammarParser.ADD_VAL, 0); }
-		public TerminalNode SUB_VAL() { return getToken(GrammarParser.SUB_VAL, 0); }
-		public TerminalNode MUL_VAL() { return getToken(GrammarParser.MUL_VAL, 0); }
-		public TerminalNode DIV_VAL() { return getToken(GrammarParser.DIV_VAL, 0); }
-		public TerminalNode MOD_VAL() { return getToken(GrammarParser.MOD_VAL, 0); }
-		public TerminalNode COMP_VAL() { return getToken(GrammarParser.COMP_VAL, 0); }
+		public TerminalNode ADD_NUMBER() { return getToken(GrammarParser.ADD_NUMBER, 0); }
+		public TerminalNode SUB_NUMBER() { return getToken(GrammarParser.SUB_NUMBER, 0); }
+		public TerminalNode MUL_NUMBER() { return getToken(GrammarParser.MUL_NUMBER, 0); }
+		public TerminalNode DIV_NUMBER() { return getToken(GrammarParser.DIV_NUMBER, 0); }
+		public TerminalNode MOD_NUMBER() { return getToken(GrammarParser.MOD_NUMBER, 0); }
+		public TerminalNode COMP_NUMBER() { return getToken(GrammarParser.COMP_NUMBER, 0); }
+		public TerminalNode GET_LABEL_CELL_NUMBER() { return getToken(GrammarParser.GET_LABEL_CELL_NUMBER, 0); }
 		public FunctionNUMBERArgumentContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -426,7 +433,7 @@ public class GrammarParser extends Parser {
 			{
 			setState(37);
 			_la = _input.LA(1);
-			if ( !(((_la) & ~0x3f) == 0 && ((1L << _la) & 516096L) != 0) ) {
+			if ( !(((_la) & ~0x3f) == 0 && ((1L << _la) & 2080768L) != 0) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -524,7 +531,7 @@ public class GrammarParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001\u0015,\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
+		"\u0004\u0001\u0017,\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
 		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0002"+
 		"\u0005\u0007\u0005\u0002\u0006\u0007\u0006\u0002\u0007\u0007\u0007\u0001"+
 		"\u0000\u0001\u0000\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0003"+
@@ -532,25 +539,25 @@ public class GrammarParser extends Parser {
 		"\u0002\u0001\u0002\u0001\u0002\u0003\u0002 \b\u0002\u0001\u0003\u0001"+
 		"\u0003\u0001\u0004\u0001\u0004\u0001\u0005\u0001\u0005\u0001\u0006\u0001"+
 		"\u0006\u0001\u0007\u0001\u0007\u0001\u0007\u0000\u0000\b\u0000\u0002\u0004"+
-		"\u0006\b\n\f\u000e\u0000\u0003\u0001\u0000\u0001\u0003\u0001\u0000\u0004"+
-		"\f\u0001\u0000\r\u0012&\u0000\u0010\u0001\u0000\u0000\u0000\u0002\u0016"+
-		"\u0001\u0000\u0000\u0000\u0004\u001f\u0001\u0000\u0000\u0000\u0006!\u0001"+
-		"\u0000\u0000\u0000\b#\u0001\u0000\u0000\u0000\n%\u0001\u0000\u0000\u0000"+
-		"\f\'\u0001\u0000\u0000\u0000\u000e)\u0001\u0000\u0000\u0000\u0010\u0011"+
-		"\u0003\u0002\u0001\u0000\u0011\u0001\u0001\u0000\u0000\u0000\u0012\u0013"+
-		"\u0003\u0004\u0002\u0000\u0013\u0014\u0003\u0002\u0001\u0000\u0014\u0017"+
-		"\u0001\u0000\u0000\u0000\u0015\u0017\u0005\u0003\u0000\u0000\u0016\u0012"+
-		"\u0001\u0000\u0000\u0000\u0016\u0015\u0001\u0000\u0000\u0000\u0017\u0003"+
-		"\u0001\u0000\u0000\u0000\u0018 \u0003\u0006\u0003\u0000\u0019\u001a\u0003"+
-		"\b\u0004\u0000\u001a\u001b\u0003\f\u0006\u0000\u001b \u0001\u0000\u0000"+
-		"\u0000\u001c\u001d\u0003\n\u0005\u0000\u001d\u001e\u0003\u000e\u0007\u0000"+
-		"\u001e \u0001\u0000\u0000\u0000\u001f\u0018\u0001\u0000\u0000\u0000\u001f"+
-		"\u0019\u0001\u0000\u0000\u0000\u001f\u001c\u0001\u0000\u0000\u0000 \u0005"+
-		"\u0001\u0000\u0000\u0000!\"\u0007\u0000\u0000\u0000\"\u0007\u0001\u0000"+
-		"\u0000\u0000#$\u0007\u0001\u0000\u0000$\t\u0001\u0000\u0000\u0000%&\u0007"+
-		"\u0002\u0000\u0000&\u000b\u0001\u0000\u0000\u0000\'(\u0005\u0014\u0000"+
-		"\u0000(\r\u0001\u0000\u0000\u0000)*\u0005\u0013\u0000\u0000*\u000f\u0001"+
-		"\u0000\u0000\u0000\u0002\u0016\u001f";
+		"\u0006\b\n\f\u000e\u0000\u0003\u0002\u0000\u0001\u0003\r\r\u0001\u0000"+
+		"\u0004\f\u0001\u0000\u000e\u0014&\u0000\u0010\u0001\u0000\u0000\u0000"+
+		"\u0002\u0016\u0001\u0000\u0000\u0000\u0004\u001f\u0001\u0000\u0000\u0000"+
+		"\u0006!\u0001\u0000\u0000\u0000\b#\u0001\u0000\u0000\u0000\n%\u0001\u0000"+
+		"\u0000\u0000\f\'\u0001\u0000\u0000\u0000\u000e)\u0001\u0000\u0000\u0000"+
+		"\u0010\u0011\u0003\u0002\u0001\u0000\u0011\u0001\u0001\u0000\u0000\u0000"+
+		"\u0012\u0013\u0003\u0004\u0002\u0000\u0013\u0014\u0003\u0002\u0001\u0000"+
+		"\u0014\u0017\u0001\u0000\u0000\u0000\u0015\u0017\u0005\u0003\u0000\u0000"+
+		"\u0016\u0012\u0001\u0000\u0000\u0000\u0016\u0015\u0001\u0000\u0000\u0000"+
+		"\u0017\u0003\u0001\u0000\u0000\u0000\u0018 \u0003\u0006\u0003\u0000\u0019"+
+		"\u001a\u0003\b\u0004\u0000\u001a\u001b\u0003\f\u0006\u0000\u001b \u0001"+
+		"\u0000\u0000\u0000\u001c\u001d\u0003\n\u0005\u0000\u001d\u001e\u0003\u000e"+
+		"\u0007\u0000\u001e \u0001\u0000\u0000\u0000\u001f\u0018\u0001\u0000\u0000"+
+		"\u0000\u001f\u0019\u0001\u0000\u0000\u0000\u001f\u001c\u0001\u0000\u0000"+
+		"\u0000 \u0005\u0001\u0000\u0000\u0000!\"\u0007\u0000\u0000\u0000\"\u0007"+
+		"\u0001\u0000\u0000\u0000#$\u0007\u0001\u0000\u0000$\t\u0001\u0000\u0000"+
+		"\u0000%&\u0007\u0002\u0000\u0000&\u000b\u0001\u0000\u0000\u0000\'(\u0005"+
+		"\u0016\u0000\u0000(\r\u0001\u0000\u0000\u0000)*\u0005\u0015\u0000\u0000"+
+		"*\u000f\u0001\u0000\u0000\u0000\u0002\u0016\u001f";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

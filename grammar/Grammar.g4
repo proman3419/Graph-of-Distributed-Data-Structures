@@ -18,6 +18,7 @@ functionNoArgument
     : SWAP_NOARG
     | COPY_NOARG
     | END_NOARG
+    | GET_LABEL_CURR_CELL_NOARG
     ;
 
 functionIDArgument
@@ -33,12 +34,13 @@ functionIDArgument
     ;
 
 functionNUMBERArgument
-    : ADD_VAL
-    | SUB_VAL
-    | MUL_VAL
-    | DIV_VAL
-    | MOD_VAL
-    | COMP_VAL
+    : ADD_NUMBER
+    | SUB_NUMBER
+    | MUL_NUMBER
+    | DIV_NUMBER
+    | MOD_NUMBER
+    | COMP_NUMBER
+    | GET_LABEL_CELL_NUMBER
     ;
 
 idArgument
@@ -97,28 +99,36 @@ SRCCOPY_CELL_ID
     : 'SRCCOPY_CELL'
     ;    
 
-ADD_VAL
+GET_LABEL_CURR_CELL_NOARG
+    : 'GET_LABEL_CURR_CELL'
+    ;
+
+ADD_NUMBER
     : 'ADD'
     ;
 
-SUB_VAL
+SUB_NUMBER
     : 'SUB'
     ;
 
-MUL_VAL
+MUL_NUMBER
     : 'MUL'
     ;
 
-DIV_VAL
+DIV_NUMBER
     : 'DIV'
     ;
 
-MOD_VAL
+MOD_NUMBER
     : 'MOD'
     ;
 
-COMP_VAL
+COMP_NUMBER
     : 'COMP'
+    ;
+
+GET_LABEL_CELL_NUMBER
+    : 'GET_LABEL_CELL'
     ;
 
 NUMBER
