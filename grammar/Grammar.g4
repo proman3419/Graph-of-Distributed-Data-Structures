@@ -82,19 +82,19 @@ CHECK_IFGZ_ID
     ;
 
 WRITE_CELL_ID
-    : 'WRITE'
+    : 'WRITE_CELL'
     ;
 
 READ_CELL_ID
-    : 'READ'
+    : 'READ_CELL'
     ;
 
 COPY_CELL_ID
-    : 'COPY'
+    : 'COPY_CELL'
     ;
 
 SRCCOPY_CELL_ID
-    : 'SRCCOPY'
+    : 'SRCCOPY_CELL'
     ;    
 
 ADD_VAL

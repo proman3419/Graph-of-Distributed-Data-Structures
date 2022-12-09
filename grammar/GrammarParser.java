@@ -17,8 +17,9 @@ public class GrammarParser extends Parser {
 		new PredictionContextCache();
 	public static final int
 		SWAP_NOARG=1, COPY_NOARG=2, END_NOARG=3, DEFINE_LABEL_ID=4, JUMP_ID=5, 
-		CHECK_IFEZ_ID=6, CHECK_IFLZ_ID=7, CHECK_IFGZ_ID=8, ADD_VAL=9, SUB_VAL=10, 
-		MUL_VAL=11, DIV_VAL=12, MOD_VAL=13, COMP_VAL=14, NUMBER=15, ID=16, WS=17;
+		CHECK_IFEZ_ID=6, CHECK_IFLZ_ID=7, CHECK_IFGZ_ID=8, WRITE_CELL_ID=9, READ_CELL_ID=10, 
+		COPY_CELL_ID=11, SRCCOPY_CELL_ID=12, ADD_VAL=13, SUB_VAL=14, MUL_VAL=15, 
+		DIV_VAL=16, MOD_VAL=17, COMP_VAL=18, NUMBER=19, ID=20, WS=21;
 	public static final int
 		RULE_start = 0, RULE_main = 1, RULE_function = 2, RULE_functionNoArgument = 3, 
 		RULE_functionIDArgument = 4, RULE_functionNUMBERArgument = 5, RULE_idArgument = 6, 
@@ -34,15 +35,17 @@ public class GrammarParser extends Parser {
 	private static String[] makeLiteralNames() {
 		return new String[] {
 			null, "'SWAP'", "'COPY'", "'END'", "'LABEL'", "'JUMP'", "'IFEZ'", "'IFLZ'", 
-			"'IFGZ'", "'ADD'", "'SUB'", "'MUL'", "'DIV'", "'MOD'", "'COMP'"
+			"'IFGZ'", "'WRITE_CELL'", "'READ_CELL'", "'COPY_CELL'", "'SRCCOPY_CELL'", 
+			"'ADD'", "'SUB'", "'MUL'", "'DIV'", "'MOD'", "'COMP'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
 			null, "SWAP_NOARG", "COPY_NOARG", "END_NOARG", "DEFINE_LABEL_ID", "JUMP_ID", 
-			"CHECK_IFEZ_ID", "CHECK_IFLZ_ID", "CHECK_IFGZ_ID", "ADD_VAL", "SUB_VAL", 
-			"MUL_VAL", "DIV_VAL", "MOD_VAL", "COMP_VAL", "NUMBER", "ID", "WS"
+			"CHECK_IFEZ_ID", "CHECK_IFLZ_ID", "CHECK_IFGZ_ID", "WRITE_CELL_ID", "READ_CELL_ID", 
+			"COPY_CELL_ID", "SRCCOPY_CELL_ID", "ADD_VAL", "SUB_VAL", "MUL_VAL", "DIV_VAL", 
+			"MOD_VAL", "COMP_VAL", "NUMBER", "ID", "WS"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -247,6 +250,10 @@ public class GrammarParser extends Parser {
 			case CHECK_IFEZ_ID:
 			case CHECK_IFLZ_ID:
 			case CHECK_IFGZ_ID:
+			case WRITE_CELL_ID:
+			case READ_CELL_ID:
+			case COPY_CELL_ID:
+			case SRCCOPY_CELL_ID:
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(25);
@@ -340,6 +347,10 @@ public class GrammarParser extends Parser {
 		public TerminalNode CHECK_IFEZ_ID() { return getToken(GrammarParser.CHECK_IFEZ_ID, 0); }
 		public TerminalNode CHECK_IFLZ_ID() { return getToken(GrammarParser.CHECK_IFLZ_ID, 0); }
 		public TerminalNode CHECK_IFGZ_ID() { return getToken(GrammarParser.CHECK_IFGZ_ID, 0); }
+		public TerminalNode WRITE_CELL_ID() { return getToken(GrammarParser.WRITE_CELL_ID, 0); }
+		public TerminalNode READ_CELL_ID() { return getToken(GrammarParser.READ_CELL_ID, 0); }
+		public TerminalNode COPY_CELL_ID() { return getToken(GrammarParser.COPY_CELL_ID, 0); }
+		public TerminalNode SRCCOPY_CELL_ID() { return getToken(GrammarParser.SRCCOPY_CELL_ID, 0); }
 		public FunctionIDArgumentContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -363,7 +374,7 @@ public class GrammarParser extends Parser {
 			{
 			setState(35);
 			_la = _input.LA(1);
-			if ( !(((_la) & ~0x3f) == 0 && ((1L << _la) & 496L) != 0) ) {
+			if ( !(((_la) & ~0x3f) == 0 && ((1L << _la) & 8176L) != 0) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -415,7 +426,7 @@ public class GrammarParser extends Parser {
 			{
 			setState(37);
 			_la = _input.LA(1);
-			if ( !(((_la) & ~0x3f) == 0 && ((1L << _la) & 32256L) != 0) ) {
+			if ( !(((_la) & ~0x3f) == 0 && ((1L << _la) & 516096L) != 0) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -513,7 +524,7 @@ public class GrammarParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001\u0011,\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
+		"\u0004\u0001\u0015,\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
 		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0002"+
 		"\u0005\u0007\u0005\u0002\u0006\u0007\u0006\u0002\u0007\u0007\u0007\u0001"+
 		"\u0000\u0001\u0000\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0003"+
@@ -522,7 +533,7 @@ public class GrammarParser extends Parser {
 		"\u0003\u0001\u0004\u0001\u0004\u0001\u0005\u0001\u0005\u0001\u0006\u0001"+
 		"\u0006\u0001\u0007\u0001\u0007\u0001\u0007\u0000\u0000\b\u0000\u0002\u0004"+
 		"\u0006\b\n\f\u000e\u0000\u0003\u0001\u0000\u0001\u0003\u0001\u0000\u0004"+
-		"\b\u0001\u0000\t\u000e&\u0000\u0010\u0001\u0000\u0000\u0000\u0002\u0016"+
+		"\f\u0001\u0000\r\u0012&\u0000\u0010\u0001\u0000\u0000\u0000\u0002\u0016"+
 		"\u0001\u0000\u0000\u0000\u0004\u001f\u0001\u0000\u0000\u0000\u0006!\u0001"+
 		"\u0000\u0000\u0000\b#\u0001\u0000\u0000\u0000\n%\u0001\u0000\u0000\u0000"+
 		"\f\'\u0001\u0000\u0000\u0000\u000e)\u0001\u0000\u0000\u0000\u0010\u0011"+
@@ -537,8 +548,8 @@ public class GrammarParser extends Parser {
 		"\u0019\u0001\u0000\u0000\u0000\u001f\u001c\u0001\u0000\u0000\u0000 \u0005"+
 		"\u0001\u0000\u0000\u0000!\"\u0007\u0000\u0000\u0000\"\u0007\u0001\u0000"+
 		"\u0000\u0000#$\u0007\u0001\u0000\u0000$\t\u0001\u0000\u0000\u0000%&\u0007"+
-		"\u0002\u0000\u0000&\u000b\u0001\u0000\u0000\u0000\'(\u0005\u0010\u0000"+
-		"\u0000(\r\u0001\u0000\u0000\u0000)*\u0005\u000f\u0000\u0000*\u000f\u0001"+
+		"\u0002\u0000\u0000&\u000b\u0001\u0000\u0000\u0000\'(\u0005\u0014\u0000"+
+		"\u0000(\r\u0001\u0000\u0000\u0000)*\u0005\u0013\u0000\u0000*\u000f\u0001"+
 		"\u0000\u0000\u0000\u0002\u0016\u001f";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
