@@ -1,11 +1,20 @@
 grammar Grammar;
 
 start
-    : main
+    : preamble cellsCode
     ;
 
-main
-    : function main | END_NOARG
+preamble
+    : CELLS_COUNT_SUPER numberArgument CELLS_GRAPH_SUPER numberArgument END_SUPER
+    ;
+
+cellsCode
+    : CELL_SUPER numberArgument idArgument cellCodePart cellsCode
+    | END_ALL_SUPER
+    ;
+
+cellCodePart
+    : function cellCodePart | END_SUPER
     ;
 
 function
@@ -14,11 +23,17 @@ function
     | functionNUMBERArgument numberArgument
     ;
 
+functionSuper
+    : CELLS_COUNT_SUPER
+    | CELLS_GRAPH_SUPER
+    | CELL_SUPER
+    | END_SUPER
+    ;
+
 functionNoArgument
     : SWAP_NOARG
     | COPY_NOARG
-    | END_NOARG
-    | GET_LABEL_CURR_CELL_NOARG
+    | PRINT_NOARG
     ;
 
 functionIDArgument
@@ -40,7 +55,7 @@ functionNUMBERArgument
     | DIV_NUMBER
     | MOD_NUMBER
     | COMP_NUMBER
-    | GET_LABEL_CELL_NUMBER
+    | PRINT_LABEL_NAME_NUMBER
     ;
 
 idArgument
@@ -51,16 +66,36 @@ numberArgument
     : NUMBER
     ;
 
+//multilineNumberArgument
+//    : MULTILINE_NUMBER
+//    ;
+
+CELLS_COUNT_SUPER
+    : '#CELLS_COUNT'
+    ;
+
+CELLS_GRAPH_SUPER
+    : '#CELLS_GRAPH'
+    ;
+
+CELL_SUPER
+    : '#CELL'
+    ;
+
+END_SUPER
+    : '#END'
+    ;
+
+END_ALL_SUPER
+    : '#END_ALL'
+    ;
+
 SWAP_NOARG
     : 'SWAP'
     ;
 
 COPY_NOARG
     : 'COPY'
-    ;
-
-END_NOARG
-    : 'END'
     ;
 
 DEFINE_LABEL_ID
@@ -99,8 +134,16 @@ SRCCOPY_CELL_ID
     : 'SRCCOPY_CELL'
     ;    
 
-GET_LABEL_CURR_CELL_NOARG
-    : 'GET_LABEL_CURR_CELL'
+PRINT_NOARG
+    : 'PRINT'
+    ;
+
+PRINT_LABEL_NAME_NUMBER
+    : 'PRINT_LABEL_NAME'
+    ;
+
+PRINT_LABEL_ID_NUMBER
+    : 'PRINT_LABEL_ID'
     ;
 
 ADD_NUMBER
@@ -127,17 +170,18 @@ COMP_NUMBER
     : 'COMP'
     ;
 
-GET_LABEL_CELL_NUMBER
-    : 'GET_LABEL_CELL'
-    ;
-
 NUMBER
     : '-'?('0'..'9')+
     ;
 
+//MULTILINE_NUMBER
+//    : ('0'..'9'[\n])+
+//    ;
+
 ID
     : [a-zA-Z]+('0'..'9')*
     ;
+
 
 /* We're going to ignore all white space characters */
 WS
