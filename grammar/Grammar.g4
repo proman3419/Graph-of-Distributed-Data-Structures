@@ -14,7 +14,8 @@ cellsCode
     ;
 
 cellCodePart
-    : function cellCodePart | END_SUPER
+    : function cellCodePart
+    | END_SUPER
     ;
 
 function
@@ -187,3 +188,7 @@ ID
 WS
     : [ \t\r\n]+ -> skip
     ;
+
+COMMENT
+  : '//' ~( '\r' | '\n' )* -> skip
+  ;
