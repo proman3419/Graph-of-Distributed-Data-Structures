@@ -41,11 +41,23 @@ public interface GrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitInputVals(GrammarParser.InputValsContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link GrammarParser#cellsCode}.
+	 * Visit a parse tree produced by {@link GrammarParser#cells}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitCellsCode(GrammarParser.CellsCodeContext ctx);
+	T visitCells(GrammarParser.CellsContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GrammarParser#cell}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCell(GrammarParser.CellContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GrammarParser#cellHeader}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCellHeader(GrammarParser.CellHeaderContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link GrammarParser#cellCode}.
 	 * @param ctx the parse tree

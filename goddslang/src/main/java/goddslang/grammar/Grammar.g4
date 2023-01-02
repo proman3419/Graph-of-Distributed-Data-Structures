@@ -1,7 +1,7 @@
 grammar Grammar;
 
 start
-    : preamble cellsCode END_ALL_SUPER
+    : preamble cells END_ALL_SUPER
     ;
 
 preamble
@@ -16,23 +16,30 @@ cellsGraph
     : CELLS_GRAPH_SUPER numberArgument
     ;
 
+//
 inputVals
     : (INPUT_VALS_SUPER NUMBER+ INPUT_VALS_CELLS_SUPER NUMBER+)?
     ;
 
-cellsCode
-    : cellCode+
-    | // Exit point
+cells
+    : cell+
+    ;
+
+cell
+    : cellHeader cellCode* END_SUPER
+    ;
+
+cellHeader
+    : CELL_SUPER numberArgument idArgument
     ;
 
 cellCode
-    : CELL_SUPER numberArgument idArgument cellCodePart END_SUPER
+    : cellCodePart+
     ;
 
 cellCodePart
-    : functionCall cellCodePart
-    | SRCCOPY_SUPER numberArgument cellCodePart
-    | 
+    : functionCall cellCodePart*
+    | SRCCOPY_SUPER numberArgument cellCodePart*
     ;
 
 functionCall

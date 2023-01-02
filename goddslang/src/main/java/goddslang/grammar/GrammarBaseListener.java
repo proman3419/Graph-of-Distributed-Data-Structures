@@ -77,13 +77,37 @@ public class GrammarBaseListener implements GrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCellsCode(GrammarParser.CellsCodeContext ctx) { }
+	@Override public void enterCells(GrammarParser.CellsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCellsCode(GrammarParser.CellsCodeContext ctx) { }
+	@Override public void exitCells(GrammarParser.CellsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCell(GrammarParser.CellContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCell(GrammarParser.CellContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCellHeader(GrammarParser.CellHeaderContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCellHeader(GrammarParser.CellHeaderContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
