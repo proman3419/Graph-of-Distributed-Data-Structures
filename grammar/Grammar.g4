@@ -5,7 +5,10 @@ start
     ;
 
 preamble
-    : CELLS_COUNT_SUPER numberArgument CELLS_GRAPH_SUPER numberArgument END_SUPER (SET_ALL_SUPER ID NUMBER+)*
+    : CELLS_COUNT_SUPER numberArgument
+        CELLS_GRAPH_SUPER numberArgument
+        (INPUT_VALS_SUPER ID NUMBER+ INPUT_VALS_ORDER_SUPER NUMBER+)*
+        (SET_ALL_SUPER ID NUMBER+)*
     ;
 
 cellsCode
@@ -33,6 +36,8 @@ functionSuper
     | END_ALL_SUPER
     | SRCCOPY_SUPER
     | SET_ALL_SUPER
+    | INPUT_VALS_SUPER
+    | INPUT_VALS_ORDER_SUPER
     ;
 
 function
@@ -90,6 +95,14 @@ END_SUPER
 
 END_ALL_SUPER
     : '#END_ALL'
+    ;
+
+INPUT_VALS_SUPER
+    : '#INPUT_VALS'
+    ;
+
+INPUT_VALS_ORDER_SUPER
+    : '#INPUT_VALS_ORDER'
     ;
 
 SWAP
