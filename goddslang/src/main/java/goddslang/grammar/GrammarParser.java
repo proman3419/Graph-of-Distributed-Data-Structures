@@ -18,19 +18,21 @@ public class GrammarParser extends Parser {
 		new PredictionContextCache();
 	public static final int
 		CELLS_COUNT_SUPER=1, CELLS_GRAPH_SUPER=2, CELL_SUPER=3, END_SUPER=4, END_ALL_SUPER=5, 
-		INPUT_VALS_SUPER=6, INPUT_VALS_ORDER_SUPER=7, SWAP=8, COPY=9, DEFINE_LABEL=10, 
+		INPUT_VALS_SUPER=6, INPUT_VALS_CELLS_SUPER=7, SWAP=8, COPY=9, DEFINE_LABEL=10, 
 		JUMP=11, CHECK_IFEZ=12, CHECK_IFLZ=13, CHECK_IFGZ=14, WRITE_CELL=15, READ_CELL=16, 
 		COPY_CELL=17, SRCCOPY_SUPER=18, PRINT=19, PRINT_CHAR=20, PRINT_LABEL_NAME=21, 
 		PRINT_LABEL_ID=22, ADD=23, SUB=24, MUL=25, DIV=26, MOD=27, COMP=28, SET=29, 
-		SET_ALL_SUPER=30, NUMBER=31, ID=32, WS=33, COMMENT=34;
+		NUMBER=30, ID=31, WS=32, COMMENT=33;
 	public static final int
-		RULE_start = 0, RULE_preamble = 1, RULE_cellsCode = 2, RULE_cellCodePart = 3, 
-		RULE_functionCall = 4, RULE_functionSuper = 5, RULE_function = 6, RULE_idArgument = 7, 
-		RULE_numberArgument = 8;
+		RULE_start = 0, RULE_preamble = 1, RULE_cellsCount = 2, RULE_cellsGraph = 3, 
+		RULE_inputVals = 4, RULE_cellsCode = 5, RULE_cellCode = 6, RULE_cellCodePart = 7, 
+		RULE_functionCall = 8, RULE_functionSuper = 9, RULE_function = 10, RULE_idArgument = 11, 
+		RULE_numberArgument = 12;
 	private static String[] makeRuleNames() {
 		return new String[] {
-			"start", "preamble", "cellsCode", "cellCodePart", "functionCall", "functionSuper", 
-			"function", "idArgument", "numberArgument"
+			"start", "preamble", "cellsCount", "cellsGraph", "inputVals", "cellsCode", 
+			"cellCode", "cellCodePart", "functionCall", "functionSuper", "function", 
+			"idArgument", "numberArgument"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
@@ -38,22 +40,22 @@ public class GrammarParser extends Parser {
 	private static String[] makeLiteralNames() {
 		return new String[] {
 			null, "'#CELLS_COUNT'", "'#CELLS_GRAPH'", "'#CELL'", "'#END'", "'#END_ALL'", 
-			"'#INPUT_VALS'", "'#INPUT_VALS_ORDER'", "'SWAP'", "'COPY'", "'LABEL'", 
+			"'#INPUT_VALS'", "'#INPUT_VALS_CELLS'", "'SWAP'", "'COPY'", "'LABEL'", 
 			"'JUMP'", "'IFEZ'", "'IFLZ'", "'IFGZ'", "'WRITE_CELL'", "'READ_CELL'", 
 			"'COPY_CELL'", "'#SRCCOPY'", "'PRINT'", "'PRINT_CHAR'", "'PRINT_LABEL_NAME'", 
 			"'PRINT_LABEL_ID'", "'ADD'", "'SUB'", "'MUL'", "'DIV'", "'MOD'", "'COMP'", 
-			"'SET'", "'#SET_ALL'"
+			"'SET'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
 			null, "CELLS_COUNT_SUPER", "CELLS_GRAPH_SUPER", "CELL_SUPER", "END_SUPER", 
-			"END_ALL_SUPER", "INPUT_VALS_SUPER", "INPUT_VALS_ORDER_SUPER", "SWAP", 
+			"END_ALL_SUPER", "INPUT_VALS_SUPER", "INPUT_VALS_CELLS_SUPER", "SWAP", 
 			"COPY", "DEFINE_LABEL", "JUMP", "CHECK_IFEZ", "CHECK_IFLZ", "CHECK_IFGZ", 
 			"WRITE_CELL", "READ_CELL", "COPY_CELL", "SRCCOPY_SUPER", "PRINT", "PRINT_CHAR", 
 			"PRINT_LABEL_NAME", "PRINT_LABEL_ID", "ADD", "SUB", "MUL", "DIV", "MOD", 
-			"COMP", "SET", "SET_ALL_SUPER", "NUMBER", "ID", "WS", "COMMENT"
+			"COMP", "SET", "NUMBER", "ID", "WS", "COMMENT"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -115,6 +117,7 @@ public class GrammarParser extends Parser {
 		public CellsCodeContext cellsCode() {
 			return getRuleContext(CellsCodeContext.class,0);
 		}
+		public TerminalNode END_ALL_SUPER() { return getToken(GrammarParser.END_ALL_SUPER, 0); }
 		public StartContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -140,10 +143,12 @@ public class GrammarParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(18);
+			setState(26);
 			preamble();
-			setState(19);
+			setState(27);
 			cellsCode();
+			setState(28);
+			match(END_ALL_SUPER);
 			}
 		}
 		catch (RecognitionException re) {
@@ -159,27 +164,14 @@ public class GrammarParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class PreambleContext extends ParserRuleContext {
-		public TerminalNode CELLS_COUNT_SUPER() { return getToken(GrammarParser.CELLS_COUNT_SUPER, 0); }
-		public List<NumberArgumentContext> numberArgument() {
-			return getRuleContexts(NumberArgumentContext.class);
+		public CellsCountContext cellsCount() {
+			return getRuleContext(CellsCountContext.class,0);
 		}
-		public NumberArgumentContext numberArgument(int i) {
-			return getRuleContext(NumberArgumentContext.class,i);
+		public CellsGraphContext cellsGraph() {
+			return getRuleContext(CellsGraphContext.class,0);
 		}
-		public TerminalNode CELLS_GRAPH_SUPER() { return getToken(GrammarParser.CELLS_GRAPH_SUPER, 0); }
-		public TerminalNode INPUT_VALS_SUPER() { return getToken(GrammarParser.INPUT_VALS_SUPER, 0); }
-		public TerminalNode INPUT_VALS_ORDER_SUPER() { return getToken(GrammarParser.INPUT_VALS_ORDER_SUPER, 0); }
-		public List<TerminalNode> SET_ALL_SUPER() { return getTokens(GrammarParser.SET_ALL_SUPER); }
-		public TerminalNode SET_ALL_SUPER(int i) {
-			return getToken(GrammarParser.SET_ALL_SUPER, i);
-		}
-		public List<TerminalNode> ID() { return getTokens(GrammarParser.ID); }
-		public TerminalNode ID(int i) {
-			return getToken(GrammarParser.ID, i);
-		}
-		public List<TerminalNode> NUMBER() { return getTokens(GrammarParser.NUMBER); }
-		public TerminalNode NUMBER(int i) {
-			return getToken(GrammarParser.NUMBER, i);
+		public InputValsContext inputVals() {
+			return getRuleContext(InputValsContext.class,0);
 		}
 		public PreambleContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -203,68 +195,165 @@ public class GrammarParser extends Parser {
 	public final PreambleContext preamble() throws RecognitionException {
 		PreambleContext _localctx = new PreambleContext(_ctx, getState());
 		enterRule(_localctx, 2, RULE_preamble);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(30);
+			cellsCount();
+			setState(31);
+			cellsGraph();
+			setState(32);
+			inputVals();
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class CellsCountContext extends ParserRuleContext {
+		public TerminalNode CELLS_COUNT_SUPER() { return getToken(GrammarParser.CELLS_COUNT_SUPER, 0); }
+		public NumberArgumentContext numberArgument() {
+			return getRuleContext(NumberArgumentContext.class,0);
+		}
+		public CellsCountContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_cellsCount; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof GrammarListener ) ((GrammarListener)listener).enterCellsCount(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof GrammarListener ) ((GrammarListener)listener).exitCellsCount(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GrammarVisitor ) return ((GrammarVisitor<? extends T>)visitor).visitCellsCount(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final CellsCountContext cellsCount() throws RecognitionException {
+		CellsCountContext _localctx = new CellsCountContext(_ctx, getState());
+		enterRule(_localctx, 4, RULE_cellsCount);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(34);
+			match(CELLS_COUNT_SUPER);
+			setState(35);
+			numberArgument();
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class CellsGraphContext extends ParserRuleContext {
+		public TerminalNode CELLS_GRAPH_SUPER() { return getToken(GrammarParser.CELLS_GRAPH_SUPER, 0); }
+		public NumberArgumentContext numberArgument() {
+			return getRuleContext(NumberArgumentContext.class,0);
+		}
+		public CellsGraphContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_cellsGraph; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof GrammarListener ) ((GrammarListener)listener).enterCellsGraph(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof GrammarListener ) ((GrammarListener)listener).exitCellsGraph(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GrammarVisitor ) return ((GrammarVisitor<? extends T>)visitor).visitCellsGraph(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final CellsGraphContext cellsGraph() throws RecognitionException {
+		CellsGraphContext _localctx = new CellsGraphContext(_ctx, getState());
+		enterRule(_localctx, 6, RULE_cellsGraph);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(37);
+			match(CELLS_GRAPH_SUPER);
+			setState(38);
+			numberArgument();
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class InputValsContext extends ParserRuleContext {
+		public TerminalNode INPUT_VALS_SUPER() { return getToken(GrammarParser.INPUT_VALS_SUPER, 0); }
+		public TerminalNode INPUT_VALS_CELLS_SUPER() { return getToken(GrammarParser.INPUT_VALS_CELLS_SUPER, 0); }
+		public List<TerminalNode> NUMBER() { return getTokens(GrammarParser.NUMBER); }
+		public TerminalNode NUMBER(int i) {
+			return getToken(GrammarParser.NUMBER, i);
+		}
+		public InputValsContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_inputVals; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof GrammarListener ) ((GrammarListener)listener).enterInputVals(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof GrammarListener ) ((GrammarListener)listener).exitInputVals(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GrammarVisitor ) return ((GrammarVisitor<? extends T>)visitor).visitInputVals(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final InputValsContext inputVals() throws RecognitionException {
+		InputValsContext _localctx = new InputValsContext(_ctx, getState());
+		enterRule(_localctx, 8, RULE_inputVals);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(21);
-			match(CELLS_COUNT_SUPER);
-			setState(22);
-			numberArgument();
-			setState(23);
-			match(CELLS_GRAPH_SUPER);
-			setState(24);
-			numberArgument();
-			setState(37);
+			setState(52);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==INPUT_VALS_SUPER) {
 				{
-				setState(25);
-				match(INPUT_VALS_SUPER);
-				setState(27); 
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-				do {
-					{
-					{
-					setState(26);
-					match(NUMBER);
-					}
-					}
-					setState(29); 
-					_errHandler.sync(this);
-					_la = _input.LA(1);
-				} while ( _la==NUMBER );
-				setState(31);
-				match(INPUT_VALS_ORDER_SUPER);
-				setState(33); 
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-				do {
-					{
-					{
-					setState(32);
-					match(NUMBER);
-					}
-					}
-					setState(35); 
-					_errHandler.sync(this);
-					_la = _input.LA(1);
-				} while ( _la==NUMBER );
-				}
-			}
-
-			setState(48);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			while (_la==SET_ALL_SUPER) {
-				{
-				{
-				setState(39);
-				match(SET_ALL_SUPER);
 				setState(40);
-				match(ID);
+				match(INPUT_VALS_SUPER);
 				setState(42); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
@@ -279,12 +368,25 @@ public class GrammarParser extends Parser {
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				} while ( _la==NUMBER );
-				}
-				}
-				setState(50);
+				setState(46);
+				match(INPUT_VALS_CELLS_SUPER);
+				setState(48); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
+				do {
+					{
+					{
+					setState(47);
+					match(NUMBER);
+					}
+					}
+					setState(50); 
+					_errHandler.sync(this);
+					_la = _input.LA(1);
+				} while ( _la==NUMBER );
+				}
 			}
+
 			}
 		}
 		catch (RecognitionException re) {
@@ -300,20 +402,12 @@ public class GrammarParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class CellsCodeContext extends ParserRuleContext {
-		public TerminalNode CELL_SUPER() { return getToken(GrammarParser.CELL_SUPER, 0); }
-		public NumberArgumentContext numberArgument() {
-			return getRuleContext(NumberArgumentContext.class,0);
+		public List<CellCodeContext> cellCode() {
+			return getRuleContexts(CellCodeContext.class);
 		}
-		public IdArgumentContext idArgument() {
-			return getRuleContext(IdArgumentContext.class,0);
+		public CellCodeContext cellCode(int i) {
+			return getRuleContext(CellCodeContext.class,i);
 		}
-		public CellCodePartContext cellCodePart() {
-			return getRuleContext(CellCodePartContext.class,0);
-		}
-		public CellsCodeContext cellsCode() {
-			return getRuleContext(CellsCodeContext.class,0);
-		}
-		public TerminalNode END_ALL_SUPER() { return getToken(GrammarParser.END_ALL_SUPER, 0); }
 		public CellsCodeContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -335,35 +429,99 @@ public class GrammarParser extends Parser {
 
 	public final CellsCodeContext cellsCode() throws RecognitionException {
 		CellsCodeContext _localctx = new CellsCodeContext(_ctx, getState());
-		enterRule(_localctx, 4, RULE_cellsCode);
+		enterRule(_localctx, 10, RULE_cellsCode);
+		int _la;
 		try {
-			setState(58);
+			setState(60);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case CELL_SUPER:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(51);
-				match(CELL_SUPER);
-				setState(52);
-				numberArgument();
-				setState(53);
-				idArgument();
-				setState(54);
-				cellCodePart();
-				setState(55);
-				cellsCode();
+				setState(55); 
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+				do {
+					{
+					{
+					setState(54);
+					cellCode();
+					}
+					}
+					setState(57); 
+					_errHandler.sync(this);
+					_la = _input.LA(1);
+				} while ( _la==CELL_SUPER );
 				}
 				break;
 			case END_ALL_SUPER:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(57);
-				match(END_ALL_SUPER);
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class CellCodeContext extends ParserRuleContext {
+		public TerminalNode CELL_SUPER() { return getToken(GrammarParser.CELL_SUPER, 0); }
+		public NumberArgumentContext numberArgument() {
+			return getRuleContext(NumberArgumentContext.class,0);
+		}
+		public IdArgumentContext idArgument() {
+			return getRuleContext(IdArgumentContext.class,0);
+		}
+		public CellCodePartContext cellCodePart() {
+			return getRuleContext(CellCodePartContext.class,0);
+		}
+		public TerminalNode END_SUPER() { return getToken(GrammarParser.END_SUPER, 0); }
+		public CellCodeContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_cellCode; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof GrammarListener ) ((GrammarListener)listener).enterCellCode(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof GrammarListener ) ((GrammarListener)listener).exitCellCode(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GrammarVisitor ) return ((GrammarVisitor<? extends T>)visitor).visitCellCode(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final CellCodeContext cellCode() throws RecognitionException {
+		CellCodeContext _localctx = new CellCodeContext(_ctx, getState());
+		enterRule(_localctx, 12, RULE_cellCode);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(62);
+			match(CELL_SUPER);
+			setState(63);
+			numberArgument();
+			setState(64);
+			idArgument();
+			setState(65);
+			cellCodePart();
+			setState(66);
+			match(END_SUPER);
 			}
 		}
 		catch (RecognitionException re) {
@@ -389,7 +547,6 @@ public class GrammarParser extends Parser {
 		public NumberArgumentContext numberArgument() {
 			return getRuleContext(NumberArgumentContext.class,0);
 		}
-		public TerminalNode END_SUPER() { return getToken(GrammarParser.END_SUPER, 0); }
 		public CellCodePartContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -411,9 +568,9 @@ public class GrammarParser extends Parser {
 
 	public final CellCodePartContext cellCodePart() throws RecognitionException {
 		CellCodePartContext _localctx = new CellCodePartContext(_ctx, getState());
-		enterRule(_localctx, 6, RULE_cellCodePart);
+		enterRule(_localctx, 14, RULE_cellCodePart);
 		try {
-			setState(68);
+			setState(76);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case SWAP:
@@ -438,28 +595,26 @@ public class GrammarParser extends Parser {
 			case SET:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(60);
+				setState(68);
 				functionCall();
-				setState(61);
+				setState(69);
 				cellCodePart();
 				}
 				break;
 			case SRCCOPY_SUPER:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(63);
+				setState(71);
 				match(SRCCOPY_SUPER);
-				setState(64);
+				setState(72);
 				numberArgument();
-				setState(65);
+				setState(73);
 				cellCodePart();
 				}
 				break;
 			case END_SUPER:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(67);
-				match(END_SUPER);
 				}
 				break;
 			default:
@@ -515,25 +670,25 @@ public class GrammarParser extends Parser {
 
 	public final FunctionCallContext functionCall() throws RecognitionException {
 		FunctionCallContext _localctx = new FunctionCallContext(_ctx, getState());
-		enterRule(_localctx, 8, RULE_functionCall);
+		enterRule(_localctx, 16, RULE_functionCall);
 		int _la;
 		try {
 			int _alt;
-			setState(104);
+			setState(112);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,13,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,12,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(70);
+				setState(78);
 				function();
-				setState(84);
+				setState(92);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==ID) {
 					{
 					{
-					setState(72); 
+					setState(80); 
 					_errHandler.sync(this);
 					_alt = 1;
 					do {
@@ -541,7 +696,7 @@ public class GrammarParser extends Parser {
 						case 1:
 							{
 							{
-							setState(71);
+							setState(79);
 							idArgument();
 							}
 							}
@@ -549,27 +704,27 @@ public class GrammarParser extends Parser {
 						default:
 							throw new NoViableAltException(this);
 						}
-						setState(74); 
+						setState(82); 
 						_errHandler.sync(this);
-						_alt = getInterpreter().adaptivePredict(_input,7,_ctx);
+						_alt = getInterpreter().adaptivePredict(_input,6,_ctx);
 					} while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
-					setState(79);
+					setState(87);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 					while (_la==NUMBER) {
 						{
 						{
-						setState(76);
+						setState(84);
 						numberArgument();
 						}
 						}
-						setState(81);
+						setState(89);
 						_errHandler.sync(this);
 						_la = _input.LA(1);
 					}
 					}
 					}
-					setState(86);
+					setState(94);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
@@ -578,29 +733,29 @@ public class GrammarParser extends Parser {
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(87);
+				setState(95);
 				function();
-				setState(99); 
+				setState(107); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				do {
 					{
 					{
-					setState(91);
+					setState(99);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 					while (_la==ID) {
 						{
 						{
-						setState(88);
+						setState(96);
 						idArgument();
 						}
 						}
-						setState(93);
+						setState(101);
 						_errHandler.sync(this);
 						_la = _input.LA(1);
 					}
-					setState(95); 
+					setState(103); 
 					_errHandler.sync(this);
 					_alt = 1;
 					do {
@@ -608,7 +763,7 @@ public class GrammarParser extends Parser {
 						case 1:
 							{
 							{
-							setState(94);
+							setState(102);
 							numberArgument();
 							}
 							}
@@ -616,13 +771,13 @@ public class GrammarParser extends Parser {
 						default:
 							throw new NoViableAltException(this);
 						}
-						setState(97); 
+						setState(105); 
 						_errHandler.sync(this);
-						_alt = getInterpreter().adaptivePredict(_input,11,_ctx);
+						_alt = getInterpreter().adaptivePredict(_input,10,_ctx);
 					} while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
 					}
 					}
-					setState(101); 
+					setState(109); 
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				} while ( _la==NUMBER || _la==ID );
@@ -631,7 +786,7 @@ public class GrammarParser extends Parser {
 			case 3:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(103);
+				setState(111);
 				function();
 				}
 				break;
@@ -656,9 +811,8 @@ public class GrammarParser extends Parser {
 		public TerminalNode END_SUPER() { return getToken(GrammarParser.END_SUPER, 0); }
 		public TerminalNode END_ALL_SUPER() { return getToken(GrammarParser.END_ALL_SUPER, 0); }
 		public TerminalNode SRCCOPY_SUPER() { return getToken(GrammarParser.SRCCOPY_SUPER, 0); }
-		public TerminalNode SET_ALL_SUPER() { return getToken(GrammarParser.SET_ALL_SUPER, 0); }
 		public TerminalNode INPUT_VALS_SUPER() { return getToken(GrammarParser.INPUT_VALS_SUPER, 0); }
-		public TerminalNode INPUT_VALS_ORDER_SUPER() { return getToken(GrammarParser.INPUT_VALS_ORDER_SUPER, 0); }
+		public TerminalNode INPUT_VALS_CELLS_SUPER() { return getToken(GrammarParser.INPUT_VALS_CELLS_SUPER, 0); }
 		public FunctionSuperContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -680,14 +834,14 @@ public class GrammarParser extends Parser {
 
 	public final FunctionSuperContext functionSuper() throws RecognitionException {
 		FunctionSuperContext _localctx = new FunctionSuperContext(_ctx, getState());
-		enterRule(_localctx, 10, RULE_functionSuper);
+		enterRule(_localctx, 18, RULE_functionSuper);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(106);
+			setState(114);
 			_la = _input.LA(1);
-			if ( !(((_la) & ~0x3f) == 0 && ((1L << _la) & 1074004222L) != 0) ) {
+			if ( !(((_la) & ~0x3f) == 0 && ((1L << _la) & 262398L) != 0) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -751,12 +905,12 @@ public class GrammarParser extends Parser {
 
 	public final FunctionContext function() throws RecognitionException {
 		FunctionContext _localctx = new FunctionContext(_ctx, getState());
-		enterRule(_localctx, 12, RULE_function);
+		enterRule(_localctx, 20, RULE_function);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(108);
+			setState(116);
 			_la = _input.LA(1);
 			if ( !(((_la) & ~0x3f) == 0 && ((1L << _la) & 1069285120L) != 0) ) {
 			_errHandler.recoverInline(this);
@@ -803,11 +957,11 @@ public class GrammarParser extends Parser {
 
 	public final IdArgumentContext idArgument() throws RecognitionException {
 		IdArgumentContext _localctx = new IdArgumentContext(_ctx, getState());
-		enterRule(_localctx, 14, RULE_idArgument);
+		enterRule(_localctx, 22, RULE_idArgument);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(110);
+			setState(118);
 			match(ID);
 			}
 		}
@@ -846,11 +1000,11 @@ public class GrammarParser extends Parser {
 
 	public final NumberArgumentContext numberArgument() throws RecognitionException {
 		NumberArgumentContext _localctx = new NumberArgumentContext(_ctx, getState());
-		enterRule(_localctx, 16, RULE_numberArgument);
+		enterRule(_localctx, 24, RULE_numberArgument);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(112);
+			setState(120);
 			match(NUMBER);
 			}
 		}
@@ -866,73 +1020,73 @@ public class GrammarParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001\"s\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
-		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0002"+
-		"\u0005\u0007\u0005\u0002\u0006\u0007\u0006\u0002\u0007\u0007\u0007\u0002"+
-		"\b\u0007\b\u0001\u0000\u0001\u0000\u0001\u0000\u0001\u0001\u0001\u0001"+
-		"\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0004\u0001\u001c\b\u0001"+
-		"\u000b\u0001\f\u0001\u001d\u0001\u0001\u0001\u0001\u0004\u0001\"\b\u0001"+
-		"\u000b\u0001\f\u0001#\u0003\u0001&\b\u0001\u0001\u0001\u0001\u0001\u0001"+
-		"\u0001\u0004\u0001+\b\u0001\u000b\u0001\f\u0001,\u0005\u0001/\b\u0001"+
-		"\n\u0001\f\u00012\t\u0001\u0001\u0002\u0001\u0002\u0001\u0002\u0001\u0002"+
-		"\u0001\u0002\u0001\u0002\u0001\u0002\u0003\u0002;\b\u0002\u0001\u0003"+
-		"\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003"+
-		"\u0001\u0003\u0003\u0003E\b\u0003\u0001\u0004\u0001\u0004\u0004\u0004"+
-		"I\b\u0004\u000b\u0004\f\u0004J\u0001\u0004\u0005\u0004N\b\u0004\n\u0004"+
-		"\f\u0004Q\t\u0004\u0005\u0004S\b\u0004\n\u0004\f\u0004V\t\u0004\u0001"+
-		"\u0004\u0001\u0004\u0005\u0004Z\b\u0004\n\u0004\f\u0004]\t\u0004\u0001"+
-		"\u0004\u0004\u0004`\b\u0004\u000b\u0004\f\u0004a\u0004\u0004d\b\u0004"+
-		"\u000b\u0004\f\u0004e\u0001\u0004\u0003\u0004i\b\u0004\u0001\u0005\u0001"+
-		"\u0005\u0001\u0006\u0001\u0006\u0001\u0007\u0001\u0007\u0001\b\u0001\b"+
-		"\u0001\b\u0000\u0000\t\u0000\u0002\u0004\u0006\b\n\f\u000e\u0010\u0000"+
-		"\u0002\u0003\u0000\u0001\u0007\u0012\u0012\u001e\u001e\u0003\u0000\b\u0011"+
-		"\u0013\u0015\u0017\u001dy\u0000\u0012\u0001\u0000\u0000\u0000\u0002\u0015"+
-		"\u0001\u0000\u0000\u0000\u0004:\u0001\u0000\u0000\u0000\u0006D\u0001\u0000"+
-		"\u0000\u0000\bh\u0001\u0000\u0000\u0000\nj\u0001\u0000\u0000\u0000\fl"+
-		"\u0001\u0000\u0000\u0000\u000en\u0001\u0000\u0000\u0000\u0010p\u0001\u0000"+
-		"\u0000\u0000\u0012\u0013\u0003\u0002\u0001\u0000\u0013\u0014\u0003\u0004"+
-		"\u0002\u0000\u0014\u0001\u0001\u0000\u0000\u0000\u0015\u0016\u0005\u0001"+
-		"\u0000\u0000\u0016\u0017\u0003\u0010\b\u0000\u0017\u0018\u0005\u0002\u0000"+
-		"\u0000\u0018%\u0003\u0010\b\u0000\u0019\u001b\u0005\u0006\u0000\u0000"+
-		"\u001a\u001c\u0005\u001f\u0000\u0000\u001b\u001a\u0001\u0000\u0000\u0000"+
-		"\u001c\u001d\u0001\u0000\u0000\u0000\u001d\u001b\u0001\u0000\u0000\u0000"+
-		"\u001d\u001e\u0001\u0000\u0000\u0000\u001e\u001f\u0001\u0000\u0000\u0000"+
-		"\u001f!\u0005\u0007\u0000\u0000 \"\u0005\u001f\u0000\u0000! \u0001\u0000"+
-		"\u0000\u0000\"#\u0001\u0000\u0000\u0000#!\u0001\u0000\u0000\u0000#$\u0001"+
-		"\u0000\u0000\u0000$&\u0001\u0000\u0000\u0000%\u0019\u0001\u0000\u0000"+
-		"\u0000%&\u0001\u0000\u0000\u0000&0\u0001\u0000\u0000\u0000\'(\u0005\u001e"+
-		"\u0000\u0000(*\u0005 \u0000\u0000)+\u0005\u001f\u0000\u0000*)\u0001\u0000"+
-		"\u0000\u0000+,\u0001\u0000\u0000\u0000,*\u0001\u0000\u0000\u0000,-\u0001"+
-		"\u0000\u0000\u0000-/\u0001\u0000\u0000\u0000.\'\u0001\u0000\u0000\u0000"+
-		"/2\u0001\u0000\u0000\u00000.\u0001\u0000\u0000\u000001\u0001\u0000\u0000"+
-		"\u00001\u0003\u0001\u0000\u0000\u000020\u0001\u0000\u0000\u000034\u0005"+
-		"\u0003\u0000\u000045\u0003\u0010\b\u000056\u0003\u000e\u0007\u000067\u0003"+
-		"\u0006\u0003\u000078\u0003\u0004\u0002\u00008;\u0001\u0000\u0000\u0000"+
-		"9;\u0005\u0005\u0000\u0000:3\u0001\u0000\u0000\u0000:9\u0001\u0000\u0000"+
-		"\u0000;\u0005\u0001\u0000\u0000\u0000<=\u0003\b\u0004\u0000=>\u0003\u0006"+
-		"\u0003\u0000>E\u0001\u0000\u0000\u0000?@\u0005\u0012\u0000\u0000@A\u0003"+
-		"\u0010\b\u0000AB\u0003\u0006\u0003\u0000BE\u0001\u0000\u0000\u0000CE\u0005"+
-		"\u0004\u0000\u0000D<\u0001\u0000\u0000\u0000D?\u0001\u0000\u0000\u0000"+
-		"DC\u0001\u0000\u0000\u0000E\u0007\u0001\u0000\u0000\u0000FT\u0003\f\u0006"+
-		"\u0000GI\u0003\u000e\u0007\u0000HG\u0001\u0000\u0000\u0000IJ\u0001\u0000"+
-		"\u0000\u0000JH\u0001\u0000\u0000\u0000JK\u0001\u0000\u0000\u0000KO\u0001"+
-		"\u0000\u0000\u0000LN\u0003\u0010\b\u0000ML\u0001\u0000\u0000\u0000NQ\u0001"+
-		"\u0000\u0000\u0000OM\u0001\u0000\u0000\u0000OP\u0001\u0000\u0000\u0000"+
-		"PS\u0001\u0000\u0000\u0000QO\u0001\u0000\u0000\u0000RH\u0001\u0000\u0000"+
-		"\u0000SV\u0001\u0000\u0000\u0000TR\u0001\u0000\u0000\u0000TU\u0001\u0000"+
-		"\u0000\u0000Ui\u0001\u0000\u0000\u0000VT\u0001\u0000\u0000\u0000Wc\u0003"+
-		"\f\u0006\u0000XZ\u0003\u000e\u0007\u0000YX\u0001\u0000\u0000\u0000Z]\u0001"+
-		"\u0000\u0000\u0000[Y\u0001\u0000\u0000\u0000[\\\u0001\u0000\u0000\u0000"+
-		"\\_\u0001\u0000\u0000\u0000][\u0001\u0000\u0000\u0000^`\u0003\u0010\b"+
-		"\u0000_^\u0001\u0000\u0000\u0000`a\u0001\u0000\u0000\u0000a_\u0001\u0000"+
-		"\u0000\u0000ab\u0001\u0000\u0000\u0000bd\u0001\u0000\u0000\u0000c[\u0001"+
-		"\u0000\u0000\u0000de\u0001\u0000\u0000\u0000ec\u0001\u0000\u0000\u0000"+
-		"ef\u0001\u0000\u0000\u0000fi\u0001\u0000\u0000\u0000gi\u0003\f\u0006\u0000"+
-		"hF\u0001\u0000\u0000\u0000hW\u0001\u0000\u0000\u0000hg\u0001\u0000\u0000"+
-		"\u0000i\t\u0001\u0000\u0000\u0000jk\u0007\u0000\u0000\u0000k\u000b\u0001"+
-		"\u0000\u0000\u0000lm\u0007\u0001\u0000\u0000m\r\u0001\u0000\u0000\u0000"+
-		"no\u0005 \u0000\u0000o\u000f\u0001\u0000\u0000\u0000pq\u0005\u001f\u0000"+
-		"\u0000q\u0011\u0001\u0000\u0000\u0000\u000e\u001d#%,0:DJOT[aeh";
+		"\u0004\u0001!{\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002\u0002"+
+		"\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0002\u0005"+
+		"\u0007\u0005\u0002\u0006\u0007\u0006\u0002\u0007\u0007\u0007\u0002\b\u0007"+
+		"\b\u0002\t\u0007\t\u0002\n\u0007\n\u0002\u000b\u0007\u000b\u0002\f\u0007"+
+		"\f\u0001\u0000\u0001\u0000\u0001\u0000\u0001\u0000\u0001\u0001\u0001\u0001"+
+		"\u0001\u0001\u0001\u0001\u0001\u0002\u0001\u0002\u0001\u0002\u0001\u0003"+
+		"\u0001\u0003\u0001\u0003\u0001\u0004\u0001\u0004\u0004\u0004+\b\u0004"+
+		"\u000b\u0004\f\u0004,\u0001\u0004\u0001\u0004\u0004\u00041\b\u0004\u000b"+
+		"\u0004\f\u00042\u0003\u00045\b\u0004\u0001\u0005\u0004\u00058\b\u0005"+
+		"\u000b\u0005\f\u00059\u0001\u0005\u0003\u0005=\b\u0005\u0001\u0006\u0001"+
+		"\u0006\u0001\u0006\u0001\u0006\u0001\u0006\u0001\u0006\u0001\u0007\u0001"+
+		"\u0007\u0001\u0007\u0001\u0007\u0001\u0007\u0001\u0007\u0001\u0007\u0001"+
+		"\u0007\u0003\u0007M\b\u0007\u0001\b\u0001\b\u0004\bQ\b\b\u000b\b\f\bR"+
+		"\u0001\b\u0005\bV\b\b\n\b\f\bY\t\b\u0005\b[\b\b\n\b\f\b^\t\b\u0001\b\u0001"+
+		"\b\u0005\bb\b\b\n\b\f\be\t\b\u0001\b\u0004\bh\b\b\u000b\b\f\bi\u0004\b"+
+		"l\b\b\u000b\b\f\bm\u0001\b\u0003\bq\b\b\u0001\t\u0001\t\u0001\n\u0001"+
+		"\n\u0001\u000b\u0001\u000b\u0001\f\u0001\f\u0001\f\u0000\u0000\r\u0000"+
+		"\u0002\u0004\u0006\b\n\f\u000e\u0010\u0012\u0014\u0016\u0018\u0000\u0002"+
+		"\u0002\u0000\u0001\u0007\u0012\u0012\u0003\u0000\b\u0011\u0013\u0015\u0017"+
+		"\u001d|\u0000\u001a\u0001\u0000\u0000\u0000\u0002\u001e\u0001\u0000\u0000"+
+		"\u0000\u0004\"\u0001\u0000\u0000\u0000\u0006%\u0001\u0000\u0000\u0000"+
+		"\b4\u0001\u0000\u0000\u0000\n<\u0001\u0000\u0000\u0000\f>\u0001\u0000"+
+		"\u0000\u0000\u000eL\u0001\u0000\u0000\u0000\u0010p\u0001\u0000\u0000\u0000"+
+		"\u0012r\u0001\u0000\u0000\u0000\u0014t\u0001\u0000\u0000\u0000\u0016v"+
+		"\u0001\u0000\u0000\u0000\u0018x\u0001\u0000\u0000\u0000\u001a\u001b\u0003"+
+		"\u0002\u0001\u0000\u001b\u001c\u0003\n\u0005\u0000\u001c\u001d\u0005\u0005"+
+		"\u0000\u0000\u001d\u0001\u0001\u0000\u0000\u0000\u001e\u001f\u0003\u0004"+
+		"\u0002\u0000\u001f \u0003\u0006\u0003\u0000 !\u0003\b\u0004\u0000!\u0003"+
+		"\u0001\u0000\u0000\u0000\"#\u0005\u0001\u0000\u0000#$\u0003\u0018\f\u0000"+
+		"$\u0005\u0001\u0000\u0000\u0000%&\u0005\u0002\u0000\u0000&\'\u0003\u0018"+
+		"\f\u0000\'\u0007\u0001\u0000\u0000\u0000(*\u0005\u0006\u0000\u0000)+\u0005"+
+		"\u001e\u0000\u0000*)\u0001\u0000\u0000\u0000+,\u0001\u0000\u0000\u0000"+
+		",*\u0001\u0000\u0000\u0000,-\u0001\u0000\u0000\u0000-.\u0001\u0000\u0000"+
+		"\u0000.0\u0005\u0007\u0000\u0000/1\u0005\u001e\u0000\u00000/\u0001\u0000"+
+		"\u0000\u000012\u0001\u0000\u0000\u000020\u0001\u0000\u0000\u000023\u0001"+
+		"\u0000\u0000\u000035\u0001\u0000\u0000\u00004(\u0001\u0000\u0000\u0000"+
+		"45\u0001\u0000\u0000\u00005\t\u0001\u0000\u0000\u000068\u0003\f\u0006"+
+		"\u000076\u0001\u0000\u0000\u000089\u0001\u0000\u0000\u000097\u0001\u0000"+
+		"\u0000\u00009:\u0001\u0000\u0000\u0000:=\u0001\u0000\u0000\u0000;=\u0001"+
+		"\u0000\u0000\u0000<7\u0001\u0000\u0000\u0000<;\u0001\u0000\u0000\u0000"+
+		"=\u000b\u0001\u0000\u0000\u0000>?\u0005\u0003\u0000\u0000?@\u0003\u0018"+
+		"\f\u0000@A\u0003\u0016\u000b\u0000AB\u0003\u000e\u0007\u0000BC\u0005\u0004"+
+		"\u0000\u0000C\r\u0001\u0000\u0000\u0000DE\u0003\u0010\b\u0000EF\u0003"+
+		"\u000e\u0007\u0000FM\u0001\u0000\u0000\u0000GH\u0005\u0012\u0000\u0000"+
+		"HI\u0003\u0018\f\u0000IJ\u0003\u000e\u0007\u0000JM\u0001\u0000\u0000\u0000"+
+		"KM\u0001\u0000\u0000\u0000LD\u0001\u0000\u0000\u0000LG\u0001\u0000\u0000"+
+		"\u0000LK\u0001\u0000\u0000\u0000M\u000f\u0001\u0000\u0000\u0000N\\\u0003"+
+		"\u0014\n\u0000OQ\u0003\u0016\u000b\u0000PO\u0001\u0000\u0000\u0000QR\u0001"+
+		"\u0000\u0000\u0000RP\u0001\u0000\u0000\u0000RS\u0001\u0000\u0000\u0000"+
+		"SW\u0001\u0000\u0000\u0000TV\u0003\u0018\f\u0000UT\u0001\u0000\u0000\u0000"+
+		"VY\u0001\u0000\u0000\u0000WU\u0001\u0000\u0000\u0000WX\u0001\u0000\u0000"+
+		"\u0000X[\u0001\u0000\u0000\u0000YW\u0001\u0000\u0000\u0000ZP\u0001\u0000"+
+		"\u0000\u0000[^\u0001\u0000\u0000\u0000\\Z\u0001\u0000\u0000\u0000\\]\u0001"+
+		"\u0000\u0000\u0000]q\u0001\u0000\u0000\u0000^\\\u0001\u0000\u0000\u0000"+
+		"_k\u0003\u0014\n\u0000`b\u0003\u0016\u000b\u0000a`\u0001\u0000\u0000\u0000"+
+		"be\u0001\u0000\u0000\u0000ca\u0001\u0000\u0000\u0000cd\u0001\u0000\u0000"+
+		"\u0000dg\u0001\u0000\u0000\u0000ec\u0001\u0000\u0000\u0000fh\u0003\u0018"+
+		"\f\u0000gf\u0001\u0000\u0000\u0000hi\u0001\u0000\u0000\u0000ig\u0001\u0000"+
+		"\u0000\u0000ij\u0001\u0000\u0000\u0000jl\u0001\u0000\u0000\u0000kc\u0001"+
+		"\u0000\u0000\u0000lm\u0001\u0000\u0000\u0000mk\u0001\u0000\u0000\u0000"+
+		"mn\u0001\u0000\u0000\u0000nq\u0001\u0000\u0000\u0000oq\u0003\u0014\n\u0000"+
+		"pN\u0001\u0000\u0000\u0000p_\u0001\u0000\u0000\u0000po\u0001\u0000\u0000"+
+		"\u0000q\u0011\u0001\u0000\u0000\u0000rs\u0007\u0000\u0000\u0000s\u0013"+
+		"\u0001\u0000\u0000\u0000tu\u0007\u0001\u0000\u0000u\u0015\u0001\u0000"+
+		"\u0000\u0000vw\u0005\u001f\u0000\u0000w\u0017\u0001\u0000\u0000\u0000"+
+		"xy\u0005\u001e\u0000\u0000y\u0019\u0001\u0000\u0000\u0000\r,249<LRW\\"+
+		"cimp";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

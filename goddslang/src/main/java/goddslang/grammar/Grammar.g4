@@ -1,25 +1,38 @@
 grammar Grammar;
 
 start
-    : preamble cellsCode
+    : preamble cellsCode END_ALL_SUPER
     ;
 
 preamble
+    : cellsCount cellsGraph inputVals
+    ;
+
+cellsCount
     : CELLS_COUNT_SUPER numberArgument
-        CELLS_GRAPH_SUPER numberArgument
-        (INPUT_VALS_SUPER NUMBER+ INPUT_VALS_ORDER_SUPER NUMBER+)?
-        (SET_ALL_SUPER ID NUMBER+)*
+    ;
+
+cellsGraph
+    : CELLS_GRAPH_SUPER numberArgument
+    ;
+
+inputVals
+    : (INPUT_VALS_SUPER NUMBER+ INPUT_VALS_CELLS_SUPER NUMBER+)?
     ;
 
 cellsCode
-    : CELL_SUPER numberArgument idArgument cellCodePart cellsCode
-    | END_ALL_SUPER
+    : cellCode+
+    | // Exit point
+    ;
+
+cellCode
+    : CELL_SUPER numberArgument idArgument cellCodePart END_SUPER
     ;
 
 cellCodePart
     : functionCall cellCodePart
     | SRCCOPY_SUPER numberArgument cellCodePart
-    | END_SUPER
+    | 
     ;
 
 functionCall
@@ -35,9 +48,8 @@ functionSuper
     | END_SUPER
     | END_ALL_SUPER
     | SRCCOPY_SUPER
-    | SET_ALL_SUPER
     | INPUT_VALS_SUPER
-    | INPUT_VALS_ORDER_SUPER
+    | INPUT_VALS_CELLS_SUPER
     ;
 
 function
@@ -101,8 +113,8 @@ INPUT_VALS_SUPER
     : '#INPUT_VALS'
     ;
 
-INPUT_VALS_ORDER_SUPER
-    : '#INPUT_VALS_ORDER'
+INPUT_VALS_CELLS_SUPER
+    : '#INPUT_VALS_CELLS'
     ;
 
 SWAP
@@ -191,10 +203,6 @@ COMP
 
 SET
     : 'SET'
-    ;
-
-SET_ALL_SUPER
-    : '#SET_ALL'
     ;
 
 NUMBER
