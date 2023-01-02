@@ -47,15 +47,15 @@ public interface GrammarListener extends ParseTreeListener {
 	 */
 	void exitCellCodePart(GrammarParser.CellCodePartContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link GrammarParser#function}.
+	 * Enter a parse tree produced by {@link GrammarParser#functionCall}.
 	 * @param ctx the parse tree
 	 */
-	void enterFunction(GrammarParser.FunctionContext ctx);
+	void enterFunctionCall(GrammarParser.FunctionCallContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link GrammarParser#function}.
+	 * Exit a parse tree produced by {@link GrammarParser#functionCall}.
 	 * @param ctx the parse tree
 	 */
-	void exitFunction(GrammarParser.FunctionContext ctx);
+	void exitFunctionCall(GrammarParser.FunctionCallContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GrammarParser#functionSuper}.
 	 * @param ctx the parse tree
@@ -67,35 +67,15 @@ public interface GrammarListener extends ParseTreeListener {
 	 */
 	void exitFunctionSuper(GrammarParser.FunctionSuperContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link GrammarParser#functionNoArgument}.
+	 * Enter a parse tree produced by {@link GrammarParser#function}.
 	 * @param ctx the parse tree
 	 */
-	void enterFunctionNoArgument(GrammarParser.FunctionNoArgumentContext ctx);
+	void enterFunction(GrammarParser.FunctionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link GrammarParser#functionNoArgument}.
+	 * Exit a parse tree produced by {@link GrammarParser#function}.
 	 * @param ctx the parse tree
 	 */
-	void exitFunctionNoArgument(GrammarParser.FunctionNoArgumentContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link GrammarParser#functionIDArgument}.
-	 * @param ctx the parse tree
-	 */
-	void enterFunctionIDArgument(GrammarParser.FunctionIDArgumentContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link GrammarParser#functionIDArgument}.
-	 * @param ctx the parse tree
-	 */
-	void exitFunctionIDArgument(GrammarParser.FunctionIDArgumentContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link GrammarParser#functionNUMBERArgument}.
-	 * @param ctx the parse tree
-	 */
-	void enterFunctionNUMBERArgument(GrammarParser.FunctionNUMBERArgumentContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link GrammarParser#functionNUMBERArgument}.
-	 * @param ctx the parse tree
-	 */
-	void exitFunctionNUMBERArgument(GrammarParser.FunctionNUMBERArgumentContext ctx);
+	void exitFunction(GrammarParser.FunctionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GrammarParser#idArgument}.
 	 * @param ctx the parse tree

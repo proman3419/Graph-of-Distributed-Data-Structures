@@ -64,13 +64,13 @@ public class GrammarBaseListener implements GrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFunction(GrammarParser.FunctionContext ctx) { }
+	@Override public void enterFunctionCall(GrammarParser.FunctionCallContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFunction(GrammarParser.FunctionContext ctx) { }
+	@Override public void exitFunctionCall(GrammarParser.FunctionCallContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -88,37 +88,13 @@ public class GrammarBaseListener implements GrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFunctionNoArgument(GrammarParser.FunctionNoArgumentContext ctx) { }
+	@Override public void enterFunction(GrammarParser.FunctionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFunctionNoArgument(GrammarParser.FunctionNoArgumentContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterFunctionIDArgument(GrammarParser.FunctionIDArgumentContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitFunctionIDArgument(GrammarParser.FunctionIDArgumentContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterFunctionNUMBERArgument(GrammarParser.FunctionNUMBERArgumentContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitFunctionNUMBERArgument(GrammarParser.FunctionNUMBERArgumentContext ctx) { }
+	@Override public void exitFunction(GrammarParser.FunctionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
