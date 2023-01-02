@@ -7,7 +7,7 @@ start
 preamble
     : CELLS_COUNT_SUPER numberArgument
         CELLS_GRAPH_SUPER numberArgument
-        (INPUT_VALS_SUPER ID NUMBER+ INPUT_VALS_ORDER_SUPER NUMBER+)*
+        (INPUT_VALS_SUPER NUMBER+ INPUT_VALS_ORDER_SUPER NUMBER+)?
         (SET_ALL_SUPER ID NUMBER+)*
     ;
 
