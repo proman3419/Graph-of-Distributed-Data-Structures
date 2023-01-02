@@ -5,7 +5,7 @@ start
     ;
 
 preamble
-    : CELLS_COUNT_SUPER numberArgument CELLS_GRAPH_SUPER numberArgument END_SUPER
+    : CELLS_COUNT_SUPER numberArgument CELLS_GRAPH_SUPER numberArgument END_SUPER (SET_ALL_SUPER ID NUMBER+)*
     ;
 
 cellsCode
@@ -14,14 +14,15 @@ cellsCode
     ;
 
 cellCodePart
-    : function cellCodePart
+    : functionCall cellCodePart
+    | SRCCOPY_SUPER numberArgument cellCodePart
     | END_SUPER
     ;
 
-function
-    : functionNoArgument
-    | functionIDArgument idArgument
-    | functionNUMBERArgument numberArgument
+functionCall
+    : function (idArgument+ numberArgument*)*
+    | function (idArgument* numberArgument+)+
+    | function
     ;
 
 functionSuper
@@ -29,34 +30,38 @@ functionSuper
     | CELLS_GRAPH_SUPER
     | CELL_SUPER
     | END_SUPER
+    | END_ALL_SUPER
+    | SRCCOPY_SUPER
+    | SET_ALL_SUPER
     ;
 
-functionNoArgument
-    : SWAP_NOARG
-    | COPY_NOARG
-    | PRINT_NOARG
-    ;
-
-functionIDArgument
-    : DEFINE_LABEL_ID
-    | JUMP_ID
-    | CHECK_IFEZ_ID
-    | CHECK_IFLZ_ID
-    | CHECK_IFGZ_ID
-    | WRITE_CELL_ID
-    | READ_CELL_ID
-    | COPY_CELL_ID
-    | SRCCOPY_CELL_ID
-    ;
-
-functionNUMBERArgument
-    : ADD_NUMBER
-    | SUB_NUMBER
-    | MUL_NUMBER
-    | DIV_NUMBER
-    | MOD_NUMBER
-    | COMP_NUMBER
-    | PRINT_LABEL_NAME_NUMBER
+function
+    // v NOARG v
+    : SWAP
+    | COPY
+    | PRINT
+    | PRINT_CHAR
+    // ^ NOARG ^
+    // v ID v
+    | DEFINE_LABEL
+    | JUMP
+    | CHECK_IFEZ
+    | CHECK_IFLZ
+    | CHECK_IFGZ
+    // ^ ID ^
+    // v NUMBER v
+    | WRITE_CELL
+    | READ_CELL
+    | COPY_CELL
+    | ADD
+    | SUB
+    | MUL
+    | DIV
+    | MOD
+    | COMP
+    | PRINT_LABEL_NAME
+    // ^ NUMBER ^
+    | SET
     ;
 
 idArgument
@@ -66,10 +71,6 @@ idArgument
 numberArgument
     : NUMBER
     ;
-
-//multilineNumberArgument
-//    : MULTILINE_NUMBER
-//    ;
 
 CELLS_COUNT_SUPER
     : '#CELLS_COUNT'
@@ -91,104 +92,112 @@ END_ALL_SUPER
     : '#END_ALL'
     ;
 
-SWAP_NOARG
+SWAP
     : 'SWAP'
     ;
 
-COPY_NOARG
+COPY
     : 'COPY'
     ;
 
-DEFINE_LABEL_ID
+DEFINE_LABEL
     : 'LABEL' 
     ;
 
-JUMP_ID
+JUMP
     : 'JUMP'
     ;
 
-CHECK_IFEZ_ID
+CHECK_IFEZ
     : 'IFEZ'
     ;
 
-CHECK_IFLZ_ID
+CHECK_IFLZ
     : 'IFLZ'
     ;
 
-CHECK_IFGZ_ID
+CHECK_IFGZ
     : 'IFGZ'
     ;
 
-WRITE_CELL_ID
+WRITE_CELL
     : 'WRITE_CELL'
     ;
 
-READ_CELL_ID
+READ_CELL
     : 'READ_CELL'
     ;
 
-COPY_CELL_ID
+COPY_CELL
     : 'COPY_CELL'
     ;
 
-SRCCOPY_CELL_ID
-    : 'SRCCOPY_CELL'
+SRCCOPY_SUPER
+    : '#SRCCOPY'
     ;    
 
-PRINT_NOARG
+PRINT
     : 'PRINT'
     ;
 
-PRINT_LABEL_NAME_NUMBER
+PRINT_CHAR
+    : 'PRINT_CHAR'
+    ;
+
+PRINT_LABEL_NAME
     : 'PRINT_LABEL_NAME'
     ;
 
-PRINT_LABEL_ID_NUMBER
+PRINT_LABEL_ID
     : 'PRINT_LABEL_ID'
     ;
 
-ADD_NUMBER
+ADD
     : 'ADD'
     ;
 
-SUB_NUMBER
+SUB
     : 'SUB'
     ;
 
-MUL_NUMBER
+MUL
     : 'MUL'
     ;
 
-DIV_NUMBER
+DIV
     : 'DIV'
     ;
 
-MOD_NUMBER
+MOD
     : 'MOD'
     ;
 
-COMP_NUMBER
+COMP
     : 'COMP'
+    ;
+
+SET
+    : 'SET'
+    ;
+
+SET_ALL_SUPER
+    : '#SET_ALL'
     ;
 
 NUMBER
     : '-'?('0'..'9')+
     ;
 
-//MULTILINE_NUMBER
-//    : ('0'..'9'[\n])+
-//    ;
-
 ID
     : [a-zA-Z]+('0'..'9')*
     ;
 
-
-/* We're going to ignore all white space characters */
+// Ignore white space characters
 WS
     : [ \t\r\n]+ -> skip
     ;
 
+// Comment starts with '//'
 COMMENT
   : '//' ~( '\r' | '\n' )* -> skip
   ;

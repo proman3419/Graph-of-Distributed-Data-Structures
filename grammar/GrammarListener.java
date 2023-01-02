@@ -17,15 +17,35 @@ public interface GrammarListener extends ParseTreeListener {
 	 */
 	void exitStart(GrammarParser.StartContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link GrammarParser#main}.
+	 * Enter a parse tree produced by {@link GrammarParser#preamble}.
 	 * @param ctx the parse tree
 	 */
-	void enterMain(GrammarParser.MainContext ctx);
+	void enterPreamble(GrammarParser.PreambleContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link GrammarParser#main}.
+	 * Exit a parse tree produced by {@link GrammarParser#preamble}.
 	 * @param ctx the parse tree
 	 */
-	void exitMain(GrammarParser.MainContext ctx);
+	void exitPreamble(GrammarParser.PreambleContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GrammarParser#cellsCode}.
+	 * @param ctx the parse tree
+	 */
+	void enterCellsCode(GrammarParser.CellsCodeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GrammarParser#cellsCode}.
+	 * @param ctx the parse tree
+	 */
+	void exitCellsCode(GrammarParser.CellsCodeContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GrammarParser#cellCodePart}.
+	 * @param ctx the parse tree
+	 */
+	void enterCellCodePart(GrammarParser.CellCodePartContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GrammarParser#cellCodePart}.
+	 * @param ctx the parse tree
+	 */
+	void exitCellCodePart(GrammarParser.CellCodePartContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GrammarParser#function}.
 	 * @param ctx the parse tree
@@ -36,6 +56,16 @@ public interface GrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFunction(GrammarParser.FunctionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GrammarParser#functionSuper}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunctionSuper(GrammarParser.FunctionSuperContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GrammarParser#functionSuper}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunctionSuper(GrammarParser.FunctionSuperContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GrammarParser#functionNoArgument}.
 	 * @param ctx the parse tree
