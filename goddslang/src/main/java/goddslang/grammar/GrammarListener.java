@@ -48,6 +48,16 @@ public interface GrammarListener extends ParseTreeListener {
 	 */
 	void exitCellsGraph(GrammarParser.CellsGraphContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link GrammarParser#input}.
+	 * @param ctx the parse tree
+	 */
+	void enterInput(GrammarParser.InputContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GrammarParser#input}.
+	 * @param ctx the parse tree
+	 */
+	void exitInput(GrammarParser.InputContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link GrammarParser#inputVals}.
 	 * @param ctx the parse tree
 	 */
@@ -57,6 +67,16 @@ public interface GrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitInputVals(GrammarParser.InputValsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GrammarParser#inputCells}.
+	 * @param ctx the parse tree
+	 */
+	void enterInputCells(GrammarParser.InputCellsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GrammarParser#inputCells}.
+	 * @param ctx the parse tree
+	 */
+	void exitInputCells(GrammarParser.InputCellsContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GrammarParser#cells}.
 	 * @param ctx the parse tree
@@ -117,6 +137,16 @@ public interface GrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFunctionCall(GrammarParser.FunctionCallContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GrammarParser#arguments}.
+	 * @param ctx the parse tree
+	 */
+	void enterArguments(GrammarParser.ArgumentsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GrammarParser#arguments}.
+	 * @param ctx the parse tree
+	 */
+	void exitArguments(GrammarParser.ArgumentsContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GrammarParser#functionSuper}.
 	 * @param ctx the parse tree

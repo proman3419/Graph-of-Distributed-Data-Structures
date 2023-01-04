@@ -1,10 +1,10 @@
 #CELLS_COUNT 2
 #CELLS_GRAPH 1111
-#INPUT_VALS 11 1 2 96 23
-#INPUT_VALS_CELLS 0 1
-#CELL 0 label0
-#END
-#CELL 1 label1
+#INPUT 11 1 2 96 23
+#INPUT_CELLS 0 1
+    #CELL 0 label0
+    #END
+    #CELL 1 label1
         PRINT
         SET R0 12
         #SRCCOPY 5

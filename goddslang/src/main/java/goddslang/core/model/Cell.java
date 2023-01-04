@@ -8,18 +8,18 @@ import java.util.List;
 public class Cell {
     private final int id;
     private final String label;
-    private final List<Function> functions;
+    private final List<Function> functions = new ArrayList<>();
     private List<Cell> neighbors;
     private int currFunctionId = 0;
 
-    public Cell(int id, String label, List<String> cellBodyRaw) {
+
+    public Cell(int id, String label) {
         this.id = id;
         this.label = label;
-        this.functions = parseBody(cellBodyRaw);
     }
 
-    private List<Function> parseBody(List<String> cellBodyRaw) {
-        return null;
+    public void addFunction(List<String> cellBodyPartRaw) {
+//        this.functions.add(new Function(cellBodyPartRaw));
     }
 
     public void setNeighbors(List<Cell> neighbors) {

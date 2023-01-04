@@ -35,11 +35,23 @@ public interface GrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCellsGraph(GrammarParser.CellsGraphContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link GrammarParser#input}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInput(GrammarParser.InputContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link GrammarParser#inputVals}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitInputVals(GrammarParser.InputValsContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GrammarParser#inputCells}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInputCells(GrammarParser.InputCellsContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link GrammarParser#cells}.
 	 * @param ctx the parse tree
@@ -76,6 +88,12 @@ public interface GrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitFunctionCall(GrammarParser.FunctionCallContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GrammarParser#arguments}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArguments(GrammarParser.ArgumentsContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link GrammarParser#functionSuper}.
 	 * @param ctx the parse tree

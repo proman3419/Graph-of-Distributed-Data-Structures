@@ -5,7 +5,7 @@ start
     ;
 
 preamble
-    : cellsCount cellsGraph inputVals
+    : cellsCount cellsGraph input
     ;
 
 cellsCount
@@ -16,9 +16,16 @@ cellsGraph
     : CELLS_GRAPH_SUPER numberArgument
     ;
 
-//
+input
+    : (inputVals inputCells)?
+    ;
+
 inputVals
-    : (INPUT_VALS_SUPER NUMBER+ INPUT_VALS_CELLS_SUPER NUMBER+)?
+    : INPUT_SUPER numberArgument+
+    ;
+
+inputCells
+    : INPUT_CELLS_SUPER numberArgument+
     ;
 
 cells
@@ -43,9 +50,13 @@ cellCodePart
     ;
 
 functionCall
-    : function (idArgument+ numberArgument*)*
-    | function (idArgument* numberArgument+)+
-    | function
+    : function arguments
+    ;
+
+arguments
+    : (idArgument+ numberArgument*)*
+    | (idArgument* numberArgument+)+
+    |
     ;
 
 functionSuper
@@ -55,8 +66,8 @@ functionSuper
     | END_SUPER
     | END_ALL_SUPER
     | SRCCOPY_SUPER
-    | INPUT_VALS_SUPER
-    | INPUT_VALS_CELLS_SUPER
+    | INPUT_SUPER
+    | INPUT_CELLS_SUPER
     ;
 
 function
@@ -116,12 +127,12 @@ END_ALL_SUPER
     : '#END_ALL'
     ;
 
-INPUT_VALS_SUPER
-    : '#INPUT_VALS'
+INPUT_SUPER
+    : '#INPUT'
     ;
 
-INPUT_VALS_CELLS_SUPER
-    : '#INPUT_VALS_CELLS'
+INPUT_CELLS_SUPER
+    : '#INPUT_CELLS'
     ;
 
 SWAP
