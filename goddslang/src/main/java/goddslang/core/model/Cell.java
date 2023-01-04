@@ -6,17 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Cell {
-    private final int id;
-    private final String label;
+    private int id = -1;
+    private String label = "DUMMY";
     private final List<Function> functions = new ArrayList<>();
     private List<Cell> neighbors;
     private int currFunctionId = 0;
-
-
-    public Cell(int id, String label) {
-        this.id = id;
-        this.label = label;
-    }
 
     public void addFunction(List<String> cellBodyPartRaw) {
 //        this.functions.add(new Function(cellBodyPartRaw));
@@ -32,6 +26,14 @@ public class Cell {
 
     public String getLabel() {
         return label;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
     }
 
     public List<Function> getFunctions() {

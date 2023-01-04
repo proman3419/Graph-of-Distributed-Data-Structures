@@ -2,6 +2,9 @@ package goddslang.core.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 // Add Graph builder wrapper
 public class Graph {
@@ -12,27 +15,26 @@ public class Graph {
 
     public Graph(int cellsCount) {
         this.cellsCount = cellsCount;
-        this.cells = new ArrayList<>(cellsCount);
+        this.cells = IntStream.range(0, cellsCount)
+                .mapToObj(i -> new Cell())
+                .collect(Collectors.toList());
         this.adjMatrix = new ArrayList<>(cellsCount);
     }
 
-    public void parse(String graphAdjMatrixRaw) {
+    public void parseAdjMatrix(String graphAdjMatrixRaw) {
         for (int i = 0; i < cellsCount; i++) {
             adjMatrix.add(new ArrayList<>(cellsCount));
             for (int j = 0; j < cellsCount; j++) {
                 int toAdd = 0;
                 if (i != j) {
-                    toAdd = graphAdjMatrixRaw.charAt(i * cellsCount + j);
+                    toAdd = Character.getNumericValue(graphAdjMatrixRaw.charAt(i * cellsCount + j));
                 }
                 adjMatrix.get(i).add(toAdd);
             }
         }
     }
 
-    public void createCell(int cellId, String cellHeaderRaw) {
-        this.cells.set(cellId, new Cell(cellId, cellHeaderRaw));
-        this.currCellId = cellId;
-    }
+
 
     public void addCellFunction(List<String> cellBodyPartRaw) {
         this.cells.get(this.currCellId).addFunction(cellBodyPartRaw);
@@ -48,5 +50,13 @@ public class Graph {
             }
             this.cells.get(i).setNeighbors(neighbors);
         }
+    }
+
+    public List<Cell> getCells() {
+        return cells;
+    }
+
+    public void setCurrCellId(int currCellId) {
+        this.currCellId = currCellId;
     }
 }
