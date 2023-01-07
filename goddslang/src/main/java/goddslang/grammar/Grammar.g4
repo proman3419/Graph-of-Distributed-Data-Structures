@@ -1,7 +1,7 @@
 grammar Grammar;
 
 start
-    : preamble cells END_ALL_SUPER
+    : preamble cells SUPER_END_ALL
     ;
 
 preamble
@@ -9,11 +9,11 @@ preamble
     ;
 
 cellsCount
-    : CELLS_COUNT_SUPER numberArgument
+    : SUPER_CELLS_COUNT numberArgument
     ;
 
 cellsGraph
-    : CELLS_GRAPH_SUPER numberArgument+ END_SUPER
+    : SUPER_CELLS_GRAPH numberArgument+ SUPER_END
     ;
 
 input
@@ -21,11 +21,11 @@ input
     ;
 
 inputVals
-    : INPUT_SUPER numberArgument+
+    : SUPER_INPUT numberArgument+
     ;
 
 inputCells
-    : INPUT_CELLS_SUPER numberArgument+
+    : SUPER_INPUT_CELLS numberArgument+
     ;
 
 cells
@@ -33,11 +33,11 @@ cells
     ;
 
 cell
-    : cellHeader cellCode? END_SUPER
+    : cellHeader cellCode? SUPER_END
     ;
 
 cellHeader
-    : CELL_SUPER numberArgument idArgument
+    : SUPER_CELL numberArgument idArgument
     ;
 
 cellCode
@@ -48,159 +48,145 @@ cellCodePart
     : functionCall cellCodePart*
     ;
 
-functionCall
-    : function arguments
-    ;
-
 arguments
     : (idArgument+ numberArgument*)*
     | (idArgument* numberArgument+)+
     |
     ;
 
-functionSuper
-    : CELLS_COUNT_SUPER
-    | CELLS_GRAPH_SUPER
-    | INPUT_SUPER
-    | INPUT_CELLS_SUPER
-    | CELL_SUPER
-    | END_SUPER
-    | END_ALL_SUPER
+functionCall
+    : functionAdd
+    | functionSub
+    | functionMul
+    | functionDiv
+    | functionMod
+    | functionSet
+    | functionComp
+    | functionSwap
+    | functionCopy
+    | functionDefineLabel
+    | functionJump
+    | functionCheckIFEZ
+    | functionCheckIFLZ
+    | functionCheckIFGZ
+    | functionExit
+    | functionPrint
+    | functionPrintChar
+    | functionWriteCell
+    | functionReadCell
+    | functionCopyCell
+    | functionPrintLabelName
     ;
 
-function
-    : FUNCTION_ADD
-    | FUNCTION_SUB
-    | FUNCTION_MUL
-    | FUNCTION_DIV
-    | FUNCTION_MOD
-    | FUNCTION_SET
-    | FUNCTION_COMP
-    | FUNCTION_SWAP
-    | FUNCTION_COPY
-    | FUNCTION_DEFINE_LABEL
-    | FUNCTION_JUMP
-    | FUNCTION_CHECK_IFEZ
-    | FUNCTION_CHECK_IFLZ
-    | FUNCTION_CHECK_IFGZ
-    | FUNCTION_EXIT
-    | FUNCTION_PRINT
-    | FUNCTION_PRINT_CHAR
-    | FUNCTION_WRITE_CELL
-    | FUNCTION_READ_CELL
-    | FUNCTION_COPY_CELL
-    | FUNCTION_PRINT_LABEL_NAME
+functionAdd
+    : ADD arguments
     ;
 
-FUNCTION_ADD
-    : ADD
+functionSub
+    : SUB arguments
     ;
 
-FUNCTION_SUB
-    : SUB
+functionMul
+    : MUL arguments
     ;
 
-FUNCTION_MUL
-    : MUL
+functionDiv
+    : DIV arguments
     ;
 
-FUNCTION_DIV
-    : DIV
+functionMod
+    : MOD arguments
     ;
 
-FUNCTION_MOD
-    : MOD
+functionSet
+    : SET arguments
     ;
 
-FUNCTION_SET
-    : SET
+functionComp
+    : COMP arguments
     ;
 
-FUNCTION_COMP
-    : COMP
+functionSwap
+    : SWAP arguments
     ;
 
-FUNCTION_SWAP
-    : SWAP
+functionCopy
+    : COPY arguments
     ;
 
-FUNCTION_COPY
-    : COPY
+functionDefineLabel
+    : DEFINE_LABEL arguments
     ;
 
-FUNCTION_DEFINE_LABEL
-    : DEFINE_LABEL
+functionJump
+    : JUMP arguments
     ;
 
-FUNCTION_JUMP
-    : JUMP
+functionCheckIFEZ
+    : CHECK_IFEZ arguments
     ;
 
-FUNCTION_CHECK_IFEZ
-    : CHECK_IFEZ
+functionCheckIFLZ
+    : CHECK_IFLZ arguments
     ;
 
-FUNCTION_CHECK_IFLZ
-    : CHECK_IFLZ
+functionCheckIFGZ
+    : CHECK_IFGZ arguments
     ;
 
-FUNCTION_CHECK_IFGZ
-    : CHECK_IFGZ
+functionExit
+    : EXIT arguments
     ;
 
-FUNCTION_EXIT
-    : EXIT
+functionPrint
+    : PRINT arguments
     ;
 
-FUNCTION_PRINT
-    : PRINT
+functionPrintChar
+    : PRINT_CHAR arguments
     ;
 
-FUNCTION_PRINT_CHAR
-    : PRINT_CHAR
+functionWriteCell
+    : WRITE_CELL arguments
     ;
 
-FUNCTION_WRITE_CELL
-    : WRITE_CELL
+functionReadCell
+    : READ_CELL arguments
     ;
 
-FUNCTION_READ_CELL
-    : READ_CELL
+functionCopyCell
+    : COPY_CELL arguments
     ;
 
-FUNCTION_COPY_CELL
-    : COPY_CELL
+functionPrintLabelName
+    : PRINT_LABEL_NAME arguments
     ;
 
-FUNCTION_PRINT_LABEL_NAME
-    : PRINT_LABEL_NAME
-    ;
-
-CELLS_COUNT_SUPER
+SUPER_CELLS_COUNT
     : '#CELLS_COUNT'
     ;
 
-CELLS_GRAPH_SUPER
+SUPER_CELLS_GRAPH
     : '#CELLS_GRAPH'
     ;
 
-INPUT_SUPER
+SUPER_INPUT
     : '#INPUT'
     ;
 
-INPUT_CELLS_SUPER
+SUPER_INPUT_CELLS
     : '#INPUT_CELLS'
     ;
 
-CELL_SUPER
+SUPER_CELL
     : '#CELL'
     ;
 
-END_SUPER
+SUPER_END
     : '#END'
     ;
 
-END_ALL_SUPER
+SUPER_END_ALL
     : '#END_ALL'
     ;
 

@@ -83,12 +83,6 @@ public interface GrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCellCodePart(GrammarParser.CellCodePartContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link GrammarParser#functionCall}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitFunctionCall(GrammarParser.FunctionCallContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link GrammarParser#arguments}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -101,11 +95,137 @@ public interface GrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFunctionSuper(GrammarParser.FunctionSuperContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link GrammarParser#function}.
+	 * Visit a parse tree produced by {@link GrammarParser#functionCall}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFunction(GrammarParser.FunctionContext ctx);
+	T visitFunctionCall(GrammarParser.FunctionCallContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GrammarParser#functionAdd}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionAdd(GrammarParser.FunctionAddContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GrammarParser#functionSub}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionSub(GrammarParser.FunctionSubContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GrammarParser#functionMul}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionMul(GrammarParser.FunctionMulContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GrammarParser#functionDiv}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionDiv(GrammarParser.FunctionDivContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GrammarParser#functionMod}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionMod(GrammarParser.FunctionModContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GrammarParser#functionSet}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionSet(GrammarParser.FunctionSetContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GrammarParser#functionComp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionComp(GrammarParser.FunctionCompContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GrammarParser#functionSwap}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionSwap(GrammarParser.FunctionSwapContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GrammarParser#functionCopy}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionCopy(GrammarParser.FunctionCopyContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GrammarParser#functionDefineLabel}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionDefineLabel(GrammarParser.FunctionDefineLabelContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GrammarParser#functionJump}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionJump(GrammarParser.FunctionJumpContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GrammarParser#functionCheckIFEZ}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionCheckIFEZ(GrammarParser.FunctionCheckIFEZContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GrammarParser#functionCheckIFLZ}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionCheckIFLZ(GrammarParser.FunctionCheckIFLZContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GrammarParser#functionCheckIFGZ}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionCheckIFGZ(GrammarParser.FunctionCheckIFGZContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GrammarParser#functionExit}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionExit(GrammarParser.FunctionExitContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GrammarParser#functionPrint}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionPrint(GrammarParser.FunctionPrintContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GrammarParser#functionPrintChar}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionPrintChar(GrammarParser.FunctionPrintCharContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GrammarParser#functionWriteCell}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionWriteCell(GrammarParser.FunctionWriteCellContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GrammarParser#functionReadCell}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionReadCell(GrammarParser.FunctionReadCellContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GrammarParser#functionCopyCell}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionCopyCell(GrammarParser.FunctionCopyCellContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GrammarParser#functionPrintLabelName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionPrintLabelName(GrammarParser.FunctionPrintLabelNameContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link GrammarParser#idArgument}.
 	 * @param ctx the parse tree

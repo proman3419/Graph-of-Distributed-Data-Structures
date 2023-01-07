@@ -10,7 +10,6 @@
     #CELL 1 label1
         PRINT
         SET R0 12
-        #SRCCOPY 5
         ADD 13
     #END
 #END_ALL
