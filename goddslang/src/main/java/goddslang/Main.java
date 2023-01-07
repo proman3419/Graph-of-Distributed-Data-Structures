@@ -5,15 +5,12 @@ import goddslang.grammar.GrammarLexer;
 import goddslang.grammar.GrammarParser;
 import org.antlr.v4.runtime.ANTLRFileStream;
 import org.antlr.v4.runtime.CharStream;
-import org.antlr.v4.runtime.tree.ParseTree;
-import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Paths;
-import java.util.Objects;
 
 public class Main {
     public static void main(String[] args) {
@@ -35,7 +32,7 @@ public class Main {
 //            throw new RuntimeException(e);
 //        }
         try {
-            URI fileUri = ClassLoader.getSystemResource("code snippets/example04.godds").toURI();
+            URI fileUri = ClassLoader.getSystemResource("code snippets/example05.godds").toURI();
             String filePath = Paths.get(fileUri).toString();
             CharStream input = (CharStream) new ANTLRFileStream(filePath);
             GrammarLexer lexer = new GrammarLexer(input);

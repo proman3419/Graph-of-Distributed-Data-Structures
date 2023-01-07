@@ -17,7 +17,7 @@ public class Program {
         Cell cell = this.graph.getCells().get(id);
         cell.setId(id);
         cell.setLabel(label);
-        this.graph.setCurrCellId(id);
+        this.graph.setCurrCell(cell);
 
         this.bus.addNeighbor(cell);
     }

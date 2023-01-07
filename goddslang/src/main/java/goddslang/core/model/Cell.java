@@ -1,6 +1,7 @@
 package goddslang.core.model;
 
 import goddslang.core.function.Function;
+import goddslang.core.function.FunctionCall;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,12 +9,18 @@ import java.util.List;
 public class Cell {
     private int id = -1;
     private String label = "DUMMY";
-    private final List<Function> functions = new ArrayList<>();
+    private final List<FunctionCall> functionCalls = new ArrayList<>();
     private List<Cell> neighbors;
-    private int currFunctionId = 0;
+    private int currFunctionCallId = 0;
+    private int R0 = 0;
+    private int R1 = 0;
 
-    public void addFunction(List<String> cellBodyPartRaw) {
-//        this.functions.add(new Function(cellBodyPartRaw));
+    public void addFunctionCall(FunctionCall functionCall) {
+        this.functionCalls.add(functionCall);
+    }
+
+    public void add(int value) {
+        this.R0 += value;
     }
 
     public void setNeighbors(List<Cell> neighbors) {
@@ -36,11 +43,19 @@ public class Cell {
         this.label = label;
     }
 
-    public List<Function> getFunctions() {
-        return functions;
+    public List<FunctionCall> getfunctionCalls() {
+        return functionCalls;
     }
 
-    public int getCurrFunctionId() {
-        return currFunctionId;
+    public int getcurrFunctionCallId() {
+        return currFunctionCallId;
+    }
+
+    public void setR0(int R0) {
+        R0 = R0;
+    }
+
+    public void setR1(int R1) {
+        R1 = R1;
     }
 }

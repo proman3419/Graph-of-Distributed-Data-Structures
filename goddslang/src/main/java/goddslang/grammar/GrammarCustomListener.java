@@ -1,12 +1,17 @@
 package goddslang.grammar;
 
+import goddslang.core.function.Argument;
+import goddslang.core.function.FunctionCall;
+import goddslang.core.function.impl.Add;
 import goddslang.core.model.Graph;
 import goddslang.core.model.Program;
+import io.vavr.control.Either;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class GrammarCustomListener extends GrammarBaseListener {
@@ -60,7 +65,7 @@ public class GrammarCustomListener extends GrammarBaseListener {
         List<String> terminalNodes = getTerminalNodes(ctx);
         System.out.println(terminalNodes);
 
-        String graphAdjMatrixRaw = terminalNodes.get(1);
+        List<String> graphAdjMatrixRaw = terminalNodes.subList(1, terminalNodes.size() - 1);
 
         this.program.getGraph().parseAdjMatrix(graphAdjMatrixRaw);
     }
@@ -91,10 +96,22 @@ public class GrammarCustomListener extends GrammarBaseListener {
         this.program.createCell(id, label);
     }
 
+    // v Functions v  ==================================================================================================
+
     @Override
-    public void exitFunctionCall(GrammarParser.FunctionCallContext ctx) {
-        super.exitFunctionCall(ctx);
+    public void exitFunctionAdd(GrammarParser.FunctionAddContext ctx) {
+        super.exitFunctionAdd(ctx);
         List<String> terminalNodes = getTerminalNodes(ctx);
         System.out.println(terminalNodes);
+
+
+        int value = Integer.parseInt(terminalNodes.get(1));
+
+        List<Argument> arguments = new ArrayList<>();
+        arguments.add(new Argument(value));
+
+        FunctionCall functionCall = new FunctionCall(new Add(), arguments);
+
+        this.program.getGraph().addCellFunctionCall(functionCall);
     }
 }

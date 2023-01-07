@@ -1,12 +1,9 @@
 package goddslang.core.function;
 
-import goddslang.core.model.CellState;
-import org.antlr.v4.runtime.ParserRuleContext;
+import goddslang.core.model.Cell;
 
 import java.util.List;
 
-public abstract class Function {
-    public CellState call() {
-        return null;
-    }
+public interface Function {
+    public void call(Cell cell, List<Argument> arguments);
 }

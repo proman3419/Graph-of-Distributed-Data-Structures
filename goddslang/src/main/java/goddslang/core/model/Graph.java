@@ -1,5 +1,7 @@
 package goddslang.core.model;
 
+import goddslang.core.function.FunctionCall;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,7 +13,7 @@ public class Graph {
     private final int cellsCount;
     private final List<Cell> cells;
     private final List<List<Integer>> adjMatrix;
-    private int currCellId;
+    private Cell currCell;
 
     public Graph(int cellsCount) {
         this.cellsCount = cellsCount;
@@ -21,23 +23,21 @@ public class Graph {
         this.adjMatrix = new ArrayList<>(cellsCount);
     }
 
-    public void parseAdjMatrix(String graphAdjMatrixRaw) {
+    public void parseAdjMatrix(List<String> graphAdjMatrixRaw) {
         for (int i = 0; i < cellsCount; i++) {
             adjMatrix.add(new ArrayList<>(cellsCount));
             for (int j = 0; j < cellsCount; j++) {
                 int toAdd = 0;
                 if (i != j) {
-                    toAdd = Character.getNumericValue(graphAdjMatrixRaw.charAt(i * cellsCount + j));
+                    toAdd = Character.getNumericValue(graphAdjMatrixRaw.get(i).charAt(j));
                 }
                 adjMatrix.get(i).add(toAdd);
             }
         }
     }
 
-
-
-    public void addCellFunction(List<String> cellBodyPartRaw) {
-        this.cells.get(this.currCellId).addFunction(cellBodyPartRaw);
+    public void addCellFunctionCall(FunctionCall functionCall) {
+        this.currCell.addFunctionCall(functionCall);
     }
 
     public void setNeighbors() {
@@ -56,7 +56,11 @@ public class Graph {
         return cells;
     }
 
-    public void setCurrCellId(int currCellId) {
-        this.currCellId = currCellId;
+    public void setCurrCell(Cell currCell) {
+        this.currCell = currCell;
+    }
+
+    public Cell getCurrCell() {
+        return currCell;
     }
 }
