@@ -3,10 +3,10 @@ package goddslang.core.model;
 import goddslang.core.function.FunctionCall;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 // Add Graph builder wrapper
 public class Graph {
@@ -40,15 +40,29 @@ public class Graph {
         this.currCell.addFunctionCall(functionCall);
     }
 
-    public void setNeighbors() {
+    public void completeSetup() {
         for (int i = 0; i < this.cellsCount; i++) {
-            List<Cell> neighbors = new ArrayList<>();
+            Cell cell = this.cells.get(i);
+            HashMap<Integer, Cell> neighbors = new HashMap<>();
+            HashMap<Integer, Pipe> outPipes = new HashMap<>();
             for (int j = 0; j < this.cellsCount; j++) {
                 if (this.adjMatrix.get(i).get(j) == 1) {
-                    neighbors.add(this.cells.get(j));
+                    neighbors.put(j, this.cells.get(j));
+                    outPipes.put(j, new Pipe(this.cells.get(i), this.cells.get(j)));
                 }
             }
-            this.cells.get(i).setNeighbors(neighbors);
+            cell.setNeighbors(neighbors);
+            cell.setOutPipes(outPipes);
+        }
+        for (int i = 0; i < this.cellsCount; i++) {
+            Cell cell = this.cells.get(i);
+            HashMap<Integer, Pipe> inPipes = new HashMap<>();
+            for (int j = 0; j < this.cellsCount; j++) {
+                if (this.adjMatrix.get(j).get(i) == 1) {
+                    inPipes.put(j, this.cells.get(j).getOutPipe(i));
+                }
+            }
+            cell.setInPipes(inPipes);
         }
     }
 

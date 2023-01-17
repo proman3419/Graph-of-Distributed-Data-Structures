@@ -18,7 +18,6 @@ public class Program {
         cell.setId(id);
         cell.setLabel(label);
         this.graph.setCurrCell(cell);
-
         this.bus.addNeighbor(cell);
     }
 

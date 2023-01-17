@@ -1,16 +1,18 @@
 package goddslang.core.model;
 
-import goddslang.core.function.Function;
 import goddslang.core.function.FunctionCall;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Cell {
     private int id = -1;
     private String label = "DUMMY";
     private final List<FunctionCall> functionCalls = new ArrayList<>();
-    private List<Cell> neighbors;
+    private HashMap<Integer, Cell> neighbors;
+    private HashMap<Integer, Pipe> inPipes;
+    private HashMap<Integer, Pipe> outPipes;
     private int currFunctionCallId = 0;
     private int R0 = 0;
     private int R1 = 0;
@@ -67,8 +69,20 @@ public class Cell {
         this.R1 = this.R0;
     }
 
-    public void setNeighbors(List<Cell> neighbors) {
+    public void setNeighbors(HashMap<Integer, Cell> neighbors) {
         this.neighbors = neighbors;
+    }
+
+    public void setInPipes(HashMap<Integer, Pipe> inPipes) {
+        this.inPipes = inPipes;
+    }
+
+    public void setOutPipes(HashMap<Integer, Pipe> outPipes) {
+        this.outPipes = outPipes;
+    }
+
+    public Pipe getOutPipe(int toId) {
+        return this.outPipes.get(toId);
     }
 
     public int getId() {

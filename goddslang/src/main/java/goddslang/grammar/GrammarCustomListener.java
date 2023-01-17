@@ -41,7 +41,7 @@ public class GrammarCustomListener extends GrammarBaseListener {
 
     @Override
     public void exitStart(GrammarParser.StartContext ctx) {
-        this.program.getGraph().setNeighbors();
+        this.program.getGraph().completeSetup();
         this.program.run();
         this.program = null;
     }
