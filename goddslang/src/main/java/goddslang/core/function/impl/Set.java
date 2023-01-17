@@ -6,10 +6,11 @@ import goddslang.core.model.Cell;
 
 import java.util.List;
 
-public class Add implements Function {
+public class Set implements Function {
     @Override
     public void call(Cell cell, List<Argument> arguments) {
-        int value = arguments.get(0).getValueAsNumber();
-        cell.add(value);
+        int registerId = arguments.get(0).getValueAsNumber();
+        int value = arguments.get(1).getValueAsNumber();
+        cell.set(registerId, value);
     }
 }

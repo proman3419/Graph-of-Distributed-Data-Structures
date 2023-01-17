@@ -23,6 +23,50 @@ public class Cell {
         this.R0 += value;
     }
 
+    public void sub(int value) {
+        this.R0 -= value;
+    }
+
+    public void mul(int value) {
+        this.R0 *= value;
+    }
+
+    public void div(int value) {
+        this.R0 /= value;
+    }
+
+    public void mod(int value) {
+        this.R0 %= value;
+    }
+
+    public void set(int registerId, int value) {
+        if (registerId == 0) {
+            this.R0 = value;
+        } else if (registerId == 1) {
+            this.R1 = value;
+        }
+    }
+
+    public void comp(int value) {
+        if (value < this.R0) {
+            this.R0 = -1;
+        } else if (value > this.R0) {
+            this.R0 = 1;
+        } else {
+            this.R0 = 0;
+        }
+    }
+
+    public void swap() {
+        int tmp = this.R0;
+        this.R0 = this.R1;
+        this.R1 = tmp;
+    }
+
+    public void copy() {
+        this.R1 = this.R0;
+    }
+
     public void setNeighbors(List<Cell> neighbors) {
         this.neighbors = neighbors;
     }

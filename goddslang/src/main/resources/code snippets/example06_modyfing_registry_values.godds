@@ -1,0 +1,16 @@
+#CELLS_COUNT 1
+#CELLS_GRAPH
+    0
+#END
+    #CELL 0 label0
+        ADD 12
+        SUB 14
+        MUL 5
+        DIV 3
+        MOD 4
+        SET 1 654
+        COMP 9999
+        SWAP
+        COPY
+    #END
+#END_ALL

@@ -2,16 +2,13 @@ package goddslang.grammar;
 
 import goddslang.core.function.Argument;
 import goddslang.core.function.FunctionCall;
-import goddslang.core.function.impl.Add;
-import goddslang.core.model.Graph;
+import goddslang.core.function.impl.*;
 import goddslang.core.model.Program;
-import io.vavr.control.Either;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class GrammarCustomListener extends GrammarBaseListener {
@@ -97,21 +94,71 @@ public class GrammarCustomListener extends GrammarBaseListener {
     }
 
     // v Functions v  ==================================================================================================
+    private List<Argument> parseArguments(List<String> terminalNodes, String types) {
+        List<Argument> arguments = new ArrayList<>();
+        for (int i = 1; i < terminalNodes.size(); i++) {
+            Argument argument;
+            if (types.charAt(i - 1) == 'i') {
+                argument = new Argument(Integer.parseInt(terminalNodes.get(i)));
+            } else {
+                argument = new Argument(terminalNodes.get(i));
+            }
+            arguments.add(argument);
+        }
+        return arguments;
+    }
 
     @Override
     public void exitFunctionAdd(GrammarParser.FunctionAddContext ctx) {
-        super.exitFunctionAdd(ctx);
-        List<String> terminalNodes = getTerminalNodes(ctx);
-        System.out.println(terminalNodes);
+        FunctionCall functionCall = new FunctionCall(new Add(), parseArguments(getTerminalNodes(ctx), "i"));
+        this.program.getGraph().addCellFunctionCall(functionCall);
+    }
 
+    @Override
+    public void exitFunctionSub(GrammarParser.FunctionSubContext ctx) {
+        FunctionCall functionCall = new FunctionCall(new Sub(), parseArguments(getTerminalNodes(ctx), "i"));
+        this.program.getGraph().addCellFunctionCall(functionCall);
+    }
 
-        int value = Integer.parseInt(terminalNodes.get(1));
+    @Override
+    public void exitFunctionMul(GrammarParser.FunctionMulContext ctx) {
+        FunctionCall functionCall = new FunctionCall(new Mul(), parseArguments(getTerminalNodes(ctx), "i"));
+        this.program.getGraph().addCellFunctionCall(functionCall);
+    }
 
-        List<Argument> arguments = new ArrayList<>();
-        arguments.add(new Argument(value));
+    @Override
+    public void exitFunctionDiv(GrammarParser.FunctionDivContext ctx) {
+        FunctionCall functionCall = new FunctionCall(new Div(), parseArguments(getTerminalNodes(ctx), "i"));
+        this.program.getGraph().addCellFunctionCall(functionCall);
+    }
 
-        FunctionCall functionCall = new FunctionCall(new Add(), arguments);
+    @Override
+    public void exitFunctionMod(GrammarParser.FunctionModContext ctx) {
+        FunctionCall functionCall = new FunctionCall(new Mod(), parseArguments(getTerminalNodes(ctx), "i"));
+        this.program.getGraph().addCellFunctionCall(functionCall);
+    }
 
+    @Override
+    public void exitFunctionSet(GrammarParser.FunctionSetContext ctx) {
+        FunctionCall functionCall = new FunctionCall(new Set(), parseArguments(getTerminalNodes(ctx), "ii"));
+        this.program.getGraph().addCellFunctionCall(functionCall);
+    }
+
+    @Override
+    public void exitFunctionComp(GrammarParser.FunctionCompContext ctx) {
+        FunctionCall functionCall = new FunctionCall(new Comp(), parseArguments(getTerminalNodes(ctx), "i"));
+        this.program.getGraph().addCellFunctionCall(functionCall);
+    }
+
+    @Override
+    public void exitFunctionSwap(GrammarParser.FunctionSwapContext ctx) {
+        FunctionCall functionCall = new FunctionCall(new Swap(), parseArguments(getTerminalNodes(ctx), ""));
+        this.program.getGraph().addCellFunctionCall(functionCall);
+    }
+
+    @Override
+    public void exitFunctionCopy(GrammarParser.FunctionCopyContext ctx) {
+        FunctionCall functionCall = new FunctionCall(new Copy(), parseArguments(getTerminalNodes(ctx), ""));
         this.program.getGraph().addCellFunctionCall(functionCall);
     }
 }

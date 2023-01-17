@@ -6,10 +6,10 @@ import goddslang.core.model.Cell;
 
 import java.util.List;
 
-public class Add implements Function {
+public class Div implements Function {
     @Override
     public void call(Cell cell, List<Argument> arguments) {
         int value = arguments.get(0).getValueAsNumber();
-        cell.add(value);
+        cell.div(value);
     }
 }
