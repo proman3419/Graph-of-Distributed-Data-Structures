@@ -13,9 +13,21 @@ public class Cell {
     private HashMap<Integer, Cell> neighbors;
     private HashMap<Integer, Pipe> inPipes;
     private HashMap<Integer, Pipe> outPipes;
-    private int currFunctionCallId = 0;
+    private CallStack callStack = new CallStack(this, 0);
+    private CellState state = CellState.RUNNING;
     private int R0 = 0;
     private int R1 = 0;
+
+    public void step() {
+        if (this.state == CellState.RUNNING) {
+            FunctionCall functionCall = this.callStack.getFunctionCall();
+            if (functionCall == null) {
+                this.state = CellState.FINISHED;
+            } else {
+                functionCall.call(this);
+            }
+        }
+    }
 
     public void addFunctionCall(FunctionCall functionCall) {
         this.functionCalls.add(functionCall);
@@ -122,5 +134,17 @@ public class Cell {
 
     public int getR0() {
         return R0;
+    }
+
+    public int getFunctionCallsCount() {
+        return this.functionCalls.size();
+    }
+
+    public FunctionCall getFunctionCall(int functionCallId) {
+        return this.functionCalls.get(functionCallId);
+    }
+
+    public boolean isRunning() {
+        return this.state == CellState.RUNNING;
     }
 }

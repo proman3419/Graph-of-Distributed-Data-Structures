@@ -1,11 +1,21 @@
 package goddslang.core.model;
 
+import java.util.List;
+
 public class Program {
     private Graph graph;
     private Bus bus;
 
     public void run() {
-
+        for (;;) {
+            List<Cell> runningCells = this.graph.getCells().stream()
+                    .filter(Cell::isRunning)
+                    .toList();
+            if (runningCells.isEmpty()) {
+                return;
+            }
+            runningCells.forEach(Cell::step);
+        }
     }
 
     public void init(int cellsCount) {

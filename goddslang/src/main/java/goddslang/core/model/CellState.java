@@ -1,4 +1,6 @@
 package goddslang.core.model;
 
-public class CellState {
+public enum CellState {
+    RUNNING,
+    FINISHED
 }

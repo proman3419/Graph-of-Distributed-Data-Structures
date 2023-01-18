@@ -9,7 +9,7 @@ import java.util.List;
 public class Comp implements Function {
     @Override
     public void call(Cell cell, List<Argument> arguments) {
-        int value = arguments.get(1).getValueAsNumber();
+        int value = arguments.get(0).getValueAsNumber();
         cell.comp(value);
     }
 }
