@@ -86,10 +86,13 @@ public class Cell {
     }
 
     public void readCell(int cellId) {
-        Pipe outPipe = this.outPipes.get(cellId);
-        if (outPipe.peek() != null) {
-            this.R0 = outPipe.pop();
+        Pipe inPipes = this.inPipes.get(cellId);
+        if (inPipes.peek() != null) {
+            this.R0 = inPipes.pop();
         }
+//        else {
+//            this.callStack.push(this, );
+//        }
     }
 
     public void copyCell(int cellId) {
