@@ -69,6 +69,25 @@ public class Cell {
         this.R1 = this.R0;
     }
 
+    public void writeCell(int cellId) {
+        this.outPipes.get(cellId).add(this.R0);
+    }
+
+    public void readCell(int cellId) {
+        Pipe outPipe = this.outPipes.get(cellId);
+        if (outPipe.peek() != null) {
+            this.R0 = outPipe.pop();
+        }
+    }
+
+    public void copyCell(int cellId) {
+        this.R0 = this.neighbors.get(cellId).getR0();
+    }
+
+    public void printLabelName(int cellId) {
+        System.out.println(this.neighbors.get(cellId).getLabel());
+    }
+
     public void setNeighbors(HashMap<Integer, Cell> neighbors) {
         this.neighbors = neighbors;
     }
@@ -101,19 +120,7 @@ public class Cell {
         this.label = label;
     }
 
-    public List<FunctionCall> getfunctionCalls() {
-        return functionCalls;
-    }
-
-    public int getcurrFunctionCallId() {
-        return currFunctionCallId;
-    }
-
-    public void setR0(int R0) {
-        R0 = R0;
-    }
-
-    public void setR1(int R1) {
-        R1 = R1;
+    public int getR0() {
+        return R0;
     }
 }

@@ -161,4 +161,28 @@ public class GrammarCustomListener extends GrammarBaseListener {
         FunctionCall functionCall = new FunctionCall(new Copy(), parseArguments(getTerminalNodes(ctx), ""));
         this.program.getGraph().addCellFunctionCall(functionCall);
     }
+
+    @Override
+    public void exitFunctionCopyCell(GrammarParser.FunctionCopyCellContext ctx) {
+        FunctionCall functionCall = new FunctionCall(new CopyCell(), parseArguments(getTerminalNodes(ctx), "i"));
+        this.program.getGraph().addCellFunctionCall(functionCall);
+    }
+
+    @Override
+    public void exitFunctionPrintLabelName(GrammarParser.FunctionPrintLabelNameContext ctx) {
+        FunctionCall functionCall = new FunctionCall(new PrintLabelName(), parseArguments(getTerminalNodes(ctx), "i"));
+        this.program.getGraph().addCellFunctionCall(functionCall);
+    }
+
+    @Override
+    public void exitFunctionReadCell(GrammarParser.FunctionReadCellContext ctx) {
+        FunctionCall functionCall = new FunctionCall(new ReadCell(), parseArguments(getTerminalNodes(ctx), "i"));
+        this.program.getGraph().addCellFunctionCall(functionCall);
+    }
+
+    @Override
+    public void exitFunctionWriteCell(GrammarParser.FunctionWriteCellContext ctx) {
+        FunctionCall functionCall = new FunctionCall(new WriteCell(), parseArguments(getTerminalNodes(ctx), "i"));
+        this.program.getGraph().addCellFunctionCall(functionCall);
+    }
 }
