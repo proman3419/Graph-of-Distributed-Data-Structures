@@ -1,0 +1,13 @@
+#CELLS_COUNT 1
+#CELLS_GRAPH
+    0
+#END
+    #CELL 0 label0
+        SET 0 954
+        PRINT 0
+        PRINT 1
+        SET 0 65
+        PRINT_CHAR 0
+        PRINT_CHAR 1
+    #END
+#END_ALL

@@ -81,6 +81,22 @@ public class Cell {
         this.R1 = this.R0;
     }
 
+    public void print(int includeCellLabel) {
+        if (includeCellLabel == 0) {
+            System.out.println(this.R0);
+        } else if (includeCellLabel == 1) {
+            System.out.printf("%s:%d\n", this.label, this.R0);
+        }
+    }
+
+    public void printChar(int includeCellLabel) {
+        if (includeCellLabel == 0) {
+            System.out.println((char) this.R0);
+        } else if (includeCellLabel == 1) {
+            System.out.printf("%s:%c\n", this.label, (char) this.R0);
+        }
+    }
+
     public void writeCell(int cellId) {
         this.outPipes.get(cellId).add(this.R0);
     }
