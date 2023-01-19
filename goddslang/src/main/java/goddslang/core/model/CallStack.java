@@ -10,7 +10,7 @@ public class CallStack {
     private final Stack<Map.Entry<Cell, Integer>> stack = new Stack<>();
 
     public CallStack(Cell cell, int functionCallId) {
-        this.stack.push(new AbstractMap.SimpleEntry<>(cell, functionCallId));
+        push(cell, functionCallId);
     }
 
     public FunctionCall getFunctionCall() {
@@ -25,8 +25,12 @@ public class CallStack {
         if (functionCallId >= cell.getFunctionCallsCount()) {
             return this.stack.empty() ? null : getFunctionCall();
         } else {
-            this.stack.push(new AbstractMap.SimpleEntry<>(cell, functionCallId + 1));
+            push(cell, functionCallId + 1);
             return cell.getFunctionCall(functionCallId);
         }
+    }
+
+    public void push(Cell cell, int functionCallId) {
+        this.stack.push(new AbstractMap.SimpleEntry<>(cell, functionCallId));
     }
 }

@@ -3,14 +3,16 @@ package goddslang.core.model;
 import goddslang.core.function.FunctionCall;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Cell {
     private int id = -1;
     private String label = "DUMMY";
     private final List<FunctionCall> functionCalls = new ArrayList<>();
-    private List<Cell> neighbors;
+    private HashMap<Integer, Cell> neighbors;
+    private HashMap<Integer, Pipe> inPipes;
+    private HashMap<Integer, Pipe> outPipes;
     private CallStack callStack = new CallStack(this, 0);
     private CellState state = CellState.RUNNING;
     private int R0 = 0;
@@ -79,8 +81,42 @@ public class Cell {
         this.R1 = this.R0;
     }
 
-    public void setNeighbors(List<Cell> neighbors) {
+    public void writeCell(int cellId) {
+        this.outPipes.get(cellId).add(this.R0);
+    }
+
+    public void readCell(int cellId) {
+        Pipe inPipes = this.inPipes.get(cellId);
+        if (inPipes.peek() != null) {
+            this.R0 = inPipes.pop();
+        }
+//        else {
+//            this.callStack.push(this, );
+//        }
+    }
+
+    public void copyCell(int cellId) {
+        this.R0 = this.neighbors.get(cellId).getR0();
+    }
+
+    public void printLabelName(int cellId) {
+        System.out.println(this.neighbors.get(cellId).getLabel());
+    }
+
+    public void setNeighbors(HashMap<Integer, Cell> neighbors) {
         this.neighbors = neighbors;
+    }
+
+    public void setInPipes(HashMap<Integer, Pipe> inPipes) {
+        this.inPipes = inPipes;
+    }
+
+    public void setOutPipes(HashMap<Integer, Pipe> outPipes) {
+        this.outPipes = outPipes;
+    }
+
+    public Pipe getOutPipe(int toId) {
+        return this.outPipes.get(toId);
     }
 
     public int getId() {
@@ -97,6 +133,10 @@ public class Cell {
 
     public void setLabel(String label) {
         this.label = label;
+    }
+
+    public int getR0() {
+        return R0;
     }
 
     public int getFunctionCallsCount() {
