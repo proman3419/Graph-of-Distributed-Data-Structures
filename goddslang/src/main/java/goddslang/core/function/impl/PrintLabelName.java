@@ -6,10 +6,10 @@ import goddslang.core.model.Cell;
 
 import java.util.List;
 
-public class Comp implements Function {
+public class PrintLabelName implements Function {
     @Override
     public void call(Cell cell, List<Argument> arguments) {
-        int value = arguments.get(0).getValueAsNumber();
-        cell.comp(value);
+        int cellId = arguments.get(0).getValueAsNumber();
+        cell.printLabelName(cellId);
     }
 }

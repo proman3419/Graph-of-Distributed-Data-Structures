@@ -1,19 +1,33 @@
 package goddslang.core.model;
 
-import goddslang.core.function.Function;
 import goddslang.core.function.FunctionCall;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Cell {
     private int id = -1;
     private String label = "DUMMY";
     private final List<FunctionCall> functionCalls = new ArrayList<>();
-    private List<Cell> neighbors;
-    private int currFunctionCallId = 0;
+    private HashMap<Integer, Cell> neighbors;
+    private HashMap<Integer, Pipe> inPipes;
+    private HashMap<Integer, Pipe> outPipes;
+    private CallStack callStack = new CallStack(this, 0);
+    private CellState state = CellState.RUNNING;
     private int R0 = 0;
     private int R1 = 0;
+
+    public void step() {
+        if (this.state == CellState.RUNNING) {
+            FunctionCall functionCall = this.callStack.getFunctionCall();
+            if (functionCall == null) {
+                this.state = CellState.FINISHED;
+            } else {
+                functionCall.call(this);
+            }
+        }
+    }
 
     public void addFunctionCall(FunctionCall functionCall) {
         this.functionCalls.add(functionCall);
@@ -83,8 +97,42 @@ public class Cell {
         }
     }
 
-    public void setNeighbors(List<Cell> neighbors) {
+    public void writeCell(int cellId) {
+        this.outPipes.get(cellId).add(this.R0);
+    }
+
+    public void readCell(int cellId) {
+        Pipe inPipes = this.inPipes.get(cellId);
+        if (inPipes.peek() != null) {
+            this.R0 = inPipes.pop();
+        }
+//        else {
+//            this.callStack.push(this, );
+//        }
+    }
+
+    public void copyCell(int cellId) {
+        this.R0 = this.neighbors.get(cellId).getR0();
+    }
+
+    public void printLabelName(int cellId) {
+        System.out.println(this.neighbors.get(cellId).getLabel());
+    }
+
+    public void setNeighbors(HashMap<Integer, Cell> neighbors) {
         this.neighbors = neighbors;
+    }
+
+    public void setInPipes(HashMap<Integer, Pipe> inPipes) {
+        this.inPipes = inPipes;
+    }
+
+    public void setOutPipes(HashMap<Integer, Pipe> outPipes) {
+        this.outPipes = outPipes;
+    }
+
+    public Pipe getOutPipe(int toId) {
+        return this.outPipes.get(toId);
     }
 
     public int getId() {
@@ -103,19 +151,19 @@ public class Cell {
         this.label = label;
     }
 
-    public List<FunctionCall> getfunctionCalls() {
-        return functionCalls;
+    public int getR0() {
+        return R0;
     }
 
-    public int getcurrFunctionCallId() {
-        return currFunctionCallId;
+    public int getFunctionCallsCount() {
+        return this.functionCalls.size();
     }
 
-    public void setR0(int R0) {
-        R0 = R0;
+    public FunctionCall getFunctionCall(int functionCallId) {
+        return this.functionCalls.get(functionCallId);
     }
 
-    public void setR1(int R1) {
-        R1 = R1;
+    public boolean isRunning() {
+        return this.state == CellState.RUNNING;
     }
 }
