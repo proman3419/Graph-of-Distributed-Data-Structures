@@ -105,10 +105,11 @@ public class Cell {
         Pipe inPipes = this.inPipes.get(cellId);
         if (inPipes.peek() != null) {
             this.R0 = inPipes.pop();
+        } else {
+            this.callStack.safePop();
+            this.callStack.setCurrFunctionCallId(this.callStack.getCurrFunctionCallId() - 1);
+            this.callStack.push(this, this.callStack.getCurrFunctionCallId());
         }
-//        else {
-//            this.callStack.push(this, );
-//        }
     }
 
     public void copyCell(int cellId) {

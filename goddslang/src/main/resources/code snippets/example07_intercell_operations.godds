@@ -13,10 +13,9 @@
     #CELL 1 label1
         SET 0 429
         WRITE_CELL 3
+        WRITE_CELL 2
     #END
     #CELL 2 label2
-        READ_CELL 0
-        READ_CELL 0
         READ_CELL 0
         READ_CELL 1
     #END
