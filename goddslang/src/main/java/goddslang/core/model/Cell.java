@@ -86,19 +86,55 @@ public class Cell {
         this.R1 = this.R0;
     }
 
-    public void print(int includeCellLabel) {
-        if (includeCellLabel == 0) {
-            System.out.println(this.R0);
-        } else if (includeCellLabel == 1) {
-            System.out.printf("%s:%d\n", this.label, this.R0);
+    public void print(String val, int includeCellLabel) {
+        String label = "";
+        if (includeCellLabel == 1) {
+            label = this.label + ":";
+        }
+        if (val.equals("R0")) {
+            System.out.printf("%s%d", label, this.R0);
+        } else if (val.equals("R1")) {
+            System.out.printf("%s%d", label, this.R1);
+        } else {
+            System.out.printf("%s%s", label, val);
         }
     }
 
-    public void printChar(int includeCellLabel) {
-        if (includeCellLabel == 0) {
-            System.out.println((char) this.R0);
-        } else if (includeCellLabel == 1) {
-            System.out.printf("%s:%c\n", this.label, (char) this.R0);
+    public void printNL(String val, int includeCellLabel) {
+        String label = "";
+        if (includeCellLabel == 1) {
+            label = this.label + ":";
+        }
+        if (val.equals("R0")) {
+            System.out.printf("%s%d\n", label, this.R0);
+        } else if (val.equals("R1")) {
+            System.out.printf("%s%d\n", label, this.R1);
+        } else {
+            System.out.printf("%s%s\n", label, val);
+        }
+    }
+
+    public void printChar(String val, int includeCellLabel) {
+        String label = "";
+        if (includeCellLabel == 1) {
+            label = this.label + ":";
+        }
+        if (val.equals("R0")) {
+            System.out.printf("%s%c", label, (char) this.R0);
+        } else if (val.equals("R1")) {
+            System.out.printf("%s%c", label, (char) this.R1);
+        }
+    }
+
+    public void printNLChar(String val, int includeCellLabel) {
+        String label = "";
+        if (includeCellLabel == 1) {
+            label = this.label + ":";
+        }
+        if (val.equals("R0")) {
+            System.out.printf("%s%c\n", label, (char) this.R0);
+        } else if (val.equals("R1")) {
+            System.out.printf("%s%c\n", label, (char) this.R1);
         }
     }
 

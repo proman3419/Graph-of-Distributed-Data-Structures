@@ -174,6 +174,39 @@ public class GrammarCustomListener extends GrammarBaseListener {
         this.program.getGraph().addCellFunctionCall(functionCall);
     }
 
+
+    @Override
+    public void exitFunctionPrint(GrammarParser.FunctionPrintContext ctx) {
+        List<String> terminalNodes = getTerminalNodes(ctx);
+        String types = "s".repeat(terminalNodes.size() - 2) + "i";
+        FunctionCall functionCall = new FunctionCall(new Print(), parseArguments(terminalNodes, types));
+        this.program.getGraph().addCellFunctionCall(functionCall);
+    }
+
+    @Override
+    public void exitFunctionPrintNL(GrammarParser.FunctionPrintNLContext ctx) {
+        List<String> terminalNodes = getTerminalNodes(ctx);
+        String types = "s".repeat(terminalNodes.size() - 2) + "i";
+        FunctionCall functionCall = new FunctionCall(new PrintNL(), parseArguments(terminalNodes, types));
+        this.program.getGraph().addCellFunctionCall(functionCall);
+    }
+
+    @Override
+    public void exitFunctionPrintChar(GrammarParser.FunctionPrintCharContext ctx) {
+        List<String> terminalNodes = getTerminalNodes(ctx);
+        String types = "s".repeat(terminalNodes.size() - 2) + "i";
+        FunctionCall functionCall = new FunctionCall(new PrintChar(), parseArguments(terminalNodes, types));
+        this.program.getGraph().addCellFunctionCall(functionCall);
+    }
+
+    @Override
+    public void exitFunctionPrintNLChar(GrammarParser.FunctionPrintNLCharContext ctx) {
+        List<String> terminalNodes = getTerminalNodes(ctx);
+        String types = "s".repeat(terminalNodes.size() - 2) + "i";
+        FunctionCall functionCall = new FunctionCall(new PrintNLChar(), parseArguments(terminalNodes, types));
+        this.program.getGraph().addCellFunctionCall(functionCall);
+    }
+
     @Override
     public void exitFunctionPrintLabelName(GrammarParser.FunctionPrintLabelNameContext ctx) {
         FunctionCall functionCall = new FunctionCall(new PrintLabelName(), parseArguments(getTerminalNodes(ctx), "i"));

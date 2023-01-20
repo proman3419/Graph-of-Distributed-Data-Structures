@@ -71,7 +71,9 @@ functionCall
     | functionCheckIFGZ
     | functionExit
     | functionPrint
+    | functionPrintNL
     | functionPrintChar
+    | functionPrintNLChar
     | functionWriteCell
     | functionReadCell
     | functionCopyCell
@@ -143,8 +145,16 @@ functionPrint
     : PRINT arguments
     ;
 
+functionPrintNL
+    : PRINTNL arguments
+    ;
+
 functionPrintChar
     : PRINT_CHAR arguments
+    ;
+
+functionPrintNLChar
+    : PRINTNL_CHAR arguments
     ;
 
 functionWriteCell
@@ -259,8 +269,16 @@ PRINT
     : 'PRINT'
     ;
 
+PRINTNL
+    : 'PRINTNL'
+    ;
+
 PRINT_CHAR
     : 'PRINT_CHAR'
+    ;
+
+PRINTNL_CHAR
+    : 'PRINTNL_CHAR'
     ;
 
 WRITE_CELL

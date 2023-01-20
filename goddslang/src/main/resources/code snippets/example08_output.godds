@@ -3,11 +3,19 @@
     0
 #END
     #CELL 0 label0
-        SET 0 954
-        PRINT 0
-        PRINT 1
-        SET 0 65
-        PRINT_CHAR 0
-        PRINT_CHAR 1
+        SET R0 954
+        PRINTNL Hello World 0
+        PRINTNL R0 1
+        PRINT HEL 0
+        PRINT L 0
+        PRINTNL O 0
+        SWAP
+        SET R0 65
+        PRINTNL R0 1
+        PRINTNL R1 1
+        PRINTNL_CHAR R0 0
+        PRINTNL_CHAR R1 0
+        PRINTNL_CHAR R0 1
+        PRINTNL_CHAR R1 1
     #END
 #END_ALL

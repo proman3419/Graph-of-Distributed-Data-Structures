@@ -308,6 +308,16 @@ public interface GrammarListener extends ParseTreeListener {
 	 */
 	void exitFunctionPrint(GrammarParser.FunctionPrintContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link GrammarParser#functionPrintNL}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunctionPrintNL(GrammarParser.FunctionPrintNLContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GrammarParser#functionPrintNL}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunctionPrintNL(GrammarParser.FunctionPrintNLContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link GrammarParser#functionPrintChar}.
 	 * @param ctx the parse tree
 	 */
@@ -317,6 +327,16 @@ public interface GrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFunctionPrintChar(GrammarParser.FunctionPrintCharContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GrammarParser#functionPrintNLChar}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunctionPrintNLChar(GrammarParser.FunctionPrintNLCharContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GrammarParser#functionPrintNLChar}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunctionPrintNLChar(GrammarParser.FunctionPrintNLCharContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GrammarParser#functionWriteCell}.
 	 * @param ctx the parse tree
