@@ -18,6 +18,5 @@
         LABEL labelY
             SET 0 65
             PRINT_CHAR 1
-            JUMP XXXXX$labelX
     #END
 #END_ALL
