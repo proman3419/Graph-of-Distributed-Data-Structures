@@ -9,7 +9,7 @@ import java.util.List;
 public class Set implements Function {
     @Override
     public void call(Cell cell, List<Argument> arguments) {
-        int registerId = arguments.get(0).getValueAsNumber();
+        String registerId = arguments.get(0).getValueAsId();
         int value = arguments.get(1).getValueAsNumber();
         cell.set(registerId, value);
     }

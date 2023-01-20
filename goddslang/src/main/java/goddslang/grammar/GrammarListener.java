@@ -138,16 +138,6 @@ public interface GrammarListener extends ParseTreeListener {
 	 */
 	void exitArguments(GrammarParser.ArgumentsContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link GrammarParser#functionSuper}.
-	 * @param ctx the parse tree
-	 */
-	void enterFunctionSuper(GrammarParser.FunctionSuperContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link GrammarParser#functionSuper}.
-	 * @param ctx the parse tree
-	 */
-	void exitFunctionSuper(GrammarParser.FunctionSuperContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link GrammarParser#functionCall}.
 	 * @param ctx the parse tree
 	 */
@@ -367,6 +357,16 @@ public interface GrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFunctionPrintLabelName(GrammarParser.FunctionPrintLabelNameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GrammarParser#functionPass}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunctionPass(GrammarParser.FunctionPassContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GrammarParser#functionPass}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunctionPass(GrammarParser.FunctionPassContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GrammarParser#idArgument}.
 	 * @param ctx the parse tree

@@ -76,6 +76,7 @@ functionCall
     | functionReadCell
     | functionCopyCell
     | functionPrintLabelName
+    | functionPass
     ;
 
 functionAdd
@@ -160,6 +161,10 @@ functionCopyCell
 
 functionPrintLabelName
     : PRINT_LABEL_NAME arguments
+    ;
+
+functionPass
+    : PASS arguments
     ;
 
 SUPER_CELLS_COUNT
@@ -272,6 +277,10 @@ COPY_CELL
 
 PRINT_LABEL_NAME
     : 'PRINT_LABEL_NAME'
+    ;
+
+PASS
+    : 'PASS'
     ;
 
 idArgument

@@ -89,12 +89,6 @@ public interface GrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitArguments(GrammarParser.ArgumentsContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link GrammarParser#functionSuper}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitFunctionSuper(GrammarParser.FunctionSuperContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link GrammarParser#functionCall}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -226,6 +220,12 @@ public interface GrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitFunctionPrintLabelName(GrammarParser.FunctionPrintLabelNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GrammarParser#functionPass}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionPass(GrammarParser.FunctionPassContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link GrammarParser#idArgument}.
 	 * @param ctx the parse tree

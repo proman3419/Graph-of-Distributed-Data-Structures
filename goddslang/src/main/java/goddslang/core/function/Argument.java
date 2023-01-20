@@ -20,4 +20,12 @@ public class Argument {
     public Integer getValueAsNumber() {
         return value.get();
     }
+
+    public Boolean isNumber() {
+        return value.isRight();
+    }
+
+    public Boolean isString() {
+        return value.isLeft();
+    }
 }

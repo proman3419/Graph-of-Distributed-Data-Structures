@@ -17,14 +17,19 @@ public class Cell {
     private CellState state = CellState.RUNNING;
     private int R0 = 0;
     private int R1 = 0;
+    private int idleStepsCount = 0;
 
     public void step() {
         if (this.state == CellState.RUNNING) {
-            FunctionCall functionCall = this.callStack.getFunctionCall();
-            if (functionCall == null) {
-                this.state = CellState.FINISHED;
+            if (idleStepsCount > 1) {  // bigger than 1 due to first idle step being reading the number of idle steps
+                idleStepsCount--;
             } else {
-                functionCall.call(this);
+                FunctionCall functionCall = this.callStack.getFunctionCall();
+                if (functionCall == null) {
+                    this.state = CellState.FINISHED;
+                } else {
+                    functionCall.call(this);
+                }
             }
         }
     }
@@ -53,10 +58,10 @@ public class Cell {
         this.R0 %= value;
     }
 
-    public void set(int registerId, int value) {
-        if (registerId == 0) {
+    public void set(String registerId, int value) {
+        if (registerId.equals("R0")) {
             this.R0 = value;
-        } else if (registerId == 1) {
+        } else if (registerId.equals("R1")) {
             this.R1 = value;
         }
     }
@@ -105,10 +110,6 @@ public class Cell {
         Pipe inPipes = this.inPipes.get(cellId);
         if (inPipes.peek() != null) {
             this.R0 = inPipes.pop();
-        } else {
-            this.callStack.safePop();
-            this.callStack.setCurrFunctionCallId(this.callStack.getCurrFunctionCallId() - 1);
-            this.callStack.push(this, this.callStack.getCurrFunctionCallId());
         }
     }
 
@@ -118,6 +119,10 @@ public class Cell {
 
     public void printLabelName(int cellId) {
         System.out.println(this.neighbors.get(cellId).getLabel());
+    }
+
+    public void pass(int val) {
+        this.idleStepsCount = val;
     }
 
     public void setNeighbors(HashMap<Integer, Cell> neighbors) {
@@ -154,6 +159,10 @@ public class Cell {
 
     public int getR0() {
         return R0;
+    }
+
+    public int getR1() {
+        return R1;
     }
 
     public int getFunctionCallsCount() {
