@@ -1,15 +1,17 @@
 package goddslang.core.model;
 
 import goddslang.core.function.FunctionCall;
+import goddslang.core.function.impl.DefineLabel;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Cell {
     private int id = -1;
     private String label = "DUMMY";
     private final List<FunctionCall> functionCalls = new ArrayList<>();
+    private final HashMap<String, Integer> definedLabels = new HashMap<>();
     private HashMap<Integer, Cell> neighbors;
     private HashMap<Integer, Pipe> inPipes;
     private HashMap<Integer, Pipe> outPipes;
@@ -31,6 +33,10 @@ public class Cell {
 
     public void addFunctionCall(FunctionCall functionCall) {
         this.functionCalls.add(functionCall);
+        if (Objects.equals(functionCall.getFunction().getClass(), DefineLabel.class)) {
+            String definedLabel = functionCall.getArguments().get(0).getValueAsId();
+            this.definedLabels.put(definedLabel, this.functionCalls.size());
+        }
     }
 
     public void add(int value) {
@@ -106,9 +112,9 @@ public class Cell {
         if (inPipes.peek() != null) {
             this.R0 = inPipes.pop();
         } else {
+            int currFunctionCallId = this.callStack.getCurrFunctionCallId() - 1;
             this.callStack.safePop();
-            this.callStack.setCurrFunctionCallId(this.callStack.getCurrFunctionCallId() - 1);
-            this.callStack.push(this, this.callStack.getCurrFunctionCallId());
+            this.callStack.push(this, currFunctionCallId);
         }
     }
 
@@ -118,6 +124,64 @@ public class Cell {
 
     public void printLabelName(int cellId) {
         System.out.println(this.neighbors.get(cellId).getLabel());
+    }
+
+    public void jump(String extendedDefinedLabel) {
+        String[] extendedDefinedLabelParts = extendedDefinedLabel.split("\\$");
+        Cell owner;
+        if (extendedDefinedLabelParts.length == 1) { // Local scope
+            owner = this;
+        } else { // Neighbor scope
+            owner = getNeighborByLabel(extendedDefinedLabelParts[0]);
+        }
+        Integer functionCallId;
+        String definedLabel = extendedDefinedLabelParts[extendedDefinedLabelParts.length - 1];
+        if (Objects.equals(definedLabel, "@")) { // Start
+            functionCallId = 0;
+        } else { // Specific function call
+            functionCallId = owner.getFunctionCallIdForLabel(definedLabel);
+        }
+
+        this.callStack.push(owner, functionCallId);
+    }
+
+    public void IFEZ(String extendedDefinedLabel) {
+        if (this.R0 == 0) {
+            jump(extendedDefinedLabel);
+        }
+    }
+
+    public void IFLZ(String extendedDefinedLabel) {
+        if (this.R0 < 0) {
+            jump(extendedDefinedLabel);
+        }
+    }
+
+    public void IFGZ(String extendedDefinedLabel) {
+        if (this.R0 > 0) {
+            jump(extendedDefinedLabel);
+        }
+    }
+
+    @Nullable
+    private Integer getFunctionCallIdForLabel(String definedLabel) {
+        return this.definedLabels.get(definedLabel);
+    }
+
+    public FunctionCall getFunctionCall(int functionCallId) {
+        return this.functionCalls.get(functionCallId);
+    }
+
+    @Nullable
+    private Cell getNeighborByLabel(String neighborLabel) {
+        return this.neighbors.values().stream()
+                .filter(cell -> Objects.equals(cell.getLabel(), neighborLabel))
+                .findFirst()
+                .orElse(null);
+    }
+
+    public boolean isRunning() {
+        return this.state == CellState.RUNNING;
     }
 
     public void setNeighbors(HashMap<Integer, Cell> neighbors) {
@@ -158,13 +222,5 @@ public class Cell {
 
     public int getFunctionCallsCount() {
         return this.functionCalls.size();
-    }
-
-    public FunctionCall getFunctionCall(int functionCallId) {
-        return this.functionCalls.get(functionCallId);
-    }
-
-    public boolean isRunning() {
-        return this.state == CellState.RUNNING;
     }
 }

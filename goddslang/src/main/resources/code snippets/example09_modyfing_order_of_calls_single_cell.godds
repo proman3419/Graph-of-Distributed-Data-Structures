@@ -1,0 +1,23 @@
+#CELLS_COUNT 1
+#CELLS_GRAPH
+    0
+#END
+    #CELL 0 label0
+        JUMP labelB
+
+        LABEL labelA
+            SET 0 65
+            PRINT_CHAR 0
+            JUMP labelC
+
+        LABEL labelB
+            SET 0 66
+            PRINT_CHAR 0
+            JUMP labelA
+
+        LABEL labelC
+            SET 0 67
+            PRINT_CHAR 0
+            JUMP @
+    #END
+#END_ALL
