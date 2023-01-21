@@ -278,6 +278,16 @@ public interface GrammarListener extends ParseTreeListener {
 	 */
 	void exitFunctionCheckIFEZ(GrammarParser.FunctionCheckIFEZContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link GrammarParser#functionCheckIFNZ}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunctionCheckIFNZ(GrammarParser.FunctionCheckIFNZContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GrammarParser#functionCheckIFNZ}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunctionCheckIFNZ(GrammarParser.FunctionCheckIFNZContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link GrammarParser#functionCheckIFLZ}.
 	 * @param ctx the parse tree
 	 */

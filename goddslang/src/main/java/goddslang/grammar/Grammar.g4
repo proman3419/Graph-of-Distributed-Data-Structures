@@ -68,6 +68,7 @@ functionCall
     | functionDefineLabel
     | functionJump
     | functionCheckIFEZ
+    | functionCheckIFNZ
     | functionCheckIFLZ
     | functionCheckIFGZ
     | functionExit
@@ -134,6 +135,10 @@ functionJump
 
 functionCheckIFEZ
     : CHECK_IFEZ extendedDefinedLabel
+    ;
+
+functionCheckIFNZ
+    : CHECK_IFNZ extendedDefinedLabel
     ;
 
 functionCheckIFLZ
@@ -270,6 +275,10 @@ JUMP
 
 CHECK_IFEZ
     : 'IFEZ'
+    ;
+
+CHECK_IFNZ
+    : 'IFNZ'
     ;
 
 CHECK_IFLZ

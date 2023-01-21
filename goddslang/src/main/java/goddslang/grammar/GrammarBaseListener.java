@@ -341,6 +341,18 @@ public class GrammarBaseListener implements GrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterFunctionCheckIFNZ(GrammarParser.FunctionCheckIFNZContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunctionCheckIFNZ(GrammarParser.FunctionCheckIFNZContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterFunctionCheckIFLZ(GrammarParser.FunctionCheckIFLZContext ctx) { }
 	/**
 	 * {@inheritDoc}

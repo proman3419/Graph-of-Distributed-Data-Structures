@@ -3,7 +3,7 @@
     0
 #END
     #CELL 0 label0
-        IFEZ labelB
+        IFEZ labelB // IFNZ labelB ends the program
         JUMP $
 
         LABEL labelA

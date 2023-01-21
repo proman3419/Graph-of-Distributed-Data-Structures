@@ -173,6 +173,12 @@ public interface GrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFunctionCheckIFEZ(GrammarParser.FunctionCheckIFEZContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link GrammarParser#functionCheckIFNZ}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionCheckIFNZ(GrammarParser.FunctionCheckIFNZContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link GrammarParser#functionCheckIFLZ}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

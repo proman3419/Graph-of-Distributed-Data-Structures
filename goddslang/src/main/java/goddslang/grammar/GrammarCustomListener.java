@@ -230,4 +230,10 @@ public class GrammarCustomListener extends GrammarBaseListener {
         FunctionCall functionCall = new FunctionCall(new Abs(), GrammarHelper.parseArguments(GrammarHelper.getTerminalNodes(ctx), ""));
         this.program.getGraph().addCellFunctionCall(functionCall);
     }
+
+    @Override
+    public void exitFunctionCheckIFNZ(GrammarParser.FunctionCheckIFNZContext ctx) {
+        FunctionCall functionCall = new FunctionCall(new IFNZ(), GrammarHelper.parseArguments(GrammarHelper.getTerminalNodes(ctx), "s"));
+        this.program.getGraph().addCellFunctionCall(functionCall);
+    }
 }

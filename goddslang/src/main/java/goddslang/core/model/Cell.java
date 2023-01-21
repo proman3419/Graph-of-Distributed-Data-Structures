@@ -228,6 +228,12 @@ public class Cell {
         }
     }
 
+    public void IFNZ(String extendedDefinedLabel, Cell owner) {
+        if (this.R0 != 0) {
+            jump(extendedDefinedLabel, owner);
+        }
+    }
+
     public void IFLZ(String extendedDefinedLabel, Cell owner) {
         if (this.R0 < 0) {
             jump(extendedDefinedLabel, owner);
