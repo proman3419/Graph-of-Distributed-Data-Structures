@@ -250,4 +250,16 @@ public interface GrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitNumberArgument(GrammarParser.NumberArgumentContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GrammarParser#extendedDefinedLabel}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExtendedDefinedLabel(GrammarParser.ExtendedDefinedLabelContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GrammarParser#definedLabel}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDefinedLabel(GrammarParser.DefinedLabelContext ctx);
 }

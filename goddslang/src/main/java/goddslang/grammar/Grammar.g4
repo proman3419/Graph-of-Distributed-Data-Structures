@@ -122,19 +122,19 @@ functionDefineLabel
     ;
 
 functionJump
-    : JUMP arguments
+    : JUMP extendedDefinedLabel
     ;
 
 functionCheckIFEZ
-    : CHECK_IFEZ arguments
+    : CHECK_IFEZ extendedDefinedLabel
     ;
 
 functionCheckIFLZ
-    : CHECK_IFLZ arguments
+    : CHECK_IFLZ extendedDefinedLabel
     ;
 
 functionCheckIFGZ
-    : CHECK_IFGZ arguments
+    : CHECK_IFGZ extendedDefinedLabel
     ;
 
 functionExit
@@ -309,13 +309,27 @@ numberArgument
     : NUMBER
     ;
 
+
+extendedDefinedLabel
+    : definedLabel
+    | ID'@'definedLabel
+    ;
+
+ definedLabel
+    : '^'
+    | '$'
+    | ID
+    ;
+
 NUMBER
     : '-'?('0'..'9')+
     ;
 
 ID
-    : [a-zA-Z]+('0'..'9')*
+    : ('_'|'-'|[a-zA-Z])+('0'..'9')*
     ;
+
+
 
 // Ignore white space characters
 WS

@@ -14,15 +14,16 @@
     #CELL 1 label1
         SET R0 429
         WRITE_CELL 3
-        WRITE_CELL 2
+        //WRITE_CELL 2
     #END
     #CELL 2 label2
         READ_CELL 0
-        READ_CELL 1
+        //READ_CELL 1
     #END
     #CELL 3 label3
         READ_CELL 0
         SWAP
         READ_CELL 1
+        ADD 15
     #END
 #END_ALL

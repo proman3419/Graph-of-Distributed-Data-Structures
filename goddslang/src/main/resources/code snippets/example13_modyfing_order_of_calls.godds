@@ -1,0 +1,26 @@
+#CELLS_COUNT 1
+#CELLS_GRAPH
+    0
+#END
+    #CELL 0 label0
+        IFEZ labelB
+        JUMP $
+
+        LABEL labelA
+            SET R0 65
+            PRINTNL_CHAR R0 0
+            JUMP labelC
+
+        LABEL labelB
+            SET R0 66
+            PRINTNL_CHAR R0 0
+            JUMP labelA
+
+        LABEL labelC
+            SET R0 67
+            PRINTNL_CHAR R0 0
+            JUMP ^
+
+        PRINTNL Finished 0
+    #END
+#END_ALL
