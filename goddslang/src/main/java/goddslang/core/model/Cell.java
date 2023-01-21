@@ -172,7 +172,7 @@ public class Cell {
     }
 
     public void jump(String extendedDefinedLabel) {
-        String[] extendedDefinedLabelParts = extendedDefinedLabel.split("\\$");
+        String[] extendedDefinedLabelParts = extendedDefinedLabel.split("@");
         Cell owner;
         if (extendedDefinedLabelParts.length == 1) { // Local scope
             owner = this;
@@ -182,12 +182,13 @@ public class Cell {
         }
         Integer functionCallId;
         String definedLabel = extendedDefinedLabelParts[extendedDefinedLabelParts.length - 1];
-        if (Objects.equals(definedLabel, "@")) { // Start
+        if (Objects.equals(definedLabel, "^")) { // Start
             functionCallId = 0;
+        } else if (Objects.equals(definedLabel, "$")) { // End
+            functionCallId = owner.getFunctionCallsCount() - 1;
         } else { // Specific function call
             functionCallId = owner.getFunctionCallIdForLabel(definedLabel);
         }
-
         this.callStack.push(owner, functionCallId);
     }
 
