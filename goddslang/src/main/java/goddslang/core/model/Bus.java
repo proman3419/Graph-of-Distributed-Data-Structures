@@ -8,25 +8,20 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Bus {
-    private final Queue<Integer> queue = new LinkedList<>();
-    private final List<Integer> order = new ArrayList<>();
-    private final List<Cell> neighbors;
+    private LinkedList<Integer> queue = new LinkedList<>();
 
-    public Bus(int cellsCount) {
-        this.neighbors = IntStream.range(0, cellsCount)
-                .mapToObj(i -> new Cell())
-                .collect(Collectors.toList());
+    public Bus() {
     }
 
-    public void push(int value) {
+    public Integer peek() {
+        return this.queue.peek();
+    }
+
+    public Integer pop() {
+        return this.queue.pop();
+    }
+
+    public void add(int value) {
         this.queue.add(value);
-    }
-
-    public void addNeighbor(Cell neighbor) {
-        this.neighbors.set(neighbor.getId(), neighbor);
-    }
-
-    public List<Integer> getOrder() {
-        return order;
     }
 }

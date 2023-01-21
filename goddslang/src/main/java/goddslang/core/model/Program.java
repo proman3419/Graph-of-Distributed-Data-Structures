@@ -4,7 +4,6 @@ import java.util.List;
 
 public class Program {
     private Graph graph;
-    private Bus bus;
 
     public void run() {
         for (;;) {
@@ -20,7 +19,6 @@ public class Program {
 
     public void init(int cellsCount) {
         this.graph = new Graph(cellsCount);
-        this.bus = new Bus(cellsCount);
     }
 
     public void createCell(int id, String label) {
@@ -28,14 +26,10 @@ public class Program {
         cell.setId(id);
         cell.setLabel(label);
         this.graph.setCurrCell(cell);
-        this.bus.addNeighbor(cell);
     }
 
     public Graph getGraph() {
         return graph;
     }
 
-    public Bus getBus() {
-        return bus;
-    }
 }

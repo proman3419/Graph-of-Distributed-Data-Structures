@@ -69,16 +69,19 @@ public class GrammarCustomListener extends GrammarBaseListener {
 
     @Override
     public void exitInputVals(GrammarParser.InputValsContext ctx) {
-        super.exitInputVals(ctx);
         List<String> terminalNodes = getTerminalNodes(ctx);
+        String types = "i".repeat(terminalNodes.size() - 1);
         System.out.println(terminalNodes);
+
+        this.program.getGraph().setBusVals(parseArguments(getTerminalNodes(ctx), types));
     }
 
     @Override
     public void exitInputCells(GrammarParser.InputCellsContext ctx) {
-        super.exitInputCells(ctx);
         List<String> terminalNodes = getTerminalNodes(ctx);
+        String types = "i".repeat(terminalNodes.size() - 1) ;
         System.out.println(terminalNodes);
+        this.program.getGraph().setupBus(parseArguments(getTerminalNodes(ctx), types));
     }
 
     @Override
@@ -222,6 +225,12 @@ public class GrammarCustomListener extends GrammarBaseListener {
     @Override
     public void exitFunctionWriteCell(GrammarParser.FunctionWriteCellContext ctx) {
         FunctionCall functionCall = new FunctionCall(new WriteCell(), parseArguments(getTerminalNodes(ctx), "i"));
+        this.program.getGraph().addCellFunctionCall(functionCall);
+    }
+
+    @Override
+    public void exitFunctionReadBus(GrammarParser.FunctionReadBusContext ctx) {
+        FunctionCall functionCall = new FunctionCall(new ReadBus(), parseArguments(getTerminalNodes(ctx), ""));
         this.program.getGraph().addCellFunctionCall(functionCall);
     }
 

@@ -76,6 +76,7 @@ functionCall
     | functionPrintNLChar
     | functionWriteCell
     | functionReadCell
+    | functionReadBus
     | functionCopyCell
     | functionPrintLabelName
     | functionPass
@@ -163,6 +164,10 @@ functionWriteCell
 
 functionReadCell
     : READ_CELL arguments
+    ;
+
+functionReadBus
+    : READ_BUS arguments
     ;
 
 functionCopyCell
@@ -287,6 +292,10 @@ WRITE_CELL
 
 READ_CELL
     : 'READ_CELL'
+    ;
+
+READ_BUS
+    : 'READ_BUS'
     ;
 
 COPY_CELL
