@@ -4,16 +4,21 @@ import java.util.List;
 
 public class Program {
     private Graph graph;
+    private static boolean terminate = false;
 
     public void run() {
-        for (;;) {
+        while (!terminate) {
             List<Cell> runningCells = this.graph.getCells().stream()
                     .filter(Cell::isRunning)
                     .toList();
             if (runningCells.isEmpty()) {
                 return;
             }
-            runningCells.forEach(Cell::step);
+            runningCells.forEach(cell -> {
+                if (!terminate) {
+                    cell.step();
+                }
+            });
         }
     }
 
@@ -32,4 +37,7 @@ public class Program {
         return graph;
     }
 
+    public static void setTerminate(boolean terminate) {
+        Program.terminate = terminate;
+    }
 }

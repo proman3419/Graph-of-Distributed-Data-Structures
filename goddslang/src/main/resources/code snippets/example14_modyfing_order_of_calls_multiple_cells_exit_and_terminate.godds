@@ -34,6 +34,7 @@
         LABEL labelD
             SET R0 68
             PRINTNL_CHAR R0 0
+            EXIT
 
         LABEL labelE
             SET R0 69
@@ -43,6 +44,7 @@
         LABEL labelF
             SET R0 70
             TERMINATE
+            PRINTNL_CHAR R0 0
     #END
 
 #END_ALL

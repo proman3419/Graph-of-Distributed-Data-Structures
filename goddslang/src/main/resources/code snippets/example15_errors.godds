@@ -1,0 +1,34 @@
+#CELLS_COUNT 3
+#CELLS_GRAPH
+// DIV 0 error
+    011
+    101
+    010
+// WRITE error
+    //010
+    //101
+    //010
+#END
+#INPUT 11 1 2 96 23
+#INPUT_CELLS 0 1
+    #CELL 0 label0
+        JUMP label1@goto2
+    #END
+
+    #CELL 1 label1
+        LABEL write
+            WRITE_CELL 2
+
+        LABEL goto2
+            JUMP label2@div0
+    #END
+
+    #CELL 2 label2
+        JUMP $
+
+        LABEL div0
+            DIV 0
+
+        ADD 12
+    #END
+#END_ALL
