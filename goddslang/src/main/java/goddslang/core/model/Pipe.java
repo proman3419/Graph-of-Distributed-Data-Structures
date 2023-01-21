@@ -23,4 +23,12 @@ public class Pipe {
     public void add(int value) {
         this.queue.add(value);
     }
+
+    public Cell getFromCell() {
+        return this.from;
+    }
+
+    public Cell getToCell() {
+        return this.to;
+    }
 }

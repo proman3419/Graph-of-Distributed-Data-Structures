@@ -9,7 +9,7 @@ import java.util.List;
 public class WriteCell implements Function {
     @Override
     public void call(Cell cell, List<Argument> arguments) {
-        int cellId = arguments.get(0).getValueAsNumber();
-        cell.writeCell(cellId);
+        String label = arguments.get(0).getValueAsId();
+        cell.writeCell(label);
     }
 }

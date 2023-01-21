@@ -147,12 +147,14 @@ public class Cell {
         }
     }
 
-    public void writeCell(int cellId) {
-        this.outPipes.get(cellId).add(this.R0);
+    public void writeCell(String label) {
+        Pipe pipe = getPipeOutputByLabel(label);
+        this.outPipes.get(pipe.getToCell().getId()).add(this.R0);
     }
 
-    public void readCell(int cellId) {
-        Pipe inPipes = this.inPipes.get(cellId);
+    public void readCell(String label) {
+        Pipe pipe = getPipeInputByLabel(label);
+        Pipe inPipes = this.inPipes.get(pipe.getFromCell().getId());
         if (inPipes.peek() != null) {
             this.R0 = inPipes.pop();
         } else {
@@ -232,6 +234,21 @@ public class Cell {
     private Cell getNeighborByLabel(String neighborLabel) {
         return this.neighbors.values().stream()
                 .filter(cell -> Objects.equals(cell.getLabel(), neighborLabel))
+                .findFirst()
+                .orElse(null);
+    }
+    @Nullable
+    private Pipe getPipeOutputByLabel(String neighborLabel) {
+        return this.outPipes.values().stream()
+                .filter(pipe -> pipe.getToCell().getLabel().equals(neighborLabel))
+                .findFirst()
+                .orElse(null);
+    }
+
+    @Nullable
+    private Pipe getPipeInputByLabel(String neighborLabel) {
+        return this.inPipes.values().stream()
+                .filter(pipe -> Objects.equals(pipe.getFromCell().getLabel(), neighborLabel))
                 .findFirst()
                 .orElse(null);
     }
