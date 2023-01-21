@@ -7,16 +7,16 @@
         JUMP YYYYY$labelY
 
         LABEL labelX
-            SET 0 65
-            PRINT_CHAR 1
+            SET R0 65
+            PRINTNL_CHAR R0 1
             JUMP YYYYY$@
     #END
     #CELL 1 YYYYY
-        SET 0 80
-        PRINT_CHAR 1
+        SET R0 80
+        PRINTNL_CHAR R0 1
 
         LABEL labelY
-            SET 0 65
-            PRINT_CHAR 1
+            SET R0 66
+            PRINTNL_CHAR R0 1
     #END
 #END_ALL

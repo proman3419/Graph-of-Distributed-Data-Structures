@@ -6,18 +6,18 @@
         JUMP labelB
 
         LABEL labelA
-            SET 0 65
-            PRINT_CHAR 0
+            SET R0 65
+            PRINTNL_CHAR R0 0
             JUMP labelC
 
         LABEL labelB
-            SET 0 66
-            PRINT_CHAR 0
+            SET R0 66
+            PRINTNL_CHAR R0 0
             JUMP labelA
 
         LABEL labelC
-            SET 0 67
-            PRINT_CHAR 0
+            SET R0 67
+            PRINTNL_CHAR R0 0
             JUMP @
     #END
 #END_ALL

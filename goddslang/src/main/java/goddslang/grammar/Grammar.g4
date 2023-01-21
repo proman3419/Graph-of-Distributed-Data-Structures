@@ -55,7 +55,10 @@ arguments
     ;
 
 extendedLabel
-    : ID('$'(ID|'@'))*
+    : '@'
+    | ID
+    | ID'$''@'
+    | ID'$'ID
     ;
 
 functionCall
