@@ -15,7 +15,7 @@ public class IFGZ implements Function {
         String extendedDefinedLabel = arguments.stream()
                 .map(Argument::getValueAsId)
                 .collect(Collectors.joining(""));
-        cell.IFGZ(extendedDefinedLabel);
+        cell.IFGZ(extendedDefinedLabel, functionCall.getOwner());
         return null;
     }
 }

@@ -15,7 +15,7 @@ public class Jump implements Function {
         String extendedDefinedLabel = arguments.stream()
                 .map(Argument::getValueAsId)
                 .collect(Collectors.joining(""));
-        cell.jump(extendedDefinedLabel);
+        cell.jump(extendedDefinedLabel, functionCall.getOwner());
         return null;
     }
 }

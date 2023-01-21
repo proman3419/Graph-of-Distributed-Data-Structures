@@ -201,15 +201,14 @@ public class Cell {
         this.idleStepsCount = val;
     }
 
-    public void jump(String extendedDefinedLabel) {
+    public void jump(String extendedDefinedLabel, Cell owner) {
         String[] extendedDefinedLabelParts = extendedDefinedLabel.split("@");
-        Cell owner;
-        if (extendedDefinedLabelParts.length == 1) { // Local scope
-            owner = this;
+        if (extendedDefinedLabelParts.length == 1) { // Local scope (owner's or this cell's)
             this.callStack.safePop(); // Don't return to the place from which the jump has been made
         } else { // Neighbor scope
             owner = getNeighborByLabel(extendedDefinedLabelParts[0]);
         }
+
         Integer functionCallId;
         String definedLabel = extendedDefinedLabelParts[extendedDefinedLabelParts.length - 1];
         if (Objects.equals(definedLabel, "^")) { // Start
@@ -222,21 +221,21 @@ public class Cell {
         this.callStack.push(owner, functionCallId);
     }
 
-    public void IFEZ(String extendedDefinedLabel) {
+    public void IFEZ(String extendedDefinedLabel, Cell owner) {
         if (this.R0 == 0) {
-            jump(extendedDefinedLabel);
+            jump(extendedDefinedLabel, owner);
         }
     }
 
-    public void IFLZ(String extendedDefinedLabel) {
+    public void IFLZ(String extendedDefinedLabel, Cell owner) {
         if (this.R0 < 0) {
-            jump(extendedDefinedLabel);
+            jump(extendedDefinedLabel, owner);
         }
     }
 
-    public void IFGZ(String extendedDefinedLabel) {
+    public void IFGZ(String extendedDefinedLabel, Cell owner) {
         if (this.R0 > 0) {
-            jump(extendedDefinedLabel);
+            jump(extendedDefinedLabel, owner);
         }
     }
 

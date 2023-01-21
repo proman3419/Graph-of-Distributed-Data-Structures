@@ -15,7 +15,7 @@ public class IFEZ implements Function {
         String extendedDefinedLabel = arguments.stream()
                 .map(Argument::getValueAsId)
                 .collect(Collectors.joining(""));
-        cell.IFEZ(extendedDefinedLabel);
+        cell.IFEZ(extendedDefinedLabel, functionCall.getOwner());
         return null;
     }
 }
