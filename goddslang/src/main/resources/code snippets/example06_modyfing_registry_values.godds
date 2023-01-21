@@ -12,5 +12,9 @@
         COMP 9999
         SWAP
         COPY
+        SET R0 -23
+        PRINTNL R0 0
+        ABS
+        PRINTNL R0 0
     #END
 #END_ALL

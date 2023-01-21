@@ -1,8 +1,5 @@
 package goddslang.core.model;
 
-import goddslang.core.error.Error;
-import goddslang.core.error.ErrorReporter;
-import goddslang.core.error.ErrorType;
 import goddslang.core.function.FunctionCall;
 import goddslang.core.function.impl.DefineLabel;
 import org.jetbrains.annotations.Nullable;
@@ -10,7 +7,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.*;
+import java.util.Objects;
 
 public class Cell {
     private int id = -1;
@@ -74,6 +71,10 @@ public class Cell {
 
     public void mod(int value) {
         this.R0 %= value;
+    }
+
+    public void abs() {
+        this.R0 = Math.abs(this.R0);
     }
 
     public void set(String registerId, int value) {
