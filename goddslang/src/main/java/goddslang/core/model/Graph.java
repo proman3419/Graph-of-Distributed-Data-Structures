@@ -44,14 +44,15 @@ public class Graph {
         this.busVals = vals;
     }
 
-    public void setupBus(List<Argument> cells) {
+    public void setupBus(List<Argument> inputCells) {
         HashMap<Integer, Bus> busPipes = new HashMap<>();
         for (int i = 0; i < this.cellsCount; i++) {
             busPipes.put(i, new Bus());
         }
 
         for (int i = 0; i < this.busVals.size(); i++) {
-            int cellId = i % (cells.size());
+            int inputCellId = i % inputCells.size();
+            int cellId = inputCells.get(inputCellId).getValueAsNumber();
             busPipes.get(cellId).add(this.busVals.get(i).getValueAsNumber());
         }
 
@@ -60,7 +61,6 @@ public class Graph {
             cell.setBusPipe(busPipes.get(i));
         }
     }
-
 
     public void completeSetup() {
         for (int i = 0; i < this.cellsCount; i++) {

@@ -7,7 +7,7 @@
     11111
 #END
 #INPUT 0 1 2 3 4 5 6
-#INPUT_CELLS 0 1 2 3 2 //2
+#INPUT_CELLS 0 1 2 3 2 2
     #CELL 0 label0
         READ_BUS
         PRINTNL R0 1
@@ -25,6 +25,7 @@
         PRINTNL R0 1
         READ_BUS
         PRINTNL R0 1
+
     #END
     #CELL 3 label3
         READ_BUS

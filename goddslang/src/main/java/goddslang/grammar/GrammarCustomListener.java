@@ -50,7 +50,7 @@ public class GrammarCustomListener extends GrammarBaseListener {
     public void exitCellsCount(GrammarParser.CellsCountContext ctx) {
         super.exitCellsCount(ctx);
         List<String> terminalNodes = getTerminalNodes(ctx);
-        System.out.println(terminalNodes);
+//        System.out.println(terminalNodes);
 
         int cellsCount = Integer.parseInt(terminalNodes.get(1));
         program.init(cellsCount);
@@ -60,7 +60,7 @@ public class GrammarCustomListener extends GrammarBaseListener {
     public void exitCellsGraph(GrammarParser.CellsGraphContext ctx) {
         super.exitCellsGraph(ctx);
         List<String> terminalNodes = getTerminalNodes(ctx);
-        System.out.println(terminalNodes);
+//        System.out.println(terminalNodes);
 
         List<String> graphAdjMatrixRaw = terminalNodes.subList(1, terminalNodes.size() - 1);
 
@@ -73,13 +73,13 @@ public class GrammarCustomListener extends GrammarBaseListener {
         String types = "i".repeat(terminalNodes.size() - 1);
         System.out.println(terminalNodes);
 
-        this.program.getGraph().setBusVals(parseArguments(getTerminalNodes(ctx), types));
+        this.program.getGraph().setBusVals(parseArguments(terminalNodes, types));
     }
 
     @Override
     public void exitInputCells(GrammarParser.InputCellsContext ctx) {
         List<String> terminalNodes = getTerminalNodes(ctx);
-        String types = "i".repeat(terminalNodes.size() - 1) ;
+        String types = "i".repeat(terminalNodes.size() - 1);
         System.out.println(terminalNodes);
         this.program.getGraph().setupBus(parseArguments(getTerminalNodes(ctx), types));
     }
