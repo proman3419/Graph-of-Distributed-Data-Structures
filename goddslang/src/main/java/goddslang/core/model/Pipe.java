@@ -17,7 +17,7 @@ public class Pipe {
     }
 
     public Integer pop() {
-        return this.queue.getFirst();
+        return this.queue.pop();
     }
 
     public void add(int value) {

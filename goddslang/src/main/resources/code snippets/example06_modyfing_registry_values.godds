@@ -8,7 +8,7 @@
         MUL 5
         DIV 3
         MOD 4
-        SET 1 654
+        SET R1 654
         COMP 9999
         SWAP
         COPY
