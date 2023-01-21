@@ -60,6 +60,7 @@ functionCall
     | functionMul
     | functionDiv
     | functionMod
+    | functionAbs
     | functionSet
     | functionComp
     | functionSwap
@@ -101,6 +102,10 @@ functionDiv
 
 functionMod
     : MOD arguments
+    ;
+
+functionAbs
+    : ABS
     ;
 
 functionSet
@@ -233,6 +238,10 @@ DIV
 
 MOD
     : 'MOD'
+    ;
+
+ABS
+    : 'ABS'
     ;
 
 SET
