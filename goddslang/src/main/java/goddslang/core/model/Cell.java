@@ -1,5 +1,8 @@
 package goddslang.core.model;
 
+import goddslang.core.error.Error;
+import goddslang.core.error.ErrorReporter;
+import goddslang.core.error.ErrorType;
 import goddslang.core.function.FunctionCall;
 import goddslang.core.function.impl.DefineLabel;
 import org.jetbrains.annotations.Nullable;
@@ -40,6 +43,8 @@ public class Cell {
     }
 
     public void addFunctionCall(FunctionCall functionCall) {
+        functionCall.setOwner(this);
+        functionCall.setId(this.functionCalls.size());
         this.functionCalls.add(functionCall);
         if (Objects.equals(functionCall.getFunction().getClass(), DefineLabel.class)) {
             String definedLabel = functionCall.getArguments().get(0).getValueAsId();
@@ -59,8 +64,12 @@ public class Cell {
         this.R0 *= value;
     }
 
-    public void div(int value) {
+    public int div(int value) {
+        if (value == 0) {
+            return 1;
+        }
         this.R0 /= value;
+        return 0;
     }
 
     public void mod(int value) {
@@ -147,19 +156,29 @@ public class Cell {
         }
     }
 
-    public void writeCell(int cellId) {
-        this.outPipes.get(cellId).add(this.R0);
+    public int writeCell(int cellId) {
+        Pipe outPipe = this.outPipes.get(cellId);
+        if (outPipe == null) {
+            return 1;
+        }
+        outPipe.add(this.R0);
+        return 0;
     }
 
-    public void readCell(int cellId) {
-        Pipe inPipes = this.inPipes.get(cellId);
-        if (inPipes.peek() != null) {
-            this.R0 = inPipes.pop();
+    public int readCell(int cellId) {
+        Pipe inPipe = this.inPipes.get(cellId);
+        if (inPipe == null) {
+            return 1;
+        }
+        if (inPipe.peek() != null) {
+            this.R0 = inPipe.pop();
         } else {
+            // If there's no data in the pipe wait with read
             int currFunctionCallId = this.callStack.getCurrFunctionCallId() - 1;
             this.callStack.safePop();
             this.callStack.push(this, currFunctionCallId);
         }
+        return 0;
     }
 
     public void readBus() {
@@ -234,6 +253,10 @@ public class Cell {
                 .filter(cell -> Objects.equals(cell.getLabel(), neighborLabel))
                 .findFirst()
                 .orElse(null);
+    }
+
+    private boolean checkIfNeighbor(int neighborId) {
+        return this.neighbors.containsKey(neighborId);
     }
 
     public boolean isRunning() {
