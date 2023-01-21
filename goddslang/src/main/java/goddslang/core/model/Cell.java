@@ -170,12 +170,14 @@ public class Cell {
         }
     }
 
-    public void copyCell(int cellId) {
-        this.R0 = this.neighbors.get(cellId).getR0();
+    public void copyCell(String label) {
+        Cell owner = getNeighborByLabel(label);
+        this.R0 = this.neighbors.get(owner.getId()).getR0();
     }
 
-    public void printLabelName(int cellId) {
-        System.out.println(this.neighbors.get(cellId).getLabel());
+    public void printLabelName(String label) {
+        Cell owner = getNeighborByLabel(label);
+        System.out.println(this.neighbors.get(owner.getId()).getLabel());
     }
 
     public void pass(int val) {

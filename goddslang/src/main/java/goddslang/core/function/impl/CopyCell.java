@@ -9,7 +9,7 @@ import java.util.List;
 public class CopyCell implements Function {
     @Override
     public void call(Cell cell, List<Argument> arguments) {
-        int cellId = arguments.get(0).getValueAsNumber();
-        cell.copyCell(cellId);
+        String label = arguments.get(0).getValueAsId();
+        cell.copyCell(label);
     }
 }

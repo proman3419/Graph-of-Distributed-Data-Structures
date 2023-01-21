@@ -173,7 +173,7 @@ public class GrammarCustomListener extends GrammarBaseListener {
 
     @Override
     public void exitFunctionCopyCell(GrammarParser.FunctionCopyCellContext ctx) {
-        FunctionCall functionCall = new FunctionCall(new CopyCell(), parseArguments(getTerminalNodes(ctx), "i"));
+        FunctionCall functionCall = new FunctionCall(new CopyCell(), parseArguments(getTerminalNodes(ctx), "s"));
         this.program.getGraph().addCellFunctionCall(functionCall);
     }
 
@@ -212,7 +212,7 @@ public class GrammarCustomListener extends GrammarBaseListener {
 
     @Override
     public void exitFunctionPrintLabelName(GrammarParser.FunctionPrintLabelNameContext ctx) {
-        FunctionCall functionCall = new FunctionCall(new PrintLabelName(), parseArguments(getTerminalNodes(ctx), "i"));
+        FunctionCall functionCall = new FunctionCall(new PrintLabelName(), parseArguments(getTerminalNodes(ctx), "s"));
         this.program.getGraph().addCellFunctionCall(functionCall);
     }
 

@@ -9,7 +9,7 @@ import java.util.List;
 public class PrintLabelName implements Function {
     @Override
     public void call(Cell cell, List<Argument> arguments) {
-        int cellId = arguments.get(0).getValueAsNumber();
-        cell.printLabelName(cellId);
+        String label = arguments.get(0).getValueAsId();
+        cell.printLabelName(label);
     }
 }
