@@ -437,6 +437,18 @@ public class GrammarBaseListener implements GrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterFunctionReadBus(GrammarParser.FunctionReadBusContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunctionReadBus(GrammarParser.FunctionReadBusContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterFunctionCopyCell(GrammarParser.FunctionCopyCellContext ctx) { }
 	/**
 	 * {@inheritDoc}

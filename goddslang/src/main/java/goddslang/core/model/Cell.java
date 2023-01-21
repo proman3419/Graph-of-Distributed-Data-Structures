@@ -4,8 +4,10 @@ import goddslang.core.function.FunctionCall;
 import goddslang.core.function.impl.DefineLabel;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Cell {
     private int id = -1;
@@ -15,6 +17,7 @@ public class Cell {
     private HashMap<Integer, Cell> neighbors;
     private HashMap<Integer, Pipe> inPipes;
     private HashMap<Integer, Pipe> outPipes;
+    private Bus bus;
     private CallStack callStack = new CallStack(this, 0);
     private CellState state = CellState.RUNNING;
     private int R0 = 0;
@@ -159,6 +162,12 @@ public class Cell {
         }
     }
 
+    public void readBus() {
+        if (this.bus.peek() != null) {
+            this.R0 = this.bus.pop();
+        }
+    }
+
     public void copyCell(int cellId) {
         this.R0 = this.neighbors.get(cellId).getR0();
     }
@@ -241,6 +250,10 @@ public class Cell {
 
     public void setOutPipes(HashMap<Integer, Pipe> outPipes) {
         this.outPipes = outPipes;
+    }
+
+    public void setBusPipe(Bus bus) {
+        this.bus = bus;
     }
 
     public Pipe getOutPipe(int toId) {

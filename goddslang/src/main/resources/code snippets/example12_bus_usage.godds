@@ -1,0 +1,36 @@
+#CELLS_COUNT 5
+#CELLS_GRAPH
+    00111
+    10111
+    00001
+    10101
+    11111
+#END
+#INPUT 0 1 2 3 4 5 6
+#INPUT_CELLS 0 1 2 3 2 2
+    #CELL 0 label0
+        READ_BUS
+        PRINTNL R0 1
+        READ_BUS
+        PRINTNL R0 1
+    #END
+    #CELL 1 label1
+        READ_BUS
+        PRINTNL R0 1
+        READ_BUS
+        PRINTNL R0 1
+    #END
+    #CELL 2 label2
+        READ_BUS
+        PRINTNL R0 1
+        READ_BUS
+        PRINTNL R0 1
+
+    #END
+    #CELL 3 label3
+        READ_BUS
+        PRINTNL R0 1
+        READ_BUS
+        PRINTNL R0 1
+    #END
+#END_ALL

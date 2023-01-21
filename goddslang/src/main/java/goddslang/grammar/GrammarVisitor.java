@@ -221,6 +221,12 @@ public interface GrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFunctionReadCell(GrammarParser.FunctionReadCellContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link GrammarParser#functionReadBus}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionReadBus(GrammarParser.FunctionReadBusContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link GrammarParser#functionCopyCell}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

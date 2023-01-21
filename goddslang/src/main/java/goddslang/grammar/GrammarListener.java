@@ -358,6 +358,16 @@ public interface GrammarListener extends ParseTreeListener {
 	 */
 	void exitFunctionReadCell(GrammarParser.FunctionReadCellContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link GrammarParser#functionReadBus}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunctionReadBus(GrammarParser.FunctionReadBusContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GrammarParser#functionReadBus}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunctionReadBus(GrammarParser.FunctionReadBusContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link GrammarParser#functionCopyCell}.
 	 * @param ctx the parse tree
 	 */
