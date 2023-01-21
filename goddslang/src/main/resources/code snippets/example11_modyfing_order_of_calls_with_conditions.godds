@@ -10,17 +10,17 @@
 
         LABEL greater
             SET 0 1
-            JUMP printRes
+            JUMP print_res
 
         LABEL equal
             SET 0 0
-            JUMP printRes
+            JUMP print_res
 
         LABEL lesser
             SET 0 -1
-            JUMP printRes
+            JUMP print_res
 
-        LABEL printRes
+        LABEL print_res
             PRINT 0
     #END
 #END_ALL

@@ -206,25 +206,25 @@ public class GrammarCustomListener extends GrammarBaseListener {
 
     @Override
     public void exitFunctionJump(GrammarParser.FunctionJumpContext ctx) {
-        FunctionCall functionCall = new FunctionCall(new Jump(), parseArguments(getTerminalNodes(ctx), "s"));
+        FunctionCall functionCall = new FunctionCall(new Jump(), parseArguments(getTerminalNodes(ctx), "ssss")); // at most 4
         this.program.getGraph().addCellFunctionCall(functionCall);
     }
 
     @Override
     public void exitFunctionCheckIFEZ(GrammarParser.FunctionCheckIFEZContext ctx) {
-        FunctionCall functionCall = new FunctionCall(new IFEZ(), parseArguments(getTerminalNodes(ctx), "s"));
+        FunctionCall functionCall = new FunctionCall(new IFEZ(), parseArguments(getTerminalNodes(ctx), "ssss")); // at most 4
         this.program.getGraph().addCellFunctionCall(functionCall);
     }
 
     @Override
     public void exitFunctionCheckIFLZ(GrammarParser.FunctionCheckIFLZContext ctx) {
-        FunctionCall functionCall = new FunctionCall(new IFLZ(), parseArguments(getTerminalNodes(ctx), "s"));
+        FunctionCall functionCall = new FunctionCall(new IFLZ(), parseArguments(getTerminalNodes(ctx), "ssss")); // at most 4
         this.program.getGraph().addCellFunctionCall(functionCall);
     }
 
     @Override
     public void exitFunctionCheckIFGZ(GrammarParser.FunctionCheckIFGZContext ctx) {
-        FunctionCall functionCall = new FunctionCall(new IFGZ(), parseArguments(getTerminalNodes(ctx), "s"));
+        FunctionCall functionCall = new FunctionCall(new IFGZ(), parseArguments(getTerminalNodes(ctx), "ssss")); // at most 4
         this.program.getGraph().addCellFunctionCall(functionCall);
     }
 }

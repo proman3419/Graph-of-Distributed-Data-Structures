@@ -89,6 +89,12 @@ public interface GrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitArguments(GrammarParser.ArgumentsContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link GrammarParser#extendedLabel}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExtendedLabel(GrammarParser.ExtendedLabelContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link GrammarParser#functionCall}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

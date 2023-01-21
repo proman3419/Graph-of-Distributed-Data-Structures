@@ -54,6 +54,10 @@ arguments
     |
     ;
 
+extendedLabel
+    : ID('$'(ID|'@'))*
+    ;
+
 functionCall
     : functionAdd
     | functionSub
@@ -119,7 +123,7 @@ functionDefineLabel
     ;
 
 functionJump
-    : JUMP arguments
+    : JUMP extendedLabel
     ;
 
 functionCheckIFEZ
@@ -287,7 +291,7 @@ NUMBER
     ;
 
 ID
-    : [a-zA-Z@$]+('0'..'9')*
+    : [a-zA-Z_-]+('0'..'9')*
     ;
 
 // Ignore white space characters

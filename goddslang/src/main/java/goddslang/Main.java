@@ -32,7 +32,7 @@ public class Main {
 //            throw new RuntimeException(e);
 //        }
         try {
-            URI fileUri = ClassLoader.getSystemResource("code snippets/example09_modyfing_order_of_calls_single_cell.godds").toURI();
+            URI fileUri = ClassLoader.getSystemResource("code snippets/example11_modyfing_order_of_calls_with_conditions.godds").toURI();
             String filePath = Paths.get(fileUri).toString();
             CharStream input = (CharStream) new ANTLRFileStream(filePath);
             GrammarLexer lexer = new GrammarLexer(input);

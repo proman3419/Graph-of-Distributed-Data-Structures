@@ -138,6 +138,16 @@ public interface GrammarListener extends ParseTreeListener {
 	 */
 	void exitArguments(GrammarParser.ArgumentsContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link GrammarParser#extendedLabel}.
+	 * @param ctx the parse tree
+	 */
+	void enterExtendedLabel(GrammarParser.ExtendedLabelContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GrammarParser#extendedLabel}.
+	 * @param ctx the parse tree
+	 */
+	void exitExtendedLabel(GrammarParser.ExtendedLabelContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link GrammarParser#functionCall}.
 	 * @param ctx the parse tree
 	 */
