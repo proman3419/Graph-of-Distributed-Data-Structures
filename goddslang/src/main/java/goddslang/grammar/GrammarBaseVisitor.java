@@ -109,13 +109,6 @@ public class GrammarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implement
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitExtendedLabel(GrammarParser.ExtendedLabelContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
 	@Override public T visitFunctionCall(GrammarParser.FunctionCallContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
@@ -235,7 +228,21 @@ public class GrammarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implement
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitFunctionPrintNL(GrammarParser.FunctionPrintNLContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitFunctionPrintChar(GrammarParser.FunctionPrintCharContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitFunctionPrintNLChar(GrammarParser.FunctionPrintNLCharContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -264,6 +271,13 @@ public class GrammarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implement
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitFunctionPrintLabelName(GrammarParser.FunctionPrintLabelNameContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitFunctionPass(GrammarParser.FunctionPassContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

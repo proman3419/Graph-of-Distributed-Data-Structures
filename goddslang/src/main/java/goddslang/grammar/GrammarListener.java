@@ -138,16 +138,6 @@ public interface GrammarListener extends ParseTreeListener {
 	 */
 	void exitArguments(GrammarParser.ArgumentsContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link GrammarParser#extendedLabel}.
-	 * @param ctx the parse tree
-	 */
-	void enterExtendedLabel(GrammarParser.ExtendedLabelContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link GrammarParser#extendedLabel}.
-	 * @param ctx the parse tree
-	 */
-	void exitExtendedLabel(GrammarParser.ExtendedLabelContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link GrammarParser#functionCall}.
 	 * @param ctx the parse tree
 	 */
@@ -318,6 +308,16 @@ public interface GrammarListener extends ParseTreeListener {
 	 */
 	void exitFunctionPrint(GrammarParser.FunctionPrintContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link GrammarParser#functionPrintNL}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunctionPrintNL(GrammarParser.FunctionPrintNLContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GrammarParser#functionPrintNL}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunctionPrintNL(GrammarParser.FunctionPrintNLContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link GrammarParser#functionPrintChar}.
 	 * @param ctx the parse tree
 	 */
@@ -327,6 +327,16 @@ public interface GrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFunctionPrintChar(GrammarParser.FunctionPrintCharContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GrammarParser#functionPrintNLChar}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunctionPrintNLChar(GrammarParser.FunctionPrintNLCharContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GrammarParser#functionPrintNLChar}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunctionPrintNLChar(GrammarParser.FunctionPrintNLCharContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GrammarParser#functionWriteCell}.
 	 * @param ctx the parse tree
@@ -367,6 +377,16 @@ public interface GrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFunctionPrintLabelName(GrammarParser.FunctionPrintLabelNameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GrammarParser#functionPass}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunctionPass(GrammarParser.FunctionPassContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GrammarParser#functionPass}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunctionPass(GrammarParser.FunctionPassContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GrammarParser#idArgument}.
 	 * @param ctx the parse tree

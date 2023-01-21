@@ -98,7 +98,13 @@ public class GrammarCustomListener extends GrammarBaseListener {
         List<Argument> arguments = new ArrayList<>();
         for (int i = 1; i < terminalNodes.size(); i++) {
             Argument argument;
-            if (types.charAt(i - 1) == 'i') {
+            if (types.charAt(i - 1) == '*') {
+                try {
+                    argument = new Argument(Integer.parseInt(terminalNodes.get(i)));
+                } catch(NumberFormatException e){
+                    argument = new Argument(terminalNodes.get(i));
+                }
+            } else if (types.charAt(i - 1) == 'i') {
                 argument = new Argument(Integer.parseInt(terminalNodes.get(i)));
             } else {
                 argument = new Argument(terminalNodes.get(i));
@@ -110,43 +116,43 @@ public class GrammarCustomListener extends GrammarBaseListener {
 
     @Override
     public void exitFunctionAdd(GrammarParser.FunctionAddContext ctx) {
-        FunctionCall functionCall = new FunctionCall(new Add(), parseArguments(getTerminalNodes(ctx), "i"));
+        FunctionCall functionCall = new FunctionCall(new Add(), parseArguments(getTerminalNodes(ctx), "*"));
         this.program.getGraph().addCellFunctionCall(functionCall);
     }
 
     @Override
     public void exitFunctionSub(GrammarParser.FunctionSubContext ctx) {
-        FunctionCall functionCall = new FunctionCall(new Sub(), parseArguments(getTerminalNodes(ctx), "i"));
+        FunctionCall functionCall = new FunctionCall(new Sub(), parseArguments(getTerminalNodes(ctx), "*"));
         this.program.getGraph().addCellFunctionCall(functionCall);
     }
 
     @Override
     public void exitFunctionMul(GrammarParser.FunctionMulContext ctx) {
-        FunctionCall functionCall = new FunctionCall(new Mul(), parseArguments(getTerminalNodes(ctx), "i"));
+        FunctionCall functionCall = new FunctionCall(new Mul(), parseArguments(getTerminalNodes(ctx), "*"));
         this.program.getGraph().addCellFunctionCall(functionCall);
     }
 
     @Override
     public void exitFunctionDiv(GrammarParser.FunctionDivContext ctx) {
-        FunctionCall functionCall = new FunctionCall(new Div(), parseArguments(getTerminalNodes(ctx), "i"));
+        FunctionCall functionCall = new FunctionCall(new Div(), parseArguments(getTerminalNodes(ctx), "*"));
         this.program.getGraph().addCellFunctionCall(functionCall);
     }
 
     @Override
     public void exitFunctionMod(GrammarParser.FunctionModContext ctx) {
-        FunctionCall functionCall = new FunctionCall(new Mod(), parseArguments(getTerminalNodes(ctx), "i"));
+        FunctionCall functionCall = new FunctionCall(new Mod(), parseArguments(getTerminalNodes(ctx), "*"));
         this.program.getGraph().addCellFunctionCall(functionCall);
     }
 
     @Override
     public void exitFunctionSet(GrammarParser.FunctionSetContext ctx) {
-        FunctionCall functionCall = new FunctionCall(new Set(), parseArguments(getTerminalNodes(ctx), "ii"));
+        FunctionCall functionCall = new FunctionCall(new Set(), parseArguments(getTerminalNodes(ctx), "si"));
         this.program.getGraph().addCellFunctionCall(functionCall);
     }
 
     @Override
     public void exitFunctionComp(GrammarParser.FunctionCompContext ctx) {
-        FunctionCall functionCall = new FunctionCall(new Comp(), parseArguments(getTerminalNodes(ctx), "i"));
+        FunctionCall functionCall = new FunctionCall(new Comp(), parseArguments(getTerminalNodes(ctx), "*"));
         this.program.getGraph().addCellFunctionCall(functionCall);
     }
 
@@ -163,23 +169,44 @@ public class GrammarCustomListener extends GrammarBaseListener {
     }
 
     @Override
-    public void exitFunctionPrint(GrammarParser.FunctionPrintContext ctx) {
-        FunctionCall functionCall = new FunctionCall(new Print(), parseArguments(getTerminalNodes(ctx), "i"));
-        this.program.getGraph().addCellFunctionCall(functionCall);
-    }
-    
-    @Override
     public void exitFunctionCopyCell(GrammarParser.FunctionCopyCellContext ctx) {
         FunctionCall functionCall = new FunctionCall(new CopyCell(), parseArguments(getTerminalNodes(ctx), "i"));
         this.program.getGraph().addCellFunctionCall(functionCall);
     }
 
+
     @Override
-    public void exitFunctionPrintChar(GrammarParser.FunctionPrintCharContext ctx) {
-        FunctionCall functionCall = new FunctionCall(new PrintChar(), parseArguments(getTerminalNodes(ctx), "i"));
+    public void exitFunctionPrint(GrammarParser.FunctionPrintContext ctx) {
+        List<String> terminalNodes = getTerminalNodes(ctx);
+        String types = "s".repeat(terminalNodes.size() - 2) + "i";
+        FunctionCall functionCall = new FunctionCall(new Print(), parseArguments(terminalNodes, types));
         this.program.getGraph().addCellFunctionCall(functionCall);
     }
-    
+
+    @Override
+    public void exitFunctionPrintNL(GrammarParser.FunctionPrintNLContext ctx) {
+        List<String> terminalNodes = getTerminalNodes(ctx);
+        String types = "s".repeat(terminalNodes.size() - 2) + "i";
+        FunctionCall functionCall = new FunctionCall(new PrintNL(), parseArguments(terminalNodes, types));
+        this.program.getGraph().addCellFunctionCall(functionCall);
+    }
+
+    @Override
+    public void exitFunctionPrintChar(GrammarParser.FunctionPrintCharContext ctx) {
+        List<String> terminalNodes = getTerminalNodes(ctx);
+        String types = "s".repeat(terminalNodes.size() - 2) + "i";
+        FunctionCall functionCall = new FunctionCall(new PrintChar(), parseArguments(terminalNodes, types));
+        this.program.getGraph().addCellFunctionCall(functionCall);
+    }
+
+    @Override
+    public void exitFunctionPrintNLChar(GrammarParser.FunctionPrintNLCharContext ctx) {
+        List<String> terminalNodes = getTerminalNodes(ctx);
+        String types = "s".repeat(terminalNodes.size() - 2) + "i";
+        FunctionCall functionCall = new FunctionCall(new PrintNLChar(), parseArguments(terminalNodes, types));
+        this.program.getGraph().addCellFunctionCall(functionCall);
+    }
+
     @Override
     public void exitFunctionPrintLabelName(GrammarParser.FunctionPrintLabelNameContext ctx) {
         FunctionCall functionCall = new FunctionCall(new PrintLabelName(), parseArguments(getTerminalNodes(ctx), "i"));
@@ -199,32 +226,8 @@ public class GrammarCustomListener extends GrammarBaseListener {
     }
 
     @Override
-    public void exitFunctionDefineLabel(GrammarParser.FunctionDefineLabelContext ctx) {
-        FunctionCall functionCall = new FunctionCall(new DefineLabel(), parseArguments(getTerminalNodes(ctx), "s"));
-        this.program.getGraph().addCellFunctionCall(functionCall);
-    }
-
-    @Override
-    public void exitFunctionJump(GrammarParser.FunctionJumpContext ctx) {
-        FunctionCall functionCall = new FunctionCall(new Jump(), parseArguments(getTerminalNodes(ctx), "ssss")); // at most 4
-        this.program.getGraph().addCellFunctionCall(functionCall);
-    }
-
-    @Override
-    public void exitFunctionCheckIFEZ(GrammarParser.FunctionCheckIFEZContext ctx) {
-        FunctionCall functionCall = new FunctionCall(new IFEZ(), parseArguments(getTerminalNodes(ctx), "ssss")); // at most 4
-        this.program.getGraph().addCellFunctionCall(functionCall);
-    }
-
-    @Override
-    public void exitFunctionCheckIFLZ(GrammarParser.FunctionCheckIFLZContext ctx) {
-        FunctionCall functionCall = new FunctionCall(new IFLZ(), parseArguments(getTerminalNodes(ctx), "ssss")); // at most 4
-        this.program.getGraph().addCellFunctionCall(functionCall);
-    }
-
-    @Override
-    public void exitFunctionCheckIFGZ(GrammarParser.FunctionCheckIFGZContext ctx) {
-        FunctionCall functionCall = new FunctionCall(new IFGZ(), parseArguments(getTerminalNodes(ctx), "ssss")); // at most 4
+    public void exitFunctionPass(GrammarParser.FunctionPassContext ctx) {
+        FunctionCall functionCall = new FunctionCall(new Pass(), parseArguments(getTerminalNodes(ctx), "i"));
         this.program.getGraph().addCellFunctionCall(functionCall);
     }
 }

@@ -7,7 +7,7 @@ import goddslang.core.model.Cell;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Print implements Function {
+public class PrintNLChar implements Function {
     @Override
     public void call(Cell cell, List<Argument> arguments) {
         String val = arguments.stream()
@@ -15,6 +15,6 @@ public class Print implements Function {
                 .limit(arguments.size() - 1)
                 .collect(Collectors.joining(" "));
         int includeCellLabel = arguments.get(arguments.size() - 1).getValueAsNumber();
-        cell.print(val, includeCellLabel);
+        cell.printNLChar(val, includeCellLabel);
     }
 }

@@ -89,12 +89,6 @@ public interface GrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitArguments(GrammarParser.ArgumentsContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link GrammarParser#extendedLabel}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitExtendedLabel(GrammarParser.ExtendedLabelContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link GrammarParser#functionCall}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -197,11 +191,23 @@ public interface GrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFunctionPrint(GrammarParser.FunctionPrintContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link GrammarParser#functionPrintNL}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionPrintNL(GrammarParser.FunctionPrintNLContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link GrammarParser#functionPrintChar}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitFunctionPrintChar(GrammarParser.FunctionPrintCharContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GrammarParser#functionPrintNLChar}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionPrintNLChar(GrammarParser.FunctionPrintNLCharContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link GrammarParser#functionWriteCell}.
 	 * @param ctx the parse tree
@@ -226,6 +232,12 @@ public interface GrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitFunctionPrintLabelName(GrammarParser.FunctionPrintLabelNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GrammarParser#functionPass}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionPass(GrammarParser.FunctionPassContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link GrammarParser#idArgument}.
 	 * @param ctx the parse tree

@@ -75,11 +75,14 @@ functionCall
     | functionCheckIFGZ
     | functionExit
     | functionPrint
+    | functionPrintNL
     | functionPrintChar
+    | functionPrintNLChar
     | functionWriteCell
     | functionReadCell
     | functionCopyCell
     | functionPrintLabelName
+    | functionPass
     ;
 
 functionAdd
@@ -146,8 +149,16 @@ functionPrint
     : PRINT arguments
     ;
 
+functionPrintNL
+    : PRINTNL arguments
+    ;
+
 functionPrintChar
     : PRINT_CHAR arguments
+    ;
+
+functionPrintNLChar
+    : PRINTNL_CHAR arguments
     ;
 
 functionWriteCell
@@ -164,6 +175,10 @@ functionCopyCell
 
 functionPrintLabelName
     : PRINT_LABEL_NAME arguments
+    ;
+
+functionPass
+    : PASS arguments
     ;
 
 SUPER_CELLS_COUNT
@@ -258,8 +273,16 @@ PRINT
     : 'PRINT'
     ;
 
+PRINTNL
+    : 'PRINTNL'
+    ;
+
 PRINT_CHAR
     : 'PRINT_CHAR'
+    ;
+
+PRINTNL_CHAR
+    : 'PRINTNL_CHAR'
     ;
 
 WRITE_CELL
@@ -276,6 +299,10 @@ COPY_CELL
 
 PRINT_LABEL_NAME
     : 'PRINT_LABEL_NAME'
+    ;
+
+PASS
+    : 'PASS'
     ;
 
 idArgument

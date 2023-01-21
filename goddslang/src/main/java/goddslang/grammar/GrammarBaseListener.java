@@ -173,18 +173,6 @@ public class GrammarBaseListener implements GrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExtendedLabel(GrammarParser.ExtendedLabelContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitExtendedLabel(GrammarParser.ExtendedLabelContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterFunctionCall(GrammarParser.FunctionCallContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -389,6 +377,18 @@ public class GrammarBaseListener implements GrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterFunctionPrintNL(GrammarParser.FunctionPrintNLContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunctionPrintNL(GrammarParser.FunctionPrintNLContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterFunctionPrintChar(GrammarParser.FunctionPrintCharContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -396,6 +396,18 @@ public class GrammarBaseListener implements GrammarListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitFunctionPrintChar(GrammarParser.FunctionPrintCharContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFunctionPrintNLChar(GrammarParser.FunctionPrintNLCharContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunctionPrintNLChar(GrammarParser.FunctionPrintNLCharContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -444,6 +456,18 @@ public class GrammarBaseListener implements GrammarListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitFunctionPrintLabelName(GrammarParser.FunctionPrintLabelNameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFunctionPass(GrammarParser.FunctionPassContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunctionPass(GrammarParser.FunctionPassContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
