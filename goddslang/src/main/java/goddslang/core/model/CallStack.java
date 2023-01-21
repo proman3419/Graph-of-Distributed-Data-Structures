@@ -40,10 +40,15 @@ public class CallStack {
             this.stack.pop();
         }
     }
+    public boolean isEmpty() {
+        return this.stack.empty();
+    }
 
     public int getCurrFunctionCallId() {
         return this.stack.peek().getValue();
     }
+
+
 //
 //    public void setCurrFunctionCallId(int currFunctionCallId) {
 //        if (!this.currFunctionCallIds.isEmpty()) {

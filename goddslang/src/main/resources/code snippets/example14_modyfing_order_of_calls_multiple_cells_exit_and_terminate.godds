@@ -1,0 +1,48 @@
+#CELLS_COUNT 2
+#CELLS_GRAPH
+    01
+    10
+#END
+    #CELL 0 label0
+        JUMP labelA
+
+        LABEL labelA
+            SET R0 65
+            PRINTNL_CHAR R0 0
+            JUMP labelB
+
+        LABEL labelB
+            SET R0 66
+            PRINTNL_CHAR R0 0
+            JUMP labelC
+
+        LABEL labelC
+            SET R0 67
+            PRINTNL_CHAR R0 0
+            JUMP labelJUMP
+
+        LABEL labelJUMP
+            JUMP label1@labelD
+            JUMP label1@labelE
+            PRINTNL_CHAR R0 0
+            JUMP label1@labelF
+            PRINTNL_CHAR R0 0
+    #END
+
+    #CELL 1 label1
+        EXIT
+        LABEL labelD
+            SET R0 68
+            PRINTNL_CHAR R0 0
+
+        LABEL labelE
+            SET R0 69
+            EXIT
+            PRINTNL_CHAR R0 0
+
+        LABEL labelF
+            SET R0 70
+            TERMINATE
+    #END
+
+#END_ALL

@@ -11,8 +11,8 @@ import java.util.List;
 public class PrintLabelName implements Function {
     @Override
     public Error call(Cell cell, List<Argument> arguments, FunctionCall functionCall) {
-        int cellId = arguments.get(0).getValueAsNumber();
-        cell.printLabelName(cellId);
+        String label = arguments.get(0).getValueAsId();
+        cell.printLabelName(label);
         return null;
     }
 }

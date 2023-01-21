@@ -12,8 +12,8 @@ import java.util.List;
 public class WriteCell implements Function {
     @Override
     public Error call(Cell cell, List<Argument> arguments, FunctionCall functionCall) {
-        int cellId = arguments.get(0).getValueAsNumber();
-        int errorCode = cell.writeCell(cellId);
+        String label = arguments.get(0).getValueAsId();
+        int errorCode = cell.writeCell(label);
         if (errorCode == 1) {
             return new Error(ErrorType.ERROR,
                     cell,

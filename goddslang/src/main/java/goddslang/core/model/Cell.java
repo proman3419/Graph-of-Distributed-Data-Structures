@@ -156,8 +156,8 @@ public class Cell {
         }
     }
 
-    public int writeCell(int cellId) {
-        Pipe outPipe = this.outPipes.get(cellId);
+    public int writeCell(String label) {
+        Pipe outPipe = getPipeOutputByLabel(label);
         if (outPipe == null) {
             return 1;
         }
@@ -165,8 +165,8 @@ public class Cell {
         return 0;
     }
 
-    public int readCell(int cellId) {
-        Pipe inPipe = this.inPipes.get(cellId);
+    public int readCell(String label) {
+        Pipe inPipe = getPipeInputByLabel(label);
         if (inPipe == null) {
             return 1;
         }
@@ -187,12 +187,14 @@ public class Cell {
         }
     }
 
-    public void copyCell(int cellId) {
-        this.R0 = this.neighbors.get(cellId).getR0();
+    public void copyCell(String label) {
+        Cell owner = getNeighborByLabel(label);
+        this.R0 = this.neighbors.get(owner.getId()).getR0();
     }
 
-    public void printLabelName(int cellId) {
-        System.out.println(this.neighbors.get(cellId).getLabel());
+    public void printLabelName(String label) {
+        Cell owner = getNeighborByLabel(label);
+        System.out.println(this.neighbors.get(owner.getId()).getLabel());
     }
 
     public void pass(int val) {
@@ -254,6 +256,21 @@ public class Cell {
                 .findFirst()
                 .orElse(null);
     }
+    @Nullable
+    private Pipe getPipeOutputByLabel(String neighborLabel) {
+        return this.outPipes.values().stream()
+                .filter(pipe -> pipe.getToCell().getLabel().equals(neighborLabel))
+                .findFirst()
+                .orElse(null);
+    }
+
+    @Nullable
+    private Pipe getPipeInputByLabel(String neighborLabel) {
+        return this.inPipes.values().stream()
+                .filter(pipe -> Objects.equals(pipe.getFromCell().getLabel(), neighborLabel))
+                .findFirst()
+                .orElse(null);
+    }
 
     private boolean checkIfNeighbor(int neighborId) {
         return this.neighbors.containsKey(neighborId);
@@ -309,5 +326,17 @@ public class Cell {
 
     public int getFunctionCallsCount() {
         return this.functionCalls.size();
+    }
+
+    public void exit() {
+        this.callStack.safePop();
+        if (this.callStack.isEmpty()) {
+            this.state = CellState.FINISHED;
+        }
+    }
+
+    public void terminate() {
+        this.callStack = null;
+        this.state = CellState.FINISHED;
     }
 }

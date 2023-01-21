@@ -12,8 +12,8 @@ import java.util.List;
 public class ReadCell implements Function {
     @Override
     public Error call(Cell cell, List<Argument> arguments, FunctionCall functionCall) {
-        int cellId = arguments.get(0).getValueAsNumber();
-        int errorCode = cell.readCell(cellId);
+        String label = arguments.get(0).getValueAsId();
+        int errorCode = cell.readCell(label);
         if (errorCode == 1) {
             return new Error(ErrorType.ERROR,
                     cell,

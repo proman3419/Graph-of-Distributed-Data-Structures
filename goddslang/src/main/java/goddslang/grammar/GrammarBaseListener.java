@@ -485,6 +485,18 @@ public class GrammarBaseListener implements GrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterFunctionTerminate(GrammarParser.FunctionTerminateContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunctionTerminate(GrammarParser.FunctionTerminateContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterIdArgument(GrammarParser.IdArgumentContext ctx) { }
 	/**
 	 * {@inheritDoc}
