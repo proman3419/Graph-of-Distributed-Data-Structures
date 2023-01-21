@@ -1,6 +1,7 @@
 package goddslang.core.function;
 
 import goddslang.core.model.Cell;
+import org.codehaus.plexus.util.cli.Arg;
 
 import java.util.List;
 
@@ -17,5 +18,13 @@ public class FunctionCall {
 
     public void call(Cell cell) {
         this.function.call(cell, this.arguments);
+    }
+
+    public Function getFunction() {
+        return function;
+    }
+
+    public List<Argument> getArguments() {
+        return arguments;
     }
 }

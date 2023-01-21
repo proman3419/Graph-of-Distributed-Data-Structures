@@ -8,7 +8,6 @@ import java.util.Stack;
 
 public class CallStack {
     private final Stack<Map.Entry<Cell, Integer>> stack = new Stack<>();
-    private int currFunctionCallId = 0;
 
     public CallStack(Cell cell, int functionCallId) {
         push(cell, functionCallId);
@@ -20,15 +19,15 @@ public class CallStack {
         }
         Map.Entry<Cell, Integer> stackTop = this.stack.peek();
         Cell cell = stackTop.getKey();
-        int functionCallId = stackTop.getValue();
+        int functionCallId = getCurrFunctionCallId();
 
         this.stack.pop();
         if (functionCallId >= cell.getFunctionCallsCount()) {
             return this.stack.empty() ? null : getFunctionCall();
         } else {
-            this.currFunctionCallId++;
-            push(cell, this.currFunctionCallId);
-            return cell.getFunctionCall(functionCallId);
+            functionCallId++;
+            push(cell, functionCallId);
+            return cell.getFunctionCall(functionCallId - 1);
         }
     }
 
@@ -43,10 +42,13 @@ public class CallStack {
     }
 
     public int getCurrFunctionCallId() {
-        return currFunctionCallId;
+        return this.stack.peek().getValue();
     }
-
-    public void setCurrFunctionCallId(int currFunctionCallId) {
-        this.currFunctionCallId = currFunctionCallId;
-    }
+//
+//    public void setCurrFunctionCallId(int currFunctionCallId) {
+//        if (!this.currFunctionCallIds.isEmpty()) {
+//            this.currFunctionCallIds.pop();
+//        }
+//        this.currFunctionCallIds.push(currFunctionCallId);
+//    }
 }

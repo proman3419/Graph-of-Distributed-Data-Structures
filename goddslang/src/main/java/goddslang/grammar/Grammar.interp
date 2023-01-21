@@ -1,5 +1,8 @@
 token literal names:
 null
+'@'
+'^'
+'$'
 '#CELLS_COUNT'
 '#CELLS_GRAPH'
 '#INPUT'
@@ -38,6 +41,9 @@ null
 null
 
 token symbolic names:
+null
+null
+null
 null
 SUPER_CELLS_COUNT
 SUPER_CELLS_GRAPH
@@ -118,6 +124,8 @@ functionPrintLabelName
 functionPass
 idArgument
 numberArgument
+extendedDefinedLabel
+definedLabel
 
 
 atn:

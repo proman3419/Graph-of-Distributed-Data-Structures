@@ -1,0 +1,26 @@
+#CELLS_COUNT 1
+#CELLS_GRAPH
+    0
+#END
+    #CELL 0 label0
+        SET R0 -2743
+        IFGZ greater
+        IFEZ equal
+        IFLZ lesser
+
+        LABEL greater
+            SET R0 1
+            JUMP print_res
+
+        LABEL equal
+            SET R0 0
+            JUMP print_res
+
+        LABEL lesser
+            SET R0 -1
+            JUMP print_res
+
+        LABEL print_res
+            PRINT R0 0
+    #END
+#END_ALL

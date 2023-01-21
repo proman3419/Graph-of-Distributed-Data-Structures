@@ -1,0 +1,22 @@
+#CELLS_COUNT 2
+#CELLS_GRAPH
+    01
+    10
+#END
+    #CELL 0 XXXXX
+        JUMP YYYYY@labelY
+
+        LABEL labelX
+            SET R0 65
+            PRINTNL_CHAR R0 1
+            JUMP YYYYY@^
+    #END
+    #CELL 1 YYYYY
+        SET R0 80
+        PRINTNL_CHAR R0 1
+
+        LABEL labelY
+            SET R0 66
+            PRINTNL_CHAR R0 1
+    #END
+#END_ALL

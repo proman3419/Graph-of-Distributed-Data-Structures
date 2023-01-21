@@ -1776,8 +1776,8 @@ public class GrammarParser extends Parser {
 	@SuppressWarnings("CheckReturnValue")
 	public static class FunctionJumpContext extends ParserRuleContext {
 		public TerminalNode JUMP() { return getToken(GrammarParser.JUMP, 0); }
-		public ArgumentsContext arguments() {
-			return getRuleContext(ArgumentsContext.class,0);
+		public ExtendedDefinedLabelContext extendedDefinedLabel() {
+			return getRuleContext(ExtendedDefinedLabelContext.class,0);
 		}
 		public FunctionJumpContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1824,8 +1824,8 @@ public class GrammarParser extends Parser {
 	@SuppressWarnings("CheckReturnValue")
 	public static class FunctionCheckIFEZContext extends ParserRuleContext {
 		public TerminalNode CHECK_IFEZ() { return getToken(GrammarParser.CHECK_IFEZ, 0); }
-		public ArgumentsContext arguments() {
-			return getRuleContext(ArgumentsContext.class,0);
+		public ExtendedDefinedLabelContext extendedDefinedLabel() {
+			return getRuleContext(ExtendedDefinedLabelContext.class,0);
 		}
 		public FunctionCheckIFEZContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1872,8 +1872,8 @@ public class GrammarParser extends Parser {
 	@SuppressWarnings("CheckReturnValue")
 	public static class FunctionCheckIFLZContext extends ParserRuleContext {
 		public TerminalNode CHECK_IFLZ() { return getToken(GrammarParser.CHECK_IFLZ, 0); }
-		public ArgumentsContext arguments() {
-			return getRuleContext(ArgumentsContext.class,0);
+		public ExtendedDefinedLabelContext extendedDefinedLabel() {
+			return getRuleContext(ExtendedDefinedLabelContext.class,0);
 		}
 		public FunctionCheckIFLZContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1920,8 +1920,8 @@ public class GrammarParser extends Parser {
 	@SuppressWarnings("CheckReturnValue")
 	public static class FunctionCheckIFGZContext extends ParserRuleContext {
 		public TerminalNode CHECK_IFGZ() { return getToken(GrammarParser.CHECK_IFGZ, 0); }
-		public ArgumentsContext arguments() {
-			return getRuleContext(ArgumentsContext.class,0);
+		public ExtendedDefinedLabelContext extendedDefinedLabel() {
+			return getRuleContext(ExtendedDefinedLabelContext.class,0);
 		}
 		public FunctionCheckIFGZContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -2566,6 +2566,121 @@ public class GrammarParser extends Parser {
 			{
 			setState(283);
 			match(NUMBER);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class ExtendedDefinedLabelContext extends ParserRuleContext {
+		public DefinedLabelContext definedLabel() {
+			return getRuleContext(DefinedLabelContext.class,0);
+		}
+		public TerminalNode ID() { return getToken(GrammarParser.ID, 0); }
+		public ExtendedDefinedLabelContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_extendedDefinedLabel; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof GrammarListener ) ((GrammarListener)listener).enterExtendedDefinedLabel(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof GrammarListener ) ((GrammarListener)listener).exitExtendedDefinedLabel(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GrammarVisitor ) return ((GrammarVisitor<? extends T>)visitor).visitExtendedDefinedLabel(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final ExtendedDefinedLabelContext extendedDefinedLabel() throws RecognitionException {
+		ExtendedDefinedLabelContext _localctx = new ExtendedDefinedLabelContext(_ctx, getState());
+		enterRule(_localctx, 80, RULE_extendedDefinedLabel);
+		try {
+			setState(287);
+			_errHandler.sync(this);
+			switch ( getInterpreter().adaptivePredict(_input,16,_ctx) ) {
+			case 1:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(283);
+				definedLabel();
+				}
+				break;
+			case 2:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(284);
+				match(ID);
+				setState(285);
+				match(T__0);
+				setState(286);
+				definedLabel();
+				}
+				break;
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class DefinedLabelContext extends ParserRuleContext {
+		public TerminalNode ID() { return getToken(GrammarParser.ID, 0); }
+		public DefinedLabelContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_definedLabel; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof GrammarListener ) ((GrammarListener)listener).enterDefinedLabel(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof GrammarListener ) ((GrammarListener)listener).exitDefinedLabel(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GrammarVisitor ) return ((GrammarVisitor<? extends T>)visitor).visitDefinedLabel(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final DefinedLabelContext definedLabel() throws RecognitionException {
+		DefinedLabelContext _localctx = new DefinedLabelContext(_ctx, getState());
+		enterRule(_localctx, 82, RULE_definedLabel);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(289);
+			_la = _input.LA(1);
+			if ( !(((_la) & ~0x3f) == 0 && ((1L << _la) & 68719476748L) != 0) ) {
+			_errHandler.recoverInline(this);
+			}
+			else {
+				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+				_errHandler.reportMatch(this);
+				consume();
+			}
 			}
 		}
 		catch (RecognitionException re) {

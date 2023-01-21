@@ -1,5 +1,8 @@
 token literal names:
 null
+'@'
+'^'
+'$'
 '#CELLS_COUNT'
 '#CELLS_GRAPH'
 '#INPUT'
@@ -39,6 +42,9 @@ null
 
 token symbolic names:
 null
+null
+null
+null
 SUPER_CELLS_COUNT
 SUPER_CELLS_GRAPH
 SUPER_INPUT
@@ -77,6 +83,9 @@ WS
 COMMENT
 
 rule names:
+T__0
+T__1
+T__2
 SUPER_CELLS_COUNT
 SUPER_CELLS_GRAPH
 SUPER_INPUT
