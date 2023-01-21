@@ -1,0 +1,20 @@
+#CELLS_COUNT 2
+#CELLS_GRAPH
+    01
+    10
+#END
+    #CELL 0 label0
+        JUMP label1@afterExit
+
+        LABEL printFunc
+            PRINTNL Print from cell 0 1
+    #END
+
+    #CELL 1 label1
+        LABEL afterExit
+            JUMP printFunc
+
+        LABEL printFunc
+            PRINTNL Print from cell 1 1
+    #END
+#END_ALL
