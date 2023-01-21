@@ -269,4 +269,16 @@ public class GrammarCustomListener extends GrammarBaseListener {
         FunctionCall functionCall = new FunctionCall(new IFGZ(), parseArguments(getTerminalNodes(ctx), "ssss")); // at most 4
         this.program.getGraph().addCellFunctionCall(functionCall);
     }
+
+    @Override
+    public void exitFunctionExit(GrammarParser.FunctionExitContext ctx) {
+        FunctionCall functionCall = new FunctionCall(new Exit(), parseArguments(getTerminalNodes(ctx), ""));
+        this.program.getGraph().addCellFunctionCall(functionCall);
+    }
+
+    @Override
+    public void exitFunctionTerminate(GrammarParser.FunctionTerminateContext ctx) {
+        FunctionCall functionCall = new FunctionCall(new Terminate(), parseArguments(getTerminalNodes(ctx), ""));
+        this.program.getGraph().addCellFunctionCall(functionCall);
+    }
 }

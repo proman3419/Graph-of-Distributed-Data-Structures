@@ -287,4 +287,16 @@ public class Cell {
     public int getFunctionCallsCount() {
         return this.functionCalls.size();
     }
+
+    public void exit() {
+        this.callStack.safePop();
+        if (this.callStack.isEmpty()) {
+            this.state = CellState.FINISHED;
+        }
+    }
+
+    public void terminate() {
+        this.callStack = null;
+        this.state = CellState.FINISHED;
+    }
 }

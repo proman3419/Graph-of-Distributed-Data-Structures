@@ -245,6 +245,12 @@ public interface GrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFunctionPass(GrammarParser.FunctionPassContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link GrammarParser#functionTerminate}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionTerminate(GrammarParser.FunctionTerminateContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link GrammarParser#idArgument}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

@@ -80,6 +80,7 @@ functionCall
     | functionCopyCell
     | functionPrintLabelName
     | functionPass
+    | functionTerminate
     ;
 
 functionAdd
@@ -180,6 +181,10 @@ functionPrintLabelName
 
 functionPass
     : PASS arguments
+    ;
+
+functionTerminate
+    : TERMINATE arguments
     ;
 
 SUPER_CELLS_COUNT
@@ -308,6 +313,10 @@ PRINT_LABEL_NAME
 
 PASS
     : 'PASS'
+    ;
+
+TERMINATE
+    : 'TERMINATE'
     ;
 
 idArgument
