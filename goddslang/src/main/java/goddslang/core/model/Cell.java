@@ -131,6 +131,7 @@ public class Cell {
         Cell owner;
         if (extendedDefinedLabelParts.length == 1) { // Local scope
             owner = this;
+            this.callStack.safePop(); // Don't return to the place from which the jump has been made
         } else { // Neighbor scope
             owner = getNeighborByLabel(extendedDefinedLabelParts[0]);
         }
