@@ -1,7 +1,7 @@
 package goddslang.core.model;
 
 import goddslang.core.function.FunctionCall;
-import goddslang.core.function.impl.DefineLabel;
+import goddslang.core.function.impl.callsorder.DefineLabel;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;

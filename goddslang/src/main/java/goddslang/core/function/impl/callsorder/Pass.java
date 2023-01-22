@@ -1,6 +1,5 @@
-package goddslang.core.function.impl;
+package goddslang.core.function.impl.callsorder;
 
-import goddslang.utils.notification.NotificationType;
 import goddslang.utils.notification.RuntimeNotification;
 import goddslang.core.function.Argument;
 import goddslang.core.function.Function;
@@ -9,14 +8,14 @@ import goddslang.core.model.Cell;
 
 import java.util.List;
 
-public class CopyCell implements Function {
+public class Pass implements Function {
     @Override
     public RuntimeNotification call(Cell cell, List<Argument> arguments, FunctionCall functionCall) {
-        String label = arguments.get(0).getValueAsId();
-        int errorCode = cell.copyCell(label);
-        if (errorCode == 1) {
-            return new RuntimeNotification(NotificationType.RUNTIME_ERROR, cell, functionCall, "Can't read from the cell");
+        int value = 1;
+        if (arguments.size() > 0) {
+            value = arguments.get(0).getValueAsNumber();
         }
+        cell.pass(value);
         return null;
     }
 }

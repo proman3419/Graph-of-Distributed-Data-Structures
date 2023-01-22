@@ -1,4 +1,4 @@
-package goddslang.core.function;
+package goddslang.core.function.impl.registry;
 
 import goddslang.core.function.Argument;
 import goddslang.core.model.Cell;

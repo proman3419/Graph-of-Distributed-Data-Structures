@@ -1,7 +1,13 @@
 package goddslang.grammar;
 
 import goddslang.core.function.FunctionCall;
-import goddslang.core.function.impl.*;
+import goddslang.core.function.impl.callsorder.*;
+import goddslang.core.function.impl.intercell.*;
+import goddslang.core.function.impl.output.Print;
+import goddslang.core.function.impl.output.PrintChar;
+import goddslang.core.function.impl.output.PrintNL;
+import goddslang.core.function.impl.output.PrintNLChar;
+import goddslang.core.function.impl.registry.*;
 import goddslang.core.model.CellOption;
 import goddslang.core.model.Program;
 import goddslang.utils.notification.NotificationType;

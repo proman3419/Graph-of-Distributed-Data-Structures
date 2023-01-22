@@ -1,4 +1,4 @@
-package goddslang.core.function.impl;
+package goddslang.core.function.impl.intercell;
 
 import goddslang.utils.notification.NotificationType;
 import goddslang.utils.notification.RuntimeNotification;
@@ -8,19 +8,14 @@ import goddslang.core.function.FunctionCall;
 import goddslang.core.model.Cell;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class IFNZ implements Function {
+public class PrintLabelName implements Function {
     @Override
     public RuntimeNotification call(Cell cell, List<Argument> arguments, FunctionCall functionCall) {
-        String extendedDefinedLabel = arguments.stream()
-                .map(Argument::getValueAsId)
-                .collect(Collectors.joining(""));
-        int errorCode = cell.IFNZ(extendedDefinedLabel, functionCall.getOwner());
+        String label = arguments.get(0).getValueAsId();
+        int errorCode = cell.printLabelName(label);
         if (errorCode == 1) {
             return new RuntimeNotification(NotificationType.RUNTIME_ERROR, cell, functionCall, "Not a neighbor");
-        } else if (errorCode == 2) {
-            return new RuntimeNotification(NotificationType.RUNTIME_ERROR, cell, functionCall, "Invalid label name");
         }
         return null;
     }

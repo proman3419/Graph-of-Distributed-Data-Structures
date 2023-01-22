@@ -1,10 +1,9 @@
-package goddslang.core.function.impl;
+package goddslang.core.function.impl.registry;
 
 import goddslang.utils.notification.RuntimeNotification;
 import goddslang.core.function.Argument;
 import goddslang.core.function.Function;
 import goddslang.core.function.FunctionCall;
-import goddslang.core.function.ModifyingFunction;
 import goddslang.core.model.Cell;
 
 import java.util.List;

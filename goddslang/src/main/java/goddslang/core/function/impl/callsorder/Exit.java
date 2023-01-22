@@ -1,4 +1,4 @@
-package goddslang.core.function.impl;
+package goddslang.core.function.impl.callsorder;
 
 import goddslang.utils.notification.RuntimeNotification;
 import goddslang.core.function.Argument;
@@ -8,10 +8,10 @@ import goddslang.core.model.Cell;
 
 import java.util.List;
 
-public class Terminate implements Function {
+public class Exit implements Function {
     @Override
     public RuntimeNotification call(Cell cell, List<Argument> arguments, FunctionCall functionCall) {
-        cell.terminate();
+        cell.exit();
         return null;
     }
 }

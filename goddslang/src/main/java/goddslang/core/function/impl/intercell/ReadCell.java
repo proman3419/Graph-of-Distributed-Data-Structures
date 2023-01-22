@@ -1,4 +1,4 @@
-package goddslang.core.function.impl;
+package goddslang.core.function.impl.intercell;
 
 import goddslang.utils.notification.RuntimeNotification;
 import goddslang.utils.notification.NotificationType;
@@ -9,13 +9,13 @@ import goddslang.core.model.Cell;
 
 import java.util.List;
 
-public class WriteCell implements Function {
+public class ReadCell implements Function {
     @Override
     public RuntimeNotification call(Cell cell, List<Argument> arguments, FunctionCall functionCall) {
         String label = arguments.get(0).getValueAsId();
-        int errorCode = cell.writeCell(label);
+        int errorCode = cell.readCell(label);
         if (errorCode == 1) {
-            return new RuntimeNotification(NotificationType.RUNTIME_ERROR, cell, functionCall, "Write error");
+            return new RuntimeNotification(NotificationType.RUNTIME_ERROR, cell, functionCall, "Read error");
         }
         return null;
     }

@@ -1,4 +1,4 @@
-package goddslang.core.function.impl;
+package goddslang.core.function.impl.registry;
 
 import goddslang.utils.notification.RuntimeNotification;
 import goddslang.core.function.Argument;
@@ -8,12 +8,11 @@ import goddslang.core.model.Cell;
 
 import java.util.List;
 
-public class Set implements Function {
+public class Add extends ModifyingFunction implements Function {
     @Override
     public RuntimeNotification call(Cell cell, List<Argument> arguments, FunctionCall functionCall) {
-        String registerId = arguments.get(0).getValueAsId();
-        int value = arguments.get(1).getValueAsNumber();
-        cell.set(registerId, value);
+        int value = getValue(cell, arguments);
+        cell.add(value);
         return null;
     }
 }

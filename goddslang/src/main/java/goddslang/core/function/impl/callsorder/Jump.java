@@ -1,4 +1,4 @@
-package goddslang.core.function.impl;
+package goddslang.core.function.impl.callsorder;
 
 import goddslang.utils.notification.NotificationType;
 import goddslang.utils.notification.RuntimeNotification;
@@ -10,17 +10,17 @@ import goddslang.core.model.Cell;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class PrintNLChar implements Function {
+public class Jump implements Function {
     @Override
     public RuntimeNotification call(Cell cell, List<Argument> arguments, FunctionCall functionCall) {
-        String val = arguments.stream()
+        String extendedDefinedLabel = arguments.stream()
                 .map(Argument::getValueAsId)
-                .limit(arguments.size() - 1)
-                .collect(Collectors.joining(" "));
-        int includeCellLabel = arguments.get(arguments.size() - 1).getValueAsNumber();
-        int errorCode = cell.printNLChar(val, includeCellLabel);
+                .collect(Collectors.joining(""));
+        int errorCode = cell.jump(extendedDefinedLabel, functionCall.getOwner());
         if (errorCode == 1) {
-            return new RuntimeNotification(NotificationType.RUNTIME_WARNING, cell, functionCall, "Invalid flag value, assumed flag = 0");
+            return new RuntimeNotification(NotificationType.RUNTIME_ERROR, cell, functionCall, "Not a neighbor");
+        } else if (errorCode == 2) {
+            return new RuntimeNotification(NotificationType.RUNTIME_ERROR, cell, functionCall, "Invalid label name");
         }
         return null;
     }
