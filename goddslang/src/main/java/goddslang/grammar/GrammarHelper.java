@@ -51,12 +51,16 @@ public class GrammarHelper {
         return arguments;
     }
 
+    public static String collectExpression(List<String> terminalNodes) {
+        return terminalNodes.stream().collect(Collectors.joining(" "));
+    }
+
     private static Argument parseNumber(String terminalNode, List<String> terminalNodes) {
         Argument argument = null;
         try {
             argument = new Argument(Integer.parseInt(terminalNode));
         } catch (NumberFormatException e) {
-            String expression = terminalNodes.stream().collect(Collectors.joining(" "));
+            String expression = collectExpression(terminalNodes);
             Notifier.notifyParse(new ParseNotification(NotificationType.PARSE_ERROR, expression, "Format of the number is invalid"));
         }
         return argument;

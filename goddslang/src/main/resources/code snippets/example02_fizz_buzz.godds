@@ -40,7 +40,7 @@
         TERMINATE
     #END
 
-    #CELL 1 CheckFizz
+    #CELL 1 CheckFizz %Daemon
         READ_CELL Counter
 
         JUMP Helpers@check_divisibility_by_three
@@ -57,7 +57,7 @@
             JUMP send_to_printer        
     #END
 
-    #CELL 2 CheckBuzz
+    #CELL 2 CheckBuzz %Daemon
         READ_CELL Counter
 
         JUMP Helpers@check_divisibility_by_five
@@ -74,7 +74,7 @@
             JUMP send_to_printer        
     #END
 
-    #CELL 3 Printer
+    #CELL 3 Printer %Daemon
         READ_CELL CheckFizz
         SWAP
         READ_CELL CheckBuzz
@@ -100,8 +100,8 @@
         JUMP ^
     #END
 
-    #CELL 4 Helpers
-        TERMINATE // this cell is just a labels holder
+    #CELL 4 Helpers %Inactive
+        // this cell is just a labels holder
 
         LABEL check_divisibility_by_three
             MOD 3
@@ -133,7 +133,7 @@
             PRINTNL 0
     #END
 
-    #CELL 5 AdditionalMemory
+    #CELL 5 AdditionalMemory %Daemon
         READ_CELL Counter
         WRITE_CELL Counter
         JUMP ^

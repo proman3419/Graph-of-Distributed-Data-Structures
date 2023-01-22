@@ -108,6 +108,26 @@ public interface GrammarListener extends ParseTreeListener {
 	 */
 	void exitCellHeader(GrammarParser.CellHeaderContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link GrammarParser#cellOptions}.
+	 * @param ctx the parse tree
+	 */
+	void enterCellOptions(GrammarParser.CellOptionsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GrammarParser#cellOptions}.
+	 * @param ctx the parse tree
+	 */
+	void exitCellOptions(GrammarParser.CellOptionsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GrammarParser#cellOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterCellOption(GrammarParser.CellOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GrammarParser#cellOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitCellOption(GrammarParser.CellOptionContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link GrammarParser#cellCode}.
 	 * @param ctx the parse tree
 	 */

@@ -4,10 +4,7 @@ import goddslang.core.function.FunctionCall;
 import goddslang.core.function.impl.DefineLabel;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class Cell {
     private int id = -1;
@@ -16,8 +13,9 @@ public class Cell {
     private final HashMap<String, Integer> definedLabels = new HashMap<>();
     private HashMap<Integer, Pipe> inputPipes; // Pipes that this cell can read from
     private HashMap<Integer, Pipe> outputPipes; // Pipes that this cell can write to
-    private Bus bus;
     private CallStack callStack = new CallStack(this, 0);
+    private java.util.Set<CellOption> cellOptions;
+    private Bus bus;
     private CellState state = CellState.RUNNING;
     private int R0 = 0;
     private int R1 = 0;
@@ -85,13 +83,7 @@ public class Cell {
     }
 
     public void comp(int value) {
-        if (value < this.R0) {
-            this.R0 = -1;
-        } else if (value > this.R0) {
-            this.R0 = 1;
-        } else {
-            this.R0 = 0;
-        }
+        this.R0 = Integer.compare(value, this.R0);
     }
 
     public void swap() {
@@ -104,56 +96,80 @@ public class Cell {
         this.R1 = this.R0;
     }
 
-    public void print(String val, int includeCellLabel) {
-        String label = "";
-        if (includeCellLabel == 1) {
-            label = this.label + ":";
+    private String getPrintHeader(String value, int flag) {
+        String header = null;
+        if (flag == 0) {
+            header = "";
+        } else if (flag == 1) {
+            header = this.label + ": ";
+        } else if (flag == 2 && (Objects.equals(value, "R0") || Objects.equals(value, "R1"))) {
+            header = this.label + "->" + value + ": ";
         }
-        if (val.equals("R0")) {
-            System.out.printf("%s%d", label, this.R0);
-        } else if (val.equals("R1")) {
-            System.out.printf("%s%d", label, this.R1);
+        return header;
+    }
+
+    public int print(String value, int flag) {
+        int errorCode = 0;
+        String header = getPrintHeader(value, flag);
+        if (header == null) {
+            errorCode = 1;
+            header = "";
+        }
+        if (value.equals("R0")) {
+            System.out.printf("%s%d", header, this.R0);
+        } else if (value.equals("R1")) {
+            System.out.printf("%s%d", header, this.R1);
         } else {
-            System.out.printf("%s%s", label, val);
+            System.out.printf("%s%s", header, value);
         }
+        return errorCode;
     }
 
-    public void printNL(String val, int includeCellLabel) {
-        String label = "";
-        if (includeCellLabel == 1) {
-            label = this.label + ":";
+    public int printNL(String value, int flag) {
+        int errorCode = 0;
+        String header = getPrintHeader(value, flag);
+        if (header == null) {
+            errorCode = 1;
+            header = "";
         }
-        if (val.equals("R0")) {
-            System.out.printf("%s%d\n", label, this.R0);
-        } else if (val.equals("R1")) {
-            System.out.printf("%s%d\n", label, this.R1);
+        if (value.equals("R0")) {
+            System.out.printf("%s%d\n", header, this.R0);
+        } else if (value.equals("R1")) {
+            System.out.printf("%s%d\n", header, this.R1);
         } else {
-            System.out.printf("%s%s\n", label, val);
+            System.out.printf("%s%s\n", header, value);
         }
+        return errorCode;
     }
 
-    public void printChar(String val, int includeCellLabel) {
-        String label = "";
-        if (includeCellLabel == 1) {
-            label = this.label + ":";
+    public int printChar(String value, int flag) {
+        int errorCode = 0;
+        String header = getPrintHeader(value, flag);
+        if (header == null) {
+            errorCode = 1;
+            header = "";
         }
-        if (val.equals("R0")) {
-            System.out.printf("%s%c", label, (char) this.R0);
-        } else if (val.equals("R1")) {
-            System.out.printf("%s%c", label, (char) this.R1);
+        if (value.equals("R0")) {
+            System.out.printf("%s%c", header, (char) this.R0);
+        } else if (value.equals("R1")) {
+            System.out.printf("%s%c", header, (char) this.R1);
         }
+        return errorCode;
     }
 
-    public void printNLChar(String val, int includeCellLabel) {
-        String label = "";
-        if (includeCellLabel == 1) {
-            label = this.label + ":";
+    public int printNLChar(String value, int flag) {
+        int errorCode = 0;
+        String header = getPrintHeader(value, flag);
+        if (header == null) {
+            errorCode = 1;
+            header = "";
         }
-        if (val.equals("R0")) {
-            System.out.printf("%s%c\n", label, (char) this.R0);
-        } else if (val.equals("R1")) {
-            System.out.printf("%s%c\n", label, (char) this.R1);
+        if (value.equals("R0")) {
+            System.out.printf("%s%c\n", header, (char) this.R0);
+        } else if (value.equals("R1")) {
+            System.out.printf("%s%c\n", header, (char) this.R1);
         }
+        return errorCode;
     }
 
     public int writeCell(String label) {
@@ -205,8 +221,8 @@ public class Cell {
         return 0;
     }
 
-    public void pass(int val) {
-        this.idleStepsCount = val;
+    public void pass(int value) {
+        this.idleStepsCount = value;
     }
 
     public int jump(String extendedDefinedLabel, Cell owner) {
@@ -331,6 +347,14 @@ public class Cell {
 
     public void setLabel(String label) {
         this.label = label;
+    }
+
+    public void setCellOptions(Set<CellOption> cellOptions) {
+        this.cellOptions = cellOptions;
+    }
+
+    public Set<CellOption> getCellOptions() {
+        return cellOptions;
     }
 
     public int getR0() {

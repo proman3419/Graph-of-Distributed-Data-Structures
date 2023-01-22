@@ -17,5 +17,9 @@
         PRINTNL_CHAR R1 0
         PRINTNL_CHAR R0 1
         PRINTNL_CHAR R1 1
+        PRINTNL R0 2
+        PRINTNL R1 2
+        PRINTNL Adsafa 2
+        PRINTNL_CHAR R1 2
     #END
 #END_ALL

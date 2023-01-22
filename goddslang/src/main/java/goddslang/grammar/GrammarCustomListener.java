@@ -2,9 +2,16 @@ package goddslang.grammar;
 
 import goddslang.core.function.FunctionCall;
 import goddslang.core.function.impl.*;
+import goddslang.core.model.CellOption;
 import goddslang.core.model.Program;
+import goddslang.utils.notification.NotificationType;
+import goddslang.utils.notification.Notifier;
+import goddslang.utils.notification.ParseNotification;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class GrammarCustomListener extends GrammarBaseListener {
     private Program program = null;
@@ -56,10 +63,19 @@ public class GrammarCustomListener extends GrammarBaseListener {
         List<String> terminalNodes = GrammarHelper.getTerminalNodes(ctx);
         int id = Integer.parseInt(terminalNodes.get(1));
         String label = terminalNodes.get(2);
-        this.program.createCell(id, label);
+        java.util.Set<CellOption> cellOptions = IntStream.range(3, terminalNodes.size())
+                .mapToObj(terminalNodes::get)
+                .map(cellOptionRaw -> cellOptionRaw.substring(1)) // remove %
+                .map(CellOption::fromString)
+                .collect(Collectors.toSet());
+        if (cellOptions.contains(null)) {
+            Notifier.notifyParse(new ParseNotification(NotificationType.PARSE_ERROR, GrammarHelper.collectExpression(terminalNodes), "Invalid cell option"));
+        }
+        cellOptions.removeIf(Objects::isNull); // Not to worry about the nulls, if any appeared the program won't run anyway
+        this.program.createCell(id, label, cellOptions);
     }
 
-    // v Functions v  ==================================================================================================
+    // Functions =======================================================================================================
     @Override
     public void exitFunctionAdd(GrammarParser.FunctionAddContext ctx) {
         FunctionCall functionCall = new FunctionCall(new Add(), GrammarHelper.parseArguments(GrammarHelper.getTerminalNodes(ctx), "*"));

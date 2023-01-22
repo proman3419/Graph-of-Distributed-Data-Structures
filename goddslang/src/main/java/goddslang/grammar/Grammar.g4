@@ -39,7 +39,16 @@ cell
     ;
 
 cellHeader
-    : SUPER_CELL numberArgument idArgument
+    : SUPER_CELL numberArgument idArgument cellOptions
+    ;
+
+cellOptions
+    : cellOption*
+    ;
+
+cellOption
+    : CELL_OPTION_DAEMON
+    | CELL_OPTION_INACTIVE
     ;
 
 cellCode
@@ -48,6 +57,14 @@ cellCode
 
 cellCodePart
     : functionCall cellCodePart*
+    ;
+
+CELL_OPTION_DAEMON
+    : '%Daemon'
+    ;
+
+CELL_OPTION_INACTIVE
+    : '%Inactive'
     ;
 
 // Functions ===========================================================================================================
