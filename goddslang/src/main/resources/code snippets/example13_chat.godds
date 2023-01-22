@@ -1,0 +1,38 @@
+#CELLS_COUNT 3
+#CELLS_GRAPH
+    010
+    101
+    010
+#END
+#INPUT 5 72 101 108 108 111   // The first value n = messages' length 
+                              // followed by n values - the message
+#INPUT_CELLS 0                // Write to cell 0
+    #CELL 0 Client1
+        READ_BUS              // Read n
+        SWAP                  // Store it
+
+        LABEL send_loop
+            READ_BUS          // Read a character of the message
+            WRITE_CELL Server // Send it to the server
+            SWAP              
+            SUB 1             // Mark the character as sent
+            IFEZ $            // Check if message has been sent
+            SWAP
+            JUMP send_loop
+
+        TERMINATE
+    #END
+
+    #CELL 1 Server %Daemon
+        READ_CELL Client1     // Get a character
+        WRITE_CELL Client2    // Forward the character
+        JUMP ^
+    #END
+
+    #CELL 2 Client2 %Daemon
+        READ_CELL Server      // Get a character
+        PRINT "Received " 1
+        PRINTNL_CHAR R0 0     // Print the character
+        JUMP ^
+    #END
+#END_ALL
