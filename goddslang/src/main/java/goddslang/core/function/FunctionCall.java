@@ -1,7 +1,7 @@
 package goddslang.core.function;
 
-import goddslang.core.error.ErrorReporter;
-import goddslang.core.error.Error;
+import goddslang.utils.notification.Notifier;
+import goddslang.utils.notification.RuntimeNotification;
 import goddslang.core.model.Cell;
 
 import java.util.List;
@@ -18,9 +18,9 @@ public class FunctionCall {
     }
 
     public void call(Cell cell) {
-        Error error = this.function.call(cell, this.arguments, this);
-        if (error != null) {
-            ErrorReporter.report(error);
+        RuntimeNotification runtimeNotification = this.function.call(cell, this.arguments, this);
+        if (runtimeNotification != null) {
+            Notifier.notifyRuntime(runtimeNotification);
         }
     }
 

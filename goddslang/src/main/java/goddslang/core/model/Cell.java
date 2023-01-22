@@ -14,7 +14,6 @@ public class Cell {
     private String label = "DUMMY";
     private final List<FunctionCall> functionCalls = new ArrayList<>();
     private final HashMap<String, Integer> definedLabels = new HashMap<>();
-    private HashMap<Integer, Cell> neighbors;
     private HashMap<Integer, Pipe> inputPipes; // Pipes that this cell can read from
     private HashMap<Integer, Pipe> outputPipes; // Pipes that this cell can write to
     private Bus bus;
@@ -188,28 +187,38 @@ public class Cell {
         }
     }
 
-    public void copyCell(String label) {
+    public int copyCell(String label) {
         Cell neighbor = getReadableNeighborByLabel(label);
+        if (neighbor == null) {
+            return 1;
+        }
         this.R0 = neighbor.getR0();
+        return 0;
     }
 
-    public void printLabelName(String label) {
+    public int printLabelName(String label) {
         Cell neighbor = getNeighborByLabel(label);
+        if (neighbor == null) {
+            return 1;
+        }
         System.out.println(neighbor.getLabel());
+        return 0;
     }
 
     public void pass(int val) {
         this.idleStepsCount = val;
     }
 
-    public void jump(String extendedDefinedLabel, Cell owner) {
+    public int jump(String extendedDefinedLabel, Cell owner) {
         String[] extendedDefinedLabelParts = extendedDefinedLabel.split("@");
         if (extendedDefinedLabelParts.length == 1) { // Local scope (owner's or this cell's)
             this.callStack.safePop(); // Don't return to the place from which the jump has been made
         } else { // Neighbor scope
             owner = getNeighborByLabel(extendedDefinedLabelParts[0]);
+            if (owner == null) {
+                return 1;
+            }
         }
-
         Integer functionCallId;
         String definedLabel = extendedDefinedLabelParts[extendedDefinedLabelParts.length - 1];
         if (Objects.equals(definedLabel, "^")) { // Start
@@ -218,32 +227,28 @@ public class Cell {
             functionCallId = owner.getFunctionCallsCount() - 1;
         } else { // Specific function call
             functionCallId = owner.getFunctionCallIdForLabel(definedLabel);
+            if (functionCallId == null) {
+                return 2;
+            }
         }
         this.callStack.push(owner, functionCallId);
+        return 0;
     }
 
-    public void IFEZ(String extendedDefinedLabel, Cell owner) {
-        if (this.R0 == 0) {
-            jump(extendedDefinedLabel, owner);
-        }
+    public int IFEZ(String extendedDefinedLabel, Cell owner) {
+        return this.R0 == 0 ? jump(extendedDefinedLabel, owner) : 0;
     }
 
-    public void IFNZ(String extendedDefinedLabel, Cell owner) {
-        if (this.R0 != 0) {
-            jump(extendedDefinedLabel, owner);
-        }
+    public int IFNZ(String extendedDefinedLabel, Cell owner) {
+        return this.R0 != 0 ? jump(extendedDefinedLabel, owner) : 0;
     }
 
-    public void IFLZ(String extendedDefinedLabel, Cell owner) {
-        if (this.R0 < 0) {
-            jump(extendedDefinedLabel, owner);
-        }
+    public int IFLZ(String extendedDefinedLabel, Cell owner) {
+        return this.R0 < 0 ? jump(extendedDefinedLabel, owner) : 0;
     }
 
-    public void IFGZ(String extendedDefinedLabel, Cell owner) {
-        if (this.R0 > 0) {
-            jump(extendedDefinedLabel, owner);
-        }
+    public int IFGZ(String extendedDefinedLabel, Cell owner) {
+        return this.R0 > 0 ? jump(extendedDefinedLabel, owner) : 0;
     }
 
     @Nullable
@@ -258,8 +263,8 @@ public class Cell {
     // Returns a neighbor that this cell can read from
     @Nullable
     private Cell getReadableNeighborByLabel(String neighborLabel) {
-         Pipe inputPipe = getInputPipeByLabel(neighborLabel);
-         return inputPipe == null ? null : inputPipe.getFromCell();
+        Pipe inputPipe = getInputPipeByLabel(neighborLabel);
+        return inputPipe == null ? null : inputPipe.getFromCell();
     }
 
     // Returns a neighbor that this cell can write to

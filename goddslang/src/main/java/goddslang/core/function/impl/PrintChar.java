@@ -1,6 +1,6 @@
 package goddslang.core.function.impl;
 
-import goddslang.core.error.Error;
+import goddslang.utils.notification.RuntimeNotification;
 import goddslang.core.function.Argument;
 import goddslang.core.function.Function;
 import goddslang.core.function.FunctionCall;
@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class PrintChar implements Function {
     @Override
-    public Error call(Cell cell, List<Argument> arguments, FunctionCall functionCall) {
+    public RuntimeNotification call(Cell cell, List<Argument> arguments, FunctionCall functionCall) {
         String val = arguments.stream()
                 .map(Argument::getValueAsId)
                 .limit(arguments.size() - 1)

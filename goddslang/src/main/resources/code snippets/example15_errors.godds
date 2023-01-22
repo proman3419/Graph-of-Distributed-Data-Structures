@@ -12,6 +12,7 @@
 #INPUT 11 1 2 96 23
 #INPUT_CELLS 0 1
     #CELL 0 label0
+        //ADD 21321321321321 // parse error
         JUMP label1@goto2
     #END
 

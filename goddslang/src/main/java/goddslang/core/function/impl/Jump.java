@@ -1,6 +1,7 @@
 package goddslang.core.function.impl;
 
-import goddslang.core.error.Error;
+import goddslang.utils.notification.NotificationType;
+import goddslang.utils.notification.RuntimeNotification;
 import goddslang.core.function.Argument;
 import goddslang.core.function.Function;
 import goddslang.core.function.FunctionCall;
@@ -11,11 +12,16 @@ import java.util.stream.Collectors;
 
 public class Jump implements Function {
     @Override
-    public Error call(Cell cell, List<Argument> arguments, FunctionCall functionCall) {
+    public RuntimeNotification call(Cell cell, List<Argument> arguments, FunctionCall functionCall) {
         String extendedDefinedLabel = arguments.stream()
                 .map(Argument::getValueAsId)
                 .collect(Collectors.joining(""));
-        cell.jump(extendedDefinedLabel, functionCall.getOwner());
+        int errorCode = cell.jump(extendedDefinedLabel, functionCall.getOwner());
+        if (errorCode == 1) {
+            return new RuntimeNotification(NotificationType.RUNTIME_ERROR, cell, functionCall, "Not a neighbor");
+        } else if (errorCode == 2) {
+            return new RuntimeNotification(NotificationType.RUNTIME_ERROR, cell, functionCall, "Invalid label name");
+        }
         return null;
     }
 }

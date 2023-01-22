@@ -1,23 +1,23 @@
-package goddslang.core.error;
+package goddslang.utils.notification;
 
 import goddslang.core.function.FunctionCall;
 import goddslang.core.model.Cell;
 
-public class Error {
-    private final ErrorType errorType;
+public class RuntimeNotification {
+    private final NotificationType notificationType;
     private final Cell cell;
     private final FunctionCall functionCall;
     private final String description;
 
-    public Error(ErrorType errorType, Cell cell, FunctionCall functionCall, String description) {
-        this.errorType = errorType;
+    public RuntimeNotification(NotificationType notificationType, Cell cell, FunctionCall functionCall, String description) {
+        this.notificationType = notificationType;
         this.cell = cell;
         this.functionCall = functionCall;
         this.description = description;
     }
 
-    public ErrorType getErrorType() {
-        return errorType;
+    public NotificationType getNotificationType() {
+        return notificationType;
     }
 
     public Cell getCell() {
