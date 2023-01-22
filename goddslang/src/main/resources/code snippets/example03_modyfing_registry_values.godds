@@ -1,0 +1,30 @@
+#CELLS_COUNT 1
+#CELLS_GRAPH
+    0
+#END
+    #CELL 0 Modify
+        PRINTNL R0 2
+        ADD 12
+        PRINTNL R0 2
+        SUB 14
+        PRINTNL R0 2
+        MUL 5
+        PRINTNL R0 2
+        DIV 3
+        PRINTNL R0 2
+        MOD 4
+        PRINTNL R0 2
+        SET R1 654
+        PRINTNL R1 2
+        COMP 9999
+        PRINTNL R0 2
+        SWAP
+        PRINTNL R0 2
+        PRINTNL R1 2
+        COPY
+        SET R0 -23
+        PRINTNL R0 2
+        ABS
+        PRINTNL R0 2
+    #END
+#END_ALL

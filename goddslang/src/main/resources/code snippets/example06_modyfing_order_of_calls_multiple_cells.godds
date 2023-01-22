@@ -3,19 +3,20 @@
     01
     10
 #END
-    #CELL 0 XXXXX
-        JUMP YYYYY@labelY
+    #CELL 0 Cell0
+        JUMP Cell1@print_B
 
-        LABEL labelX
+        LABEL print_A
             SET R0 65
             PRINTNL_CHAR R0 1
-            JUMP YYYYY@^
+            JUMP Cell1@^
     #END
-    #CELL 1 YYYYY
+
+    #CELL 1 Cell1
         SET R0 80
         PRINTNL_CHAR R0 1
 
-        LABEL labelY
+        LABEL print_B
             SET R0 66
             PRINTNL_CHAR R0 1
     #END

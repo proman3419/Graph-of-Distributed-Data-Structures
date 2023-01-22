@@ -1,0 +1,26 @@
+#CELLS_COUNT 3
+#CELLS_GRAPH
+    010
+    101
+    010
+#END
+    #CELL 0 Client1
+        SET R0 123
+        PRINT "Sending " 1
+        PRINTNL R0 0
+        WRITE_CELL Server
+    #END
+
+    #CELL 1 Server
+        READ_CELL Client1
+        PRINT "Forwarding " 1
+        PRINTNL R0 0
+        WRITE_CELL Client2
+    #END
+
+    #CELL 2 Client2
+        READ_CELL Server
+        PRINT "Received " 1
+        PRINTNL R0 0
+    #END
+#END_ALL

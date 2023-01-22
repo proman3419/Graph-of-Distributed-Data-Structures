@@ -378,7 +378,8 @@ definedLabel
     ;
 
 printArguments
-    : arguments numberArgument
+    : STRING* numberArgument
+    | idArgument numberArgument
     | numberArgument
     ;
 
@@ -388,6 +389,10 @@ NUMBER
 
 ID
     : ('_'|'-'|[a-zA-Z])+('0'..'9')*
+    ;
+
+STRING
+    : '"' (~["\r\n] | '""')* '"'
     ;
 
 // Ignore white space characters

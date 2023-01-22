@@ -2,13 +2,13 @@
 #CELLS_GRAPH
     0
 #END
-    #CELL 0 label0
+    #CELL 0 Output
         SET R0 954
-        PRINTNL Hello World 0
+        PRINTNL "Hello World" 0
         PRINTNL R0 1
-        PRINT HEL 0
-        PRINT L 0
-        PRINTNL O 0
+        PRINT "HEL" 0
+        PRINT "L" 0
+        PRINTNL "O" 0
         SWAP
         SET R0 65
         PRINTNL R0 1
@@ -19,7 +19,7 @@
         PRINTNL_CHAR R1 1
         PRINTNL R0 2
         PRINTNL R1 2
-        PRINTNL Adsafa 2
+        PRINTNL "Adsafa" 2
         PRINTNL_CHAR R1 2
     #END
 #END_ALL

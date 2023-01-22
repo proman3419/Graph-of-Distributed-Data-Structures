@@ -11,20 +11,20 @@
 #END
 #INPUT 11 1 2 96 23
 #INPUT_CELLS 0 1
-    #CELL 0 label0
+    #CELL 0 Cell0
         //ADD 21321321321321 // parse error
-        JUMP label1@goto2
+        JUMP Cell1@goto2
     #END
 
-    #CELL 1 label1
+    #CELL 1 Cell1
         LABEL write
-            WRITE_CELL 2
+            WRITE_CELL Cell2
 
         LABEL goto2
-            JUMP label2@div0
+            JUMP Cell2@div0
     #END
 
-    #CELL 2 label2
+    #CELL 2 Cell2
         JUMP $
 
         LABEL div0

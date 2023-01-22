@@ -109,6 +109,7 @@ public class Cell {
     }
 
     public int print(String value, int flag) {
+        value = value.replace("\"", ""); // Ignore quotation marks
         int errorCode = 0;
         String header = getPrintHeader(value, flag);
         if (header == null) {
@@ -126,6 +127,7 @@ public class Cell {
     }
 
     public int printNL(String value, int flag) {
+        value = value.replace("\"", ""); // Ignore quotation marks
         int errorCode = 0;
         String header = getPrintHeader(value, flag);
         if (header == null) {
@@ -143,6 +145,7 @@ public class Cell {
     }
 
     public int printChar(String value, int flag) {
+        value = value.replace("\"", ""); // Ignore quotation marks
         int errorCode = 0;
         String header = getPrintHeader(value, flag);
         if (header == null) {
@@ -158,6 +161,7 @@ public class Cell {
     }
 
     public int printNLChar(String value, int flag) {
+        value = value.replace("\"", ""); // Ignore quotation marks
         int errorCode = 0;
         String header = getPrintHeader(value, flag);
         if (header == null) {
