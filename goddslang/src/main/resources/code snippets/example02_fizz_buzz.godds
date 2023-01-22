@@ -43,7 +43,7 @@
     #CELL 1 CheckFizz
         READ_CELL Counter
 
-        JUMP helpers@check_divisibility_by_three
+        JUMP Helpers@check_divisibility_by_three
         IFEZ set_true
         SET R0 0
 
@@ -60,7 +60,7 @@
     #CELL 2 CheckBuzz
         READ_CELL Counter
 
-        JUMP helpers@check_divisibility_by_five
+        JUMP Helpers@check_divisibility_by_five
         IFEZ set_true
         SET R0 0
 
@@ -81,26 +81,26 @@
         ADD R1
 
         SUB 3
-        IFEZ helpers@print_fizz
-        IFEZ helpers@print_buzz
-        IFEZ helpers@print_newline
+        IFEZ Helpers@print_fizz
+        IFEZ Helpers@print_buzz
+        IFEZ Helpers@print_newline
         ADD 3
 
         SUB 2
-        IFEZ helpers@print_fizz
-        IFEZ helpers@print_newline
+        IFEZ Helpers@print_fizz
+        IFEZ Helpers@print_newline
         ADD 2
 
         SUB 1
-        IFEZ helpers@print_buzz
-        IFEZ helpers@print_newline
+        IFEZ Helpers@print_buzz
+        IFEZ Helpers@print_newline
         ADD 1
 
         WRITE_CELL Counter // call print_number if needed
         JUMP ^
     #END
 
-    #CELL 4 helpers
+    #CELL 4 Helpers
         TERMINATE // this cell is just a labels holder
 
         LABEL check_divisibility_by_three

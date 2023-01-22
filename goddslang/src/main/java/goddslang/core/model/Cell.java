@@ -15,8 +15,8 @@ public class Cell {
     private final List<FunctionCall> functionCalls = new ArrayList<>();
     private final HashMap<String, Integer> definedLabels = new HashMap<>();
     private HashMap<Integer, Cell> neighbors;
-    private HashMap<Integer, Pipe> inPipes;
-    private HashMap<Integer, Pipe> outPipes;
+    private HashMap<Integer, Pipe> inputPipes; // Pipes that this cell can read from
+    private HashMap<Integer, Pipe> outputPipes; // Pipes that this cell can write to
     private Bus bus;
     private CallStack callStack = new CallStack(this, 0);
     private CellState state = CellState.RUNNING;
@@ -158,7 +158,7 @@ public class Cell {
     }
 
     public int writeCell(String label) {
-        Pipe outPipe = getPipeOutputByLabel(label);
+        Pipe outPipe = getOutputPipeByLabel(label);
         if (outPipe == null) {
             return 1;
         }
@@ -167,7 +167,7 @@ public class Cell {
     }
 
     public int readCell(String label) {
-        Pipe inPipe = getPipeInputByLabel(label);
+        Pipe inPipe = getInputPipeByLabel(label);
         if (inPipe == null) {
             return 1;
         }
@@ -189,13 +189,13 @@ public class Cell {
     }
 
     public void copyCell(String label) {
-        Cell owner = getNeighborByLabel(label);
-        this.R0 = this.neighbors.get(owner.getId()).getR0();
+        Cell neighbor = getReadableNeighborByLabel(label);
+        this.R0 = neighbor.getR0();
     }
 
     public void printLabelName(String label) {
-        Cell owner = getNeighborByLabel(label);
-        System.out.println(this.neighbors.get(owner.getId()).getLabel());
+        Cell neighbor = getNeighborByLabel(label);
+        System.out.println(neighbor.getLabel());
     }
 
     public void pass(int val) {
@@ -255,47 +255,53 @@ public class Cell {
         return this.functionCalls.get(functionCallId);
     }
 
+    // Returns a neighbor that this cell can read from
+    @Nullable
+    private Cell getReadableNeighborByLabel(String neighborLabel) {
+         Pipe inputPipe = getInputPipeByLabel(neighborLabel);
+         return inputPipe == null ? null : inputPipe.getFromCell();
+    }
+
+    // Returns a neighbor that this cell can write to
+    @Nullable
+    private Cell getWritableNeighborByLabel(String neighborLabel) {
+        Pipe outputPipe = getOutputPipeByLabel(neighborLabel);
+        return outputPipe == null ? null : outputPipe.getToCell();
+    }
+
+    // Returns a neighbor that this cell can read from or write to
     @Nullable
     private Cell getNeighborByLabel(String neighborLabel) {
-        return this.neighbors.values().stream()
-                .filter(cell -> Objects.equals(cell.getLabel(), neighborLabel))
-                .findFirst()
-                .orElse(null);
+        Cell neighbor = getReadableNeighborByLabel(neighborLabel);
+        return neighbor != null ? neighbor : getWritableNeighborByLabel(neighborLabel);
     }
+
     @Nullable
-    private Pipe getPipeOutputByLabel(String neighborLabel) {
-        return this.outPipes.values().stream()
+    private Pipe getOutputPipeByLabel(String neighborLabel) {
+        return this.outputPipes.values().stream()
                 .filter(pipe -> pipe.getToCell().getLabel().equals(neighborLabel))
                 .findFirst()
                 .orElse(null);
     }
 
     @Nullable
-    private Pipe getPipeInputByLabel(String neighborLabel) {
-        return this.inPipes.values().stream()
+    private Pipe getInputPipeByLabel(String neighborLabel) {
+        return this.inputPipes.values().stream()
                 .filter(pipe -> Objects.equals(pipe.getFromCell().getLabel(), neighborLabel))
                 .findFirst()
                 .orElse(null);
-    }
-
-    private boolean checkIfNeighbor(int neighborId) {
-        return this.neighbors.containsKey(neighborId);
     }
 
     public boolean isRunning() {
         return this.state == CellState.RUNNING;
     }
 
-    public void setNeighbors(HashMap<Integer, Cell> neighbors) {
-        this.neighbors = neighbors;
+    public void setInputPipes(HashMap<Integer, Pipe> inputPipes) {
+        this.inputPipes = inputPipes;
     }
 
-    public void setInPipes(HashMap<Integer, Pipe> inPipes) {
-        this.inPipes = inPipes;
-    }
-
-    public void setOutPipes(HashMap<Integer, Pipe> outPipes) {
-        this.outPipes = outPipes;
+    public void setOutputPipes(HashMap<Integer, Pipe> outputPipes) {
+        this.outputPipes = outputPipes;
     }
 
     public void setBusPipe(Bus bus) {
@@ -303,7 +309,7 @@ public class Cell {
     }
 
     public Pipe getOutPipe(int toId) {
-        return this.outPipes.get(toId);
+        return this.outputPipes.get(toId);
     }
 
     public int getId() {

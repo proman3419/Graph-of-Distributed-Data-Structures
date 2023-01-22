@@ -65,16 +65,13 @@ public class Graph {
     public void completeSetup() {
         for (int i = 0; i < this.cellsCount; i++) {
             Cell cell = this.cells.get(i);
-            HashMap<Integer, Cell> neighbors = new HashMap<>();
             HashMap<Integer, Pipe> outPipes = new HashMap<>();
             for (int j = 0; j < this.cellsCount; j++) {
                 if (this.adjMatrix.get(i).get(j) == 1) {
-                    neighbors.put(j, this.cells.get(j));
                     outPipes.put(j, new Pipe(this.cells.get(i), this.cells.get(j)));
                 }
             }
-            cell.setNeighbors(neighbors);
-            cell.setOutPipes(outPipes);
+            cell.setOutputPipes(outPipes);
         }
         for (int i = 0; i < this.cellsCount; i++) {
             Cell cell = this.cells.get(i);
@@ -84,7 +81,7 @@ public class Graph {
                     inPipes.put(j, this.cells.get(j).getOutPipe(i));
                 }
             }
-            cell.setInPipes(inPipes);
+            cell.setInputPipes(inPipes);
         }
     }
 
