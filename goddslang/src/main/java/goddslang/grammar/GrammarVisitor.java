@@ -83,12 +83,6 @@ public interface GrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCellCodePart(GrammarParser.CellCodePartContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link GrammarParser#arguments}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitArguments(GrammarParser.ArgumentsContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link GrammarParser#functionCall}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -263,6 +257,12 @@ public interface GrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFunctionTerminate(GrammarParser.FunctionTerminateContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link GrammarParser#arguments}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArguments(GrammarParser.ArgumentsContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link GrammarParser#idArgument}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -286,4 +286,10 @@ public interface GrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitDefinedLabel(GrammarParser.DefinedLabelContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GrammarParser#printArguments}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPrintArguments(GrammarParser.PrintArgumentsContext ctx);
 }

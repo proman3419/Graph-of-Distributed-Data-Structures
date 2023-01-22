@@ -128,16 +128,6 @@ public interface GrammarListener extends ParseTreeListener {
 	 */
 	void exitCellCodePart(GrammarParser.CellCodePartContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link GrammarParser#arguments}.
-	 * @param ctx the parse tree
-	 */
-	void enterArguments(GrammarParser.ArgumentsContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link GrammarParser#arguments}.
-	 * @param ctx the parse tree
-	 */
-	void exitArguments(GrammarParser.ArgumentsContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link GrammarParser#functionCall}.
 	 * @param ctx the parse tree
 	 */
@@ -428,6 +418,16 @@ public interface GrammarListener extends ParseTreeListener {
 	 */
 	void exitFunctionTerminate(GrammarParser.FunctionTerminateContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link GrammarParser#arguments}.
+	 * @param ctx the parse tree
+	 */
+	void enterArguments(GrammarParser.ArgumentsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GrammarParser#arguments}.
+	 * @param ctx the parse tree
+	 */
+	void exitArguments(GrammarParser.ArgumentsContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link GrammarParser#idArgument}.
 	 * @param ctx the parse tree
 	 */
@@ -467,4 +467,14 @@ public interface GrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitDefinedLabel(GrammarParser.DefinedLabelContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GrammarParser#printArguments}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrintArguments(GrammarParser.PrintArgumentsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GrammarParser#printArguments}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrintArguments(GrammarParser.PrintArgumentsContext ctx);
 }

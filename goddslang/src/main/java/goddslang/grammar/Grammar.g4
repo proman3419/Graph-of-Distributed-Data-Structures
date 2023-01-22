@@ -1,5 +1,6 @@
 grammar Grammar;
 
+// Preamble ============================================================================================================
 start
     : preamble cells SUPER_END_ALL
     ;
@@ -32,6 +33,7 @@ cells
     : cell+
     ;
 
+// Cell ================================================================================================================
 cell
     : cellHeader cellCode? SUPER_END
     ;
@@ -48,12 +50,7 @@ cellCodePart
     : functionCall cellCodePart*
     ;
 
-arguments
-    : (idArgument+ numberArgument*)*
-    | (idArgument* numberArgument+)+
-    |
-    ;
-
+// Functions ===========================================================================================================
 functionCall
     : functionAdd
     | functionSub
@@ -86,23 +83,23 @@ functionCall
     ;
 
 functionAdd
-    : ADD arguments
+    : ADD (numberArgument | idArgument)
     ;
 
 functionSub
-    : SUB arguments
+    : SUB (numberArgument | idArgument)
     ;
 
 functionMul
-    : MUL arguments
+    : MUL (numberArgument | idArgument)
     ;
 
 functionDiv
-    : DIV arguments
+    : DIV (numberArgument | idArgument)
     ;
 
 functionMod
-    : MOD arguments
+    : MOD (numberArgument | idArgument)
     ;
 
 functionAbs
@@ -110,23 +107,23 @@ functionAbs
     ;
 
 functionSet
-    : SET arguments
+    : SET idArgument numberArgument
     ;
 
 functionComp
-    : COMP arguments
+    : COMP numberArgument
     ;
 
 functionSwap
-    : SWAP arguments
+    : SWAP
     ;
 
 functionCopy
-    : COPY arguments
+    : COPY
     ;
 
 functionDefineLabel
-    : DEFINE_LABEL arguments
+    : DEFINE_LABEL idArgument
     ;
 
 functionJump
@@ -150,51 +147,51 @@ functionCheckIFGZ
     ;
 
 functionExit
-    : EXIT arguments
+    : EXIT
     ;
 
 functionPrint
-    : PRINT arguments
+    : PRINT printArguments
     ;
 
 functionPrintNL
-    : PRINTNL arguments
+    : PRINTNL printArguments
     ;
 
 functionPrintChar
-    : PRINT_CHAR arguments
+    : PRINT_CHAR printArguments
     ;
 
 functionPrintNLChar
-    : PRINTNL_CHAR arguments
+    : PRINTNL_CHAR printArguments
     ;
 
 functionWriteCell
-    : WRITE_CELL arguments
+    : WRITE_CELL idArgument
     ;
 
 functionReadCell
-    : READ_CELL arguments
+    : READ_CELL idArgument
     ;
 
 functionReadBus
-    : READ_BUS arguments
+    : READ_BUS
     ;
 
 functionCopyCell
-    : COPY_CELL arguments
+    : COPY_CELL idArgument
     ;
 
 functionPrintLabelName
-    : PRINT_LABEL_NAME arguments
+    : PRINT_LABEL_NAME numberArgument
     ;
 
 functionPass
-    : PASS arguments
+    : PASS numberArgument
     ;
 
 functionTerminate
-    : TERMINATE arguments
+    : TERMINATE
     ;
 
 SUPER_CELLS_COUNT
@@ -337,6 +334,13 @@ TERMINATE
     : 'TERMINATE'
     ;
 
+// Arguments ===========================================================================================================
+arguments
+    : (idArgument+ numberArgument*)*
+    | (idArgument* numberArgument+)+
+    |
+    ;
+
 idArgument
     : ID
     ;
@@ -345,16 +349,20 @@ numberArgument
     : NUMBER
     ;
 
-
 extendedDefinedLabel
     : definedLabel
     | ID'@'definedLabel
     ;
 
- definedLabel
+definedLabel
     : '^'
     | '$'
     | ID
+    ;
+
+printArguments
+    : arguments numberArgument
+    | numberArgument
     ;
 
 NUMBER
@@ -364,8 +372,6 @@ NUMBER
 ID
     : ('_'|'-'|[a-zA-Z])+('0'..'9')*
     ;
-
-
 
 // Ignore white space characters
 WS
