@@ -15,7 +15,7 @@
 *.war
 *.nar
 *.ear
-*.zip
+#*.zip
 *.tar.gz
 *.rar
 
@@ -25,3 +25,4 @@ hs_err_pid*
 # Idea
 .idea/
 Graph-of-Distributed-Data-Structures.iml
+target/
