@@ -1,9 +1,9 @@
 # Graph-of-Distributed-Data-Structures
-[Documentation](https://github.com/proman3419/Graph-of-Distributed-Data-Structures/blob/master/docs/GoDDS.pdf)
+[Documentation](docs/GoDDS.pdf)
 
-[Code snippets](https://github.com/proman3419/Graph-of-Distributed-Data-Structures/tree/master/goddslang/src/main/resources/code%20snippets)
+[Code snippets](goddslang/src/main/resources/code%20snippets)
 
-[Grammar](https://github.com/proman3419/Graph-of-Distributed-Data-Structures/blob/master/goddslang/src/main/java/goddslang/grammar/Grammar.g4)
+[Grammar](goddslang/src/main/java/goddslang/grammar/Grammar.g4)
 
 ### FizzBuzz implementation
 ```
